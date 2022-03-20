@@ -1,0 +1,11 @@
+me\mrsandking\github\randomlootchest\listener\PlayerDeathListener.class
+me\mrsandking\github\randomlootchest\listener\PlayerJoinListener.class
+me\mrsandking\github\randomlootchest\listener\PlayerQuitListener.class
+me\mrsandking\github\randomlootchest\manager\PlayerManager$1.class
+me\mrsandking\github\randomlootchest\manager\PlayerManager.class
+me\mrsandking\github\randomlootchest\GamePlayer.class
+me\mrsandking\github\randomlootchest\commands\ChestCommand.class
+me\mrsandking\github\randomlootchest\manager\LocationManager.class
+me\mrsandking\github\randomlootchest\manager\StarterManager$1.class
+me\mrsandking\github\randomlootchest\manager\StarterManager.class
+me\mrsandking\github\randomlootchest\WandItem.class

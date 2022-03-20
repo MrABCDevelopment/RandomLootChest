@@ -1,0 +1,8 @@
+name: RandomLootChest
+version: 1.0.0
+main: me.mrsandking.github.randomlootchest.RandomLootChestMain
+author: MrABCDevelopment
+
+commands:
+  chests:
+    description: The main command of RandomLootChest plugin.

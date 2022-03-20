@@ -1,0 +1,15 @@
+start-items:
+  - IRON_HELMET
+  - IRON_CHESTPLATE
+  - IRON_LEGGINGS
+  - IRON_BOOTS
+  - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je
+
+max-items: 5
+cooldown: 300
+
+gamechest-items:
+  - wood_sword:1:0.4
+  - melon:4:0.6
+  - potion,speed,1:1:0.5
+  - enchanted_golden_apple:3:0.4

@@ -1,0 +1,10 @@
+messages:
+  loaded-messages: '&aZaladowano {MESSAGES} wiadomosci!'
+  not-player: '&cTylko gracz moze uzyc tej komendy!'
+  chest-command-correct-usage: '&cPoprawne uzycie /chests [wand/save]'
+  location-save: '&aPoprawnie zapisano lokacje!'
+  add-chest: '&aDodano nowa skrzynie!'
+  remove-chest: '&cUsunieto skrzynie!'
+  gamechest-inv-title: 'Random Loot'
+  gamechest-cooldown: 'Musisz poczekac [time] by otworzyc te skrzynie!'
+
