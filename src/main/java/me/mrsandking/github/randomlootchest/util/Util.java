@@ -27,7 +27,6 @@ public class Util {
         }
     }
 
-
     public static boolean chance(double chance) {
         return Math.random() < chance;
     }
