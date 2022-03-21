@@ -2,18 +2,15 @@ package me.mrsandking.github.randomlootchest.commands;
 
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.WandItem;
-import me.mrsandking.github.randomlootchest.manager.MessagesManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class ChestCommand implements CommandExecutor {
 
-    private RandomLootChestMain plugin;
+    private final RandomLootChestMain plugin;
 
     public ChestCommand(RandomLootChestMain plugin) {
         this.plugin = plugin;

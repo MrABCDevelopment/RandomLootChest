@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerDeathListener implements Listener {
 
-    private RandomLootChestMain plugin;
+    private final RandomLootChestMain plugin;
 
     public PlayerDeathListener(RandomLootChestMain plugin) {
         this.plugin = plugin;

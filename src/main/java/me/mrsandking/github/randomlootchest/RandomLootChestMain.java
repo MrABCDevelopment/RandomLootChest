@@ -7,7 +7,6 @@ import me.mrsandking.github.randomlootchest.listener.PlayerInteractListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerJoinListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerQuitListener;
 import me.mrsandking.github.randomlootchest.manager.*;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

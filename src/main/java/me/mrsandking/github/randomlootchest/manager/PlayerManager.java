@@ -4,7 +4,6 @@ import lombok.Getter;
 import me.mrsandking.github.randomlootchest.GamePlayer;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
