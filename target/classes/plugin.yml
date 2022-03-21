@@ -1,8 +1,10 @@
 name: RandomLootChest
-version: 1.0.0
+version: 1.1.0
 main: me.mrsandking.github.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
 
 commands:
   chests:
+    permission: chests.use
+    permission-message: You cannot use this command.
     description: The main command of RandomLootChest plugin.
