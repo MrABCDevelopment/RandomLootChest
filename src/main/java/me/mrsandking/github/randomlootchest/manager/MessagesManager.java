@@ -14,6 +14,11 @@ public class MessagesManager {
 
     public MessagesManager(RandomLootChestMain plugin) {
         messages = new HashMap<>();
+        load(plugin);
+    }
+
+    public void load(RandomLootChestMain plugin) {
+        messages.clear();
         FileConfiguration config = plugin.getConfigManager().getConfig("messages.yml");
         ConfigurationSection section = config.getConfigurationSection("messages");
         for(String id : section.getKeys(false))
