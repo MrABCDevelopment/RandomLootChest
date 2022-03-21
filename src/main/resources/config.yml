@@ -9,6 +9,8 @@ start-items:
   - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je
 #Maksymalna ilość przedmiotów jaką gracz może wylosować z skrzyni.
 max-items: 5
+#Maksymalna ilość przedmiotów tego samego typu, jaka może wystąpić w skrzyni. -1 lub 0 oznacza nielimitowana ilość.
+max-items-in-same-type: -1
 #Cooldown jaki gracz musi odczekać pomiędzy ponownym otworzeniem tej samej skrzyni.
 cooldown: 300
 #Przedmioty i ich szansa na wylosowanie się w skrzyni
