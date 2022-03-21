@@ -78,12 +78,13 @@ public class GameManager {
                 if(max > 0) {
                     int i = 0;
                     for(int x = 0; x<inventory.getSize(); x++) {
-                        if(inventory.getItem(x).getType() == randomItem.getItemStack().getType()) {
+                        if(inventory.getItem(x) != null && inventory.getItem(x).getType() == randomItem.getItemStack().getType() && i<max) {
                             i++;
-                            inventory.setItem(Util.randomSlot(inventory.getSize()), randomItem.getItemStack());
-                            counter++;
                         }
-                        if(i >= max) continue;
+                    }
+                    if(i<max) {
+                        inventory.setItem(Util.randomSlot(inventory.getSize()), randomItem.getItemStack());
+                        counter++;
                     }
                 } else {
                     inventory.setItem(Util.randomSlot(inventory.getSize()), randomItem.getItemStack());
