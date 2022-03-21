@@ -116,6 +116,10 @@ public class ConfigManager {
             return null;
     }
 
+    public TreeMap<String, Configuration> getConfigs() {
+        return configs;
+    }
+
     private void printException(Exception e, String filename) {
         if (e instanceof IOException) {
             plugin.getLogger().severe(

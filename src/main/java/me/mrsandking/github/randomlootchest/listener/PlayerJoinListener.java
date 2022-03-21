@@ -19,7 +19,7 @@ public class PlayerJoinListener implements Listener {
         GamePlayer gamePlayer = new GamePlayer(event.getPlayer());
         if(!gamePlayer.getDataFile().exists()) {
             gamePlayer.createFile();
-            plugin.getStarterManager().load(event.getPlayer());
+            plugin.getStarterManager().loadItems(event.getPlayer());
         }
     }
 
