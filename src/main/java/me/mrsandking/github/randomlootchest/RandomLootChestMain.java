@@ -5,7 +5,6 @@ import me.mrsandking.github.randomlootchest.commands.ChestCommand;
 import me.mrsandking.github.randomlootchest.listener.PlayerDeathListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerInteractListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerJoinListener;
-import me.mrsandking.github.randomlootchest.listener.PlayerQuitListener;
 import me.mrsandking.github.randomlootchest.manager.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,7 +16,6 @@ public class RandomLootChestMain extends JavaPlugin {
     private @Getter CooldownManager cooldownManager;
     private @Getter MessagesManager messagesManager;
     private @Getter GameManager gameManager;
-    private @Getter PlayerManager playerManager;
     private @Getter StarterManager starterManager;
     private @Getter LocationManager locationManager;
     private static @Getter RandomLootChestMain instance;
@@ -34,7 +32,6 @@ public class RandomLootChestMain extends JavaPlugin {
 
         this.messagesManager = new MessagesManager(this);
         this.gameManager = new GameManager(this);
-        this.playerManager = new PlayerManager();
         this.locationManager = new LocationManager(this);
         this.starterManager = new StarterManager();
 
@@ -45,7 +42,6 @@ public class RandomLootChestMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
     }
 
     @Override
