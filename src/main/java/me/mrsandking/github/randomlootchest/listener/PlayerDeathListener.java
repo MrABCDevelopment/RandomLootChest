@@ -21,7 +21,7 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void respawnEvent(PlayerRespawnEvent event) {
-        plugin.getStarterManager().load(event.getPlayer());
+        plugin.getStarterManager().loadItems(event.getPlayer());
     }
 
 }
