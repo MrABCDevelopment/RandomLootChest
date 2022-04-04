@@ -20,7 +20,7 @@ public class LocationTask {
                 public void run() {
                     for(Map.Entry<String, String> map : RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet()) {
                         Location location = Util.getStringLocation(map.getKey());
-                        location.getWorld().playEffect(location.add(0.5, 0.7, 0.5), Effect.valueOf(Settings.particle), 3);
+                        location.getWorld().playEffect(location.add(0.5, 0.7, 0.5), Effect.valueOf(Settings.particleType), Settings.particleAmount);
                     }
                 }
             }, 0L, 15L);

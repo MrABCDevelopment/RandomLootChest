@@ -4,6 +4,7 @@ random-chests: false
 #Cząsteczki nad skrzyniami.
 particles:
   active: true
+  amount: 1
   type: "HEART"
 
 #Jest to mini-dodatek możesz po prostu usunąć wszystko z listy aby nic on nie dodawał na starcie.

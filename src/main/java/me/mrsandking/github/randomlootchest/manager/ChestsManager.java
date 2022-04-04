@@ -59,13 +59,13 @@ public class ChestsManager {
                         itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("chests."+id+".Contents."+content+".DisplayName")));
                     if(config.getStringList("chests."+id+".Contents."+content+".DisplayLore") != null)
                         itemMeta.setLore(Util.colouredLore(config.getStringList("chests."+id+".Contents."+content+".DisplayLore")));
+                    itemStack.setItemMeta(itemMeta);
                     if(config.getStringList("chests."+id+".Contents."+content+".Enchantments") != null && !config.getStringList("chests."+id+".Contents."+content+".Enchantments").isEmpty()) {
                         for(String enchantment : config.getStringList("chests."+id+".Contents."+content+".Enchantments")) {
                             String[] splits = enchantment.split(":");
                             itemStack.addUnsafeEnchantment(Enchantment.getByName(splits[0].toUpperCase()), Integer.parseInt(splits[1]));
                         }
                     }
-                    itemStack.setItemMeta(itemMeta);
                     if(config.get("chests."+id+".Contents."+content+".Amount") != null)
                         itemStack.setAmount(config.getInt("chests."+id+".Contents."+content+".Amount"));
                     RandomItem randomItem = new RandomItem(itemStack, config.getDouble("chests."+id+".Contents."+content+".Chance"));

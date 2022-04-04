@@ -33,6 +33,7 @@ public class ConfigManager {
         public void save() throws IOException {
             config.save(configFile);
         }
+
     }
 
     private final RandomLootChestMain plugin;
