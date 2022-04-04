@@ -1,31 +1,17 @@
+#Bez względu na ustawioną skrzynię na danej lokacji, otworzy się losowa skrzynia.
+random-chests: false
+
+#Cząsteczki nad skrzyniami.
+particles:
+  active: true
+  type: "HEART"
+
 #Jest to mini-dodatek możesz po prostu usunąć wszystko z listy aby nic on nie dodawał na starcie.
 #Jednak jeśli cię on zainteresował to działa on w następujący sposób,
-#na starcie gracz otrzymuje wszystkie przedmioty z listy jednak SET nie wypada z niego! 
+#na starcie gracz otrzymuje wszystkie przedmioty z listy jednak SET nie wypada z niego!
 start-items:
   - IRON_HELMET
   - IRON_CHESTPLATE
   - IRON_LEGGINGS
   - IRON_BOOTS
   - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je
-#Maksymalna ilość przedmiotów jaką gracz może wylosować z skrzyni.
-max-items: 5
-#Maksymalna ilość przedmiotów tego samego typu, jaka może wystąpić w skrzyni. -1 lub 0 oznacza nielimitowana ilość.
-max-items-in-same-type: -1
-#Cooldown jaki gracz musi odczekać pomiędzy ponownym otworzeniem tej samej skrzyni.
-cooldown: 300
-#Przedmioty i ich szansa na wylosowanie się w skrzyni
-#WZÓR:
-#Zwykły przedmiot bez enchantów
-# - material:AMOUNT:CHANCE
-#Przedmiot z enchantami
-# - material:AMOUNT:CHANCE:ENCHANT,LEVEL;ENCHANT2,LEVEL2...
-#W przypadku mikstury [POTIONS]
-# - potion,POTION_TYPE,LEVEL:AMOUNT:CHANCE
-#szansa [CHANCE] jest w zakresie od 0 do 1 czyli 0.01, 0.02 itd...
-gamechest-items:
-  - wood_sword:1:0.4
-  - melon:4:0.6
-  - potion,speed,1:1:0.5
-  - enchanted_golden_apple:3:0.4
-  - iron_sword:1:0.4:sharpness,5
-  - diamond_sword:1:0.01:sharpness,5;unbreaking,3

@@ -36,7 +36,8 @@ public class ChestCommand implements CommandExecutor {
                 plugin.getConfigManager().reload("config.yml");
                 plugin.getConfigManager().reload("messages.yml");
                 plugin.getMessagesManager().load(plugin);
-                plugin.getGameManager().load();
+                plugin.getChestsManager().load(plugin);
+                //plugin.getGameManager().load();
                 plugin.getStarterManager().load();
                 plugin.getLocationManager().save();
                 player.sendMessage(plugin.getMessagesManager().getMessages().get("chest-command-reload"));

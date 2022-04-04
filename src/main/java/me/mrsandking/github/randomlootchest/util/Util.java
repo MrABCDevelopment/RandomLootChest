@@ -1,5 +1,6 @@
 package me.mrsandking.github.randomlootchest.util;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class Util {
 
-    private static Random random = new Random();
+    private @Getter static Random random = new Random();
 
     public static String getTime(long timeLeft) {
         int seconds = (int) (timeLeft);
@@ -56,6 +57,14 @@ public class Util {
     }
 
     public static List<String> colouredLore(String... lore) {
+        List<String> list = new ArrayList<>();
+        for(String line : lore) {
+            list.add(ChatColor.translateAlternateColorCodes('&', line));
+        }
+        return list;
+    }
+
+    public static List<String> colouredLore(List<String> lore) {
         List<String> list = new ArrayList<>();
         for(String line : lore) {
             list.add(ChatColor.translateAlternateColorCodes('&', line));

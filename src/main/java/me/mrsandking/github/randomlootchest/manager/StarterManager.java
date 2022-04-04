@@ -1,5 +1,6 @@
 package me.mrsandking.github.randomlootchest.manager;
 
+import lombok.Getter;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.Bukkit;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class StarterManager {
 
-    private List<ItemStack> itemStacks;
+    private @Getter List<ItemStack> itemStacks;
 
     public StarterManager() {
         itemStacks = new ArrayList<>();
@@ -59,10 +60,6 @@ public class StarterManager {
             else if(isBoots(itemStack)) player.getInventory().setBoots(itemStack);
             else player.getInventory().addItem(itemStack);
         }
-    }
-
-    public List<ItemStack> getItemStacks() {
-        return itemStacks;
     }
 
     public boolean isStarterItem(ItemStack itemStack) {

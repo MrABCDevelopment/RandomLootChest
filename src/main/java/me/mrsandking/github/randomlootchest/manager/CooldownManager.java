@@ -1,26 +1,24 @@
 package me.mrsandking.github.randomlootchest.manager;
 
+import lombok.Getter;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CooldownManager
 {
 
-    private HashMap<HashMap<UUID, Location>, Long> chestCooldowns;
+    private @Getter
+    ConcurrentHashMap<HashMap<UUID, Location>, Long> chestCooldowns;
 
     public CooldownManager() {
-        chestCooldowns = new HashMap<>();
+        chestCooldowns = new ConcurrentHashMap<>();
     }
 
     public void setCooldown(HashMap<UUID, Location> hashMap, int seconds) {
         chestCooldowns.put(hashMap, System.currentTimeMillis() + (seconds * 1000));
-    }
-
-    public HashMap<HashMap<UUID, Location>, Long> getChestCooldowns() {
-        return chestCooldowns;
     }
 
     public long getTime(UUID uuid, Location location) {
@@ -30,6 +28,16 @@ public class CooldownManager
             return (chestCooldowns.get(map) - System.currentTimeMillis()) / 1000;
         }
         return 0L;
+    }
+
+    public ConcurrentHashMap<HashMap<UUID, Location>, Long> getPlayerCooldowns(UUID account) {
+        ConcurrentHashMap<HashMap<UUID, Location>, Long> cooldowns = new ConcurrentHashMap<>();
+        for(HashMap<UUID, Location> forMap : getChestCooldowns().keySet()) {
+            if(forMap.containsKey(account)) {
+                cooldowns.put(forMap, getChestCooldowns().get(forMap));
+            }
+        }
+        return cooldowns;
     }
 
 }
