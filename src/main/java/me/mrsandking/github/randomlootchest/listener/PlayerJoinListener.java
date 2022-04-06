@@ -1,6 +1,5 @@
 package me.mrsandking.github.randomlootchest.listener;
 
-import me.mrsandking.github.randomlootchest.GamePlayer;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

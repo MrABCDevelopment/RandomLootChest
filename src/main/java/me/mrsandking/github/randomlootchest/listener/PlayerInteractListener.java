@@ -1,7 +1,7 @@
 package me.mrsandking.github.randomlootchest.listener;
 
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
-import me.mrsandking.github.randomlootchest.WandItem;
+import me.mrsandking.github.randomlootchest.objects.WandItem;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
 import me.mrsandking.github.randomlootchest.util.Settings;
 import me.mrsandking.github.randomlootchest.util.Util;

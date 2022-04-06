@@ -1,6 +1,6 @@
 package me.mrsandking.github.randomlootchest.manager;
 
-import me.mrsandking.github.randomlootchest.RandomItem;
+import me.mrsandking.github.randomlootchest.objects.RandomItem;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
 import me.mrsandking.github.randomlootchest.util.Util;
@@ -21,7 +21,8 @@ public class GameManager {
         Inventory inventory = Bukkit.createInventory(null, 27, chestGame.getTitle());
         int counter = 0;
         for(RandomItem randomItem : chestGame.getItems()) {
-            if(counter == chestGame.getMaxItems()) continue;
+            if(counter == chestGame.getMaxItems())
+                continue;
             if(Util.chance(randomItem.getChance())) {
                 int max = chestGame.getMaxItemsInTheSameType();
                 if(max > 0) {

@@ -1,4 +1,4 @@
-package me.mrsandking.github.randomlootchest;
+package me.mrsandking.github.randomlootchest.objects;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

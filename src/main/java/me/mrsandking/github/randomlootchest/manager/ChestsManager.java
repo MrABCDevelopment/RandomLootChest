@@ -1,7 +1,7 @@
 package me.mrsandking.github.randomlootchest.manager;
 
 import lombok.Getter;
-import me.mrsandking.github.randomlootchest.RandomItem;
+import me.mrsandking.github.randomlootchest.objects.RandomItem;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
 import me.mrsandking.github.randomlootchest.util.Util;
@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -35,6 +36,7 @@ public class ChestsManager {
             chestGame.setTitle(ChatColor.translateAlternateColorCodes('&', config.getString("chests."+id+".Title")));
             chestGame.setTime(config.getInt("chests."+id+".Cooldown"));
             chestGame.setMaxItems(config.getInt("chests."+id+".MaxItems"));
+            chestGame.setMaxItemsInTheSameType(config.getInt("chests."+id+".MaxItemsInTheSameType"));
             for(String content : config.getConfigurationSection("chests."+id+".Contents").getKeys(false)) {
                 try {
                     ItemStack itemStack = null;
@@ -59,6 +61,10 @@ public class ChestsManager {
                         itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("chests."+id+".Contents."+content+".DisplayName")));
                     if(config.getStringList("chests."+id+".Contents."+content+".DisplayLore") != null)
                         itemMeta.setLore(Util.colouredLore(config.getStringList("chests."+id+".Contents."+content+".DisplayLore")));
+                    if(config.get("chests."+id+".Contents."+content+".Glowing") != null && config.getBoolean("chests."+id+".Contents."+content+".Glowing")) {
+                        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                        itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                    }
                     itemStack.setItemMeta(itemMeta);
                     if(config.getStringList("chests."+id+".Contents."+content+".Enchantments") != null && !config.getStringList("chests."+id+".Contents."+content+".Enchantments").isEmpty()) {
                         for(String enchantment : config.getStringList("chests."+id+".Contents."+content+".Enchantments")) {
@@ -77,7 +83,7 @@ public class ChestsManager {
             }
             chests.put(id, chestGame);
         }
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN.toString()+chests.size()+" chests.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN.toString()+chests.size()+" chests loaded.");
     }
 
     public ChestGame getChestGameByRarity(String id) {

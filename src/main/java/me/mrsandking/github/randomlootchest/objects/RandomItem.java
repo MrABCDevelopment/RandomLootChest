@@ -1,12 +1,13 @@
-package me.mrsandking.github.randomlootchest;
+package me.mrsandking.github.randomlootchest.objects;
 
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 
+@Getter
 public class RandomItem {
 
-    private @Getter ItemStack itemStack;
-    private @Getter double chance;
+    private ItemStack itemStack;
+    private double chance;
 
     public RandomItem(ItemStack itemStack, double chance) {
         this.itemStack = itemStack;

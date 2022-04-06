@@ -30,14 +30,4 @@ public class CooldownManager
         return 0L;
     }
 
-    public ConcurrentHashMap<HashMap<UUID, Location>, Long> getPlayerCooldowns(UUID account) {
-        ConcurrentHashMap<HashMap<UUID, Location>, Long> cooldowns = new ConcurrentHashMap<>();
-        for(HashMap<UUID, Location> forMap : getChestCooldowns().keySet()) {
-            if(forMap.containsKey(account)) {
-                cooldowns.put(forMap, getChestCooldowns().get(forMap));
-            }
-        }
-        return cooldowns;
-    }
-
 }

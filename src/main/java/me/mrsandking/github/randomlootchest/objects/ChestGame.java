@@ -2,7 +2,6 @@ package me.mrsandking.github.randomlootchest.objects;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.mrsandking.github.randomlootchest.RandomItem;
 
 import java.util.ArrayList;
 import java.util.List;
