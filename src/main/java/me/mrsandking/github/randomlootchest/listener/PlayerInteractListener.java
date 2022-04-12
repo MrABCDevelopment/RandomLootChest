@@ -70,6 +70,8 @@ public class PlayerInteractListener implements Listener {
         if(event.getBlock().getType() != Material.CHEST) return;
         if(!event.getPlayer().getItemInHand().equals(WandItem.WANDITEM))
             return;
+        if(Settings.wandItemPermissionToUse && !event.getPlayer().hasPermission("wanditem.permission"))
+            return;
         event.setCancelled(true);
         if(plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getBlock().getLocation())))
             return;
@@ -115,6 +117,8 @@ public class PlayerInteractListener implements Listener {
         if (event.getPlayer().getItemInHand() == null) return;
         if (event.getClickedBlock().getType() != Material.CHEST) return;
         if (!event.getPlayer().getItemInHand().equals(WandItem.WANDITEM)) return;
+        if(Settings.wandItemPermissionToUse && !event.getPlayer().hasPermission("wanditem.permission"))
+            return;
         if (plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getClickedBlock().getLocation()))) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("remove-chest"));

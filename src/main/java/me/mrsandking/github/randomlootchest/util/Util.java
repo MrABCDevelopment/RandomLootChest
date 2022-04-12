@@ -73,8 +73,13 @@ public class Util {
     }
 
     public static ItemStack getPotion(String potionType, int level, boolean splash, int amount) {
-        Potion pot = new Potion(PotionType.valueOf(potionType.toUpperCase()), level, splash);
-        return pot.toItemStack(amount);
+        try {
+            Potion pot = new Potion(PotionType.valueOf(potionType.toUpperCase()), level, splash);
+            return pot.toItemStack(amount);
+        } catch (NullPointerException e) {
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Cannot get potion with type: "+potionType+" and tier "+level);
+            return null;
+        }
     }
 
 }

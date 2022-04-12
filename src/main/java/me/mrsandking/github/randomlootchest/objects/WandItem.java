@@ -1,6 +1,6 @@
 package me.mrsandking.github.randomlootchest.objects;
 
-import org.bukkit.ChatColor;
+import me.mrsandking.github.randomlootchest.util.Settings;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -9,10 +9,10 @@ public class WandItem {
 
     public static ItemStack WANDITEM = null;
 
-    static {
+    public WandItem() {
         WANDITEM = new ItemStack(Material.BLAZE_ROD);
         ItemMeta itemMeta = WANDITEM.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GOLD+"Chest Wand");
+        itemMeta.setDisplayName(Settings.wandItemDisplayName);
         WANDITEM.setItemMeta(itemMeta);
     }
 

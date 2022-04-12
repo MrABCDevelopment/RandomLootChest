@@ -1,5 +1,6 @@
 package me.mrsandking.github.randomlootchest.manager;
 
+import lombok.Getter;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 public class MessagesManager {
 
-    private HashMap<String, String> messages;
+    private @Getter HashMap<String, String> messages;
 
     public MessagesManager(RandomLootChestMain plugin) {
         messages = new HashMap<>();
@@ -29,7 +30,4 @@ public class MessagesManager {
         Bukkit.getConsoleSender().sendMessage(messages.get("loaded-messages").replace("{MESSAGES}", Integer.toString(messages.size())));
     }
 
-    public HashMap<String, String> getMessages() {
-        return messages;
-    }
 }

@@ -6,6 +6,7 @@ import me.mrsandking.github.randomlootchest.listener.PlayerDeathListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerInteractListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerJoinListener;
 import me.mrsandking.github.randomlootchest.manager.*;
+import me.mrsandking.github.randomlootchest.objects.WandItem;
 import me.mrsandking.github.randomlootchest.util.Settings;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -43,6 +44,7 @@ public class RandomLootChestMain extends JavaPlugin {
         //    databaseManager.autoSaveData();
         //}
 
+        new WandItem();
         new ChestCommand(this);
 
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);

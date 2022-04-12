@@ -2,6 +2,7 @@ package me.mrsandking.github.randomlootchest.commands;
 
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.WandItem;
+import me.mrsandking.github.randomlootchest.util.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,12 +35,14 @@ public class ChestCommand implements CommandExecutor {
                 return true;
             } else if(strings[0].equalsIgnoreCase("reload")) {
                 plugin.getConfigManager().reload("config.yml");
+                new Settings(plugin);
                 plugin.getConfigManager().reload("chests.yml");
                 plugin.getConfigManager().reload("messages.yml");
                 plugin.getMessagesManager().load(plugin);
                 plugin.getChestsManager().load(plugin);
                 plugin.getStarterManager().load();
                 plugin.getLocationManager().save();
+                new WandItem();
                 player.sendMessage(plugin.getMessagesManager().getMessages().get("chest-command-reload"));
                 return true;
             } else {

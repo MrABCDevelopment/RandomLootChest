@@ -27,7 +27,7 @@ public class LocationManager {
     }
 
     public void addLocation(String type, Location location) {
-        locations.put(Util.getLocationString(location), type); //locations.add(Util.getLocationString(location));
+        locations.put(Util.getLocationString(location), type);
     }
 
     public void removeLocation(Location location) {
