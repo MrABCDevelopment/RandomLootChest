@@ -79,6 +79,9 @@ public class Util {
         } catch (NullPointerException e) {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Cannot get potion with type: "+potionType+" and tier "+level);
             return null;
+        } catch (IllegalArgumentException e) {
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Cannot get potion with type: "+potionType+" and tier "+level);
+            return null;
         }
     }
 
