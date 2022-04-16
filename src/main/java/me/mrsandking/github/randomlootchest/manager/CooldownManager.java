@@ -43,11 +43,9 @@ public class CooldownManager
                 if(getChestCooldowns().isEmpty()) return;
                 for(HashMap<UUID, Location> map : getChestCooldowns().keySet()) {
                     if(getChestCooldowns().get(map) > System.currentTimeMillis()) {
-                        Bukkit.broadcastMessage("Nic nie ten" + getChestCooldowns().toString());
                         continue;
                     }
                     getChestCooldowns().remove(map);
-                    Bukkit.broadcastMessage("Usunieto mape "+getChestCooldowns().toString());
                 }
             }
         }, 0L, Settings.restoreCooldowns*20L);
