@@ -11,6 +11,10 @@ wand-item:
   displayName: '&6Chest Wand'
   permission-to-use: true
 
+#Funkcja, która czyści nieaktywne cooldowny.
+#Czas podawany w sekundach.
+restore-cooldowns: 20
+
 #Jest to mini-dodatek możesz po prostu usunąć wszystko z listy aby nic on nie dodawał na starcie.
 #Jednak jeśli cię on zainteresował to działa on w następujący sposób,
 #na starcie gracz otrzymuje wszystkie przedmioty z listy jednak SET nie wypada z niego!

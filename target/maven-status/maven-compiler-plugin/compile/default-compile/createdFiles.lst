@@ -5,6 +5,7 @@ me\mrsandking\github\randomlootchest\objects\RandomItem.class
 me\mrsandking\github\randomlootchest\manager\LocationTask$1.class
 me\mrsandking\github\randomlootchest\commands\ChestCommand.class
 me\mrsandking\github\randomlootchest\manager\LocationManager.class
+me\mrsandking\github\randomlootchest\manager\CooldownManager$1.class
 me\mrsandking\github\randomlootchest\manager\StarterManager$1.class
 me\mrsandking\github\randomlootchest\manager\LocationTask.class
 me\mrsandking\github\randomlootchest\objects\WandItem.class

@@ -2,6 +2,7 @@ name: ${project.artifactId}
 version: ${project.version}
 main: me.mrsandking.github.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
+api-version: 1.13
 
 commands:
   chests:

@@ -1,7 +1,11 @@
 package me.mrsandking.github.randomlootchest.manager;
 
 import lombok.Getter;
+import me.mrsandking.github.randomlootchest.RandomLootChestMain;
+import me.mrsandking.github.randomlootchest.util.Settings;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -15,6 +19,7 @@ public class CooldownManager
 
     public CooldownManager() {
         chestCooldowns = new ConcurrentHashMap<>();
+        restoreCooldowns();
     }
 
     public void setCooldown(HashMap<UUID, Location> hashMap, int seconds) {
@@ -28,6 +33,24 @@ public class CooldownManager
             return (chestCooldowns.get(map) - System.currentTimeMillis()) / 1000;
         }
         return 0L;
+    }
+
+    public void restoreCooldowns() {
+        BukkitScheduler scheduler = Bukkit.getScheduler();
+        scheduler.runTaskTimerAsynchronously(RandomLootChestMain.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if(getChestCooldowns().isEmpty()) return;
+                for(HashMap<UUID, Location> map : getChestCooldowns().keySet()) {
+                    if(getChestCooldowns().get(map) > System.currentTimeMillis()) {
+                        Bukkit.broadcastMessage("Nic nie ten" + getChestCooldowns().toString());
+                        continue;
+                    }
+                    getChestCooldowns().remove(map);
+                    Bukkit.broadcastMessage("Usunieto mape "+getChestCooldowns().toString());
+                }
+            }
+        }, 0L, Settings.restoreCooldowns*20L);
     }
 
 }

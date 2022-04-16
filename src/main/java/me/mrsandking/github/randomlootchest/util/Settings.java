@@ -13,6 +13,7 @@ public class Settings {
     public static int particleAmount;
     public static String wandItemDisplayName;
     public static boolean wandItemPermissionToUse;
+    public static int restoreCooldowns;
 
     public Settings(RandomLootChestMain plugin) {
         randomChests = plugin.getConfigManager().getConfig("config.yml").getBoolean("random-chests");
@@ -21,6 +22,7 @@ public class Settings {
         particleAmount = plugin.getConfigManager().getConfig("config.yml").getInt("particles.amount");
         wandItemDisplayName = ChatColor.translateAlternateColorCodes('&', plugin.getConfigManager().getConfig("config.yml").getString("wand-item.displayName"));
         wandItemPermissionToUse = plugin.getConfigManager().getConfig("config.yml").getBoolean("wand-item.permission-to-use");
+        restoreCooldowns = plugin.getConfigManager().getConfig("config.yml").getInt("restore-cooldowns");
     }
 
 }

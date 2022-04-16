@@ -4,18 +4,22 @@ import lombok.Getter;
 import me.mrsandking.github.randomlootchest.objects.RandomItem;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
+import me.mrsandking.github.randomlootchest.util.Settings;
 import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 @Getter
 public class ChestsManager {
@@ -23,11 +27,11 @@ public class ChestsManager {
     private HashMap<String, ChestGame> chests;
 
     public ChestsManager(RandomLootChestMain plugin) {
+        chests = new HashMap<>();
         load(plugin);
     }
 
     public void load(RandomLootChestMain plugin) {
-        chests = new HashMap<>();
         chests.clear();
         FileConfiguration config = plugin.getConfigManager().getConfig("chests.yml");
         for(String id : config.getConfigurationSection("chests").getKeys(false)) {

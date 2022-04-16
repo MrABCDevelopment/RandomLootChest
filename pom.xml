@@ -6,7 +6,7 @@
 
     <groupId>me.MrSandKing.GitHub</groupId>
     <artifactId>RandomLootChest</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -1,9 +1,7 @@
-C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\GamePlayer.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\listener\PlayerDeathListener.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\listener\PlayerJoinListener.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\manager\ConfigManager.java
-C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\WandItem.java
-C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\RandomItem.java
+C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\objects\WandItem.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\RandomLootChestMain.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\manager\GameManager.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\manager\CooldownManager.java
@@ -17,3 +15,4 @@ C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsand
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\objects\ChestGame.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\manager\ChestsManager.java
 C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\manager\LocationTask.java
+C:\Users\franc\OneDrive\Dokumenty\GitHub\RandomLootChest\src\main\java\me\mrsandking\github\randomlootchest\objects\RandomItem.java
