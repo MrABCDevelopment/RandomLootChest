@@ -2,6 +2,7 @@ package me.mrsandking.github.randomlootchest.database;
 
 import lombok.Getter;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
+import me.mrsandking.github.randomlootchest.util.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -36,7 +37,7 @@ public class Database {
             public void run() {
                 saveData();
             }
-        }, 0L, 20 * 30);
+        }, 0L, 20 * Settings.autoSaveTime);
     }
 
     public void saveData() {

@@ -12,6 +12,7 @@ public class Settings {
     public static String particleType;
     public static int particleAmount;
     public static String wandItemDisplayName;
+    public static int autoSaveTime;
     public static boolean wandItemPermissionToUse;
     public static boolean useDatabase;
     public static String databaseType;
@@ -29,6 +30,7 @@ public class Settings {
         databasePassword = plugin.getConfigManager().getConfig("config.yml").getString("database.password");
         databaseUser = plugin.getConfigManager().getConfig("config.yml").getString("database.user");
         databaseDatabase = plugin.getConfigManager().getConfig("config.yml").getString("database.database");
+        autoSaveTime = plugin.getConfigManager().getConfig("config.yml").getInt("database.auto-save-time");
         randomChests = plugin.getConfigManager().getConfig("config.yml").getBoolean("random-chests");
         activeParticles = plugin.getConfigManager().getConfig("config.yml").getBoolean("particles.active");
         particleType = plugin.getConfigManager().getConfig("config.yml").getString("particles.type").toUpperCase();
