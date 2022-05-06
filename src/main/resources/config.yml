@@ -7,13 +7,18 @@ particles:
   amount: 1
   type: "HEART"
 
+database:
+  use: false
+  type: "YAML"
+  host: "localhost"
+  user: "user"
+  password: "password"
+  database: "database"
+  port: 3306
+
 wand-item:
   displayName: '&6Chest Wand'
   permission-to-use: true
-
-#Funkcja, która czyści nieaktywne cooldowny.
-#Czas podawany w sekundach.
-restore-cooldowns: 20
 
 #Jest to mini-dodatek możesz po prostu usunąć wszystko z listy aby nic on nie dodawał na starcie.
 #Jednak jeśli cię on zainteresował to działa on w następujący sposób,

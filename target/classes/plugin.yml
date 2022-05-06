@@ -1,11 +1,12 @@
 name: RandomLootChest
-version: 1.2.4
+version: 1.3.0
 main: me.mrsandking.github.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
 api-version: 1.13
 
 commands:
-  chests:
+  randomlootchest:
+    aliases: [rlc, randomchest, chests]
     permission: chests.use
     permission-message: You cannot use this command.
     description: The main command of RandomLootChest plugin.

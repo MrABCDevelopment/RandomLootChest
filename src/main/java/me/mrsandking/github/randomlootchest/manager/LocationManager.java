@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -47,6 +48,14 @@ public class LocationManager {
 
     public HashMap<String, String> getLocations() {
         return locations;
+    }
+
+    public List<Location> getListLocations() {
+        List<Location> list = new ArrayList<>();
+        for(String string : locations.keySet()) {
+            list.add(Util.getStringLocation(string));
+        }
+        return list;
     }
 
 }

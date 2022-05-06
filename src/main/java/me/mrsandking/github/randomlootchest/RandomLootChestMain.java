@@ -1,7 +1,9 @@
 package me.mrsandking.github.randomlootchest;
 
 import lombok.Getter;
-import me.mrsandking.github.randomlootchest.commands.ChestCommand;
+import me.mrsandking.github.randomlootchest.commands.CommandHandler;
+import me.mrsandking.github.randomlootchest.database.Database;
+import me.mrsandking.github.randomlootchest.listener.InventoryListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerDeathListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerInteractListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerJoinListener;
@@ -18,7 +20,7 @@ public class RandomLootChestMain extends JavaPlugin {
     private @Getter GameManager gameManager;
     private @Getter StarterManager starterManager;
     private @Getter LocationManager locationManager;
-    //private @Getter Database databaseManager;
+    private @Getter Database databaseManager;
     private @Getter Settings settings;
     private @Getter ChestsManager chestsManager;
     private static @Getter RandomLootChestMain instance;
@@ -37,28 +39,29 @@ public class RandomLootChestMain extends JavaPlugin {
         this.gameManager = new GameManager(this);
         this.starterManager = new StarterManager();
 
-        //if(Settings.useDatabase) {
-        //    this.databaseManager = new Database();
-        //    databaseManager.connect(Settings.databaseType);
-        //    databaseManager.loadData();
-        //    databaseManager.autoSaveData();
-        //}
+        if(Settings.useDatabase) {
+            this.databaseManager = new Database();
+            databaseManager.connect(Settings.databaseType);
+            databaseManager.loadData();
+            databaseManager.autoSaveData();
+        }
 
         new WandItem();
-        new ChestCommand(this);
+        new CommandHandler(this);
 
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
         new LocationTask();
     }
 
     @Override
     public void onDisable() {
-        //if(getConfigManager().getConfig("config.yml").getBoolean("use-database")) {
-        //    databaseManager.disconnect();
-        //}
+        if(getConfigManager().getConfig("config.yml").getBoolean("use-database")) {
+            databaseManager.disconnect();
+        }
         getLocationManager().save();
     }
 }

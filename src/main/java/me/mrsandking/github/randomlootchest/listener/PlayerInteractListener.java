@@ -4,6 +4,7 @@ import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.WandItem;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
 import me.mrsandking.github.randomlootchest.util.Settings;
+import me.mrsandking.github.randomlootchest.util.TimeUtil;
 import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -40,27 +41,22 @@ public class PlayerInteractListener implements Listener {
         if(!plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getClickedBlock().getLocation()))) return;
         if(event.getClickedBlock().getType() == Material.CHEST) {
             event.setCancelled(true);
-            HashMap<UUID, Location> loc = new HashMap<>();
 
-            loc.put(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation());
-
-            if(plugin.getCooldownManager().getChestCooldowns().containsKey(loc)) {
-                if(plugin.getCooldownManager().getChestCooldowns().get(loc) > System.currentTimeMillis()) {
-                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("gamechest-cooldown").replace("[time]", Util.getTime(plugin.getCooldownManager().getTime(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
-                    return;
-                }
+            if(plugin.getCooldownManager().isOnCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation())) {
+                event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("gamechest-cooldown").replace("[time]", TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
+                return;
             }
 
             if(Settings.randomChests) {
                 ChestGame chestGame = plugin.getChestsManager().getRandomChest();
                 plugin.getGameManager().openChest(event.getPlayer(), chestGame.getId());
-                plugin.getCooldownManager().setCooldown(loc, chestGame.getTime());
+                plugin.getCooldownManager().setCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation(), chestGame.getTime());
                 return;
             }
 
             String type = plugin.getLocationManager().getLocations().get(Util.getLocationString(event.getClickedBlock().getLocation()));
             plugin.getGameManager().openChest(event.getPlayer(), type);
-            plugin.getCooldownManager().setCooldown(loc, plugin.getChestsManager().getChestGameByRarity(type).getTime());
+            plugin.getCooldownManager().setCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation(), plugin.getChestsManager().getChestGameByRarity(type).getTime());
         }
     }
 

@@ -14,20 +14,6 @@ public class Util {
 
     private @Getter static Random random = new Random();
 
-    public static String getTime(long timeLeft) {
-        int seconds = (int) (timeLeft);
-        long sec = seconds % 60;
-        long minutes = seconds % 3600 / 60;
-        long hours = seconds % 86400 / 3600;
-        if(hours > 0) {
-            return hours + "h " + minutes + "m " + sec + "s";
-        } else if(hours == 0 && minutes > 0) {
-            return minutes + "m " + sec + "s";
-        } else {
-            return sec+"s";
-        }
-    }
-
     public static boolean chance(double chance) {
         return Math.random() < chance;
     }
@@ -76,10 +62,7 @@ public class Util {
         try {
             Potion pot = new Potion(PotionType.valueOf(potionType.toUpperCase()), level, splash);
             return pot.toItemStack(amount);
-        } catch (NullPointerException e) {
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Cannot get potion with type: "+potionType+" and tier "+level);
-            return null;
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException | IllegalArgumentException e) {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Cannot get potion with type: "+potionType+" and tier "+level);
             return null;
         }

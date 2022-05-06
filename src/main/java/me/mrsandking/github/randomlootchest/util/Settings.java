@@ -13,16 +13,28 @@ public class Settings {
     public static int particleAmount;
     public static String wandItemDisplayName;
     public static boolean wandItemPermissionToUse;
-    public static int restoreCooldowns;
+    public static boolean useDatabase;
+    public static String databaseType;
+    public static String databaseUser;
+    public static String databaseHost;
+    public static String databasePassword;
+    public static String databaseDatabase;
+    public static int databasePort;
 
     public Settings(RandomLootChestMain plugin) {
+        useDatabase = plugin.getConfigManager().getConfig("config.yml").getBoolean("database.use");
+        databaseType = plugin.getConfigManager().getConfig("config.yml").getString("database.type");
+        databaseHost = plugin.getConfigManager().getConfig("config.yml").getString("database.host");
+        databasePort = plugin.getConfigManager().getConfig("config.yml").getInt("database.port");
+        databasePassword = plugin.getConfigManager().getConfig("config.yml").getString("database.password");
+        databaseUser = plugin.getConfigManager().getConfig("config.yml").getString("database.user");
+        databaseDatabase = plugin.getConfigManager().getConfig("config.yml").getString("database.database");
         randomChests = plugin.getConfigManager().getConfig("config.yml").getBoolean("random-chests");
         activeParticles = plugin.getConfigManager().getConfig("config.yml").getBoolean("particles.active");
         particleType = plugin.getConfigManager().getConfig("config.yml").getString("particles.type").toUpperCase();
         particleAmount = plugin.getConfigManager().getConfig("config.yml").getInt("particles.amount");
         wandItemDisplayName = ChatColor.translateAlternateColorCodes('&', plugin.getConfigManager().getConfig("config.yml").getString("wand-item.displayName"));
         wandItemPermissionToUse = plugin.getConfigManager().getConfig("config.yml").getBoolean("wand-item.permission-to-use");
-        restoreCooldowns = plugin.getConfigManager().getConfig("config.yml").getInt("restore-cooldowns");
     }
 
 }

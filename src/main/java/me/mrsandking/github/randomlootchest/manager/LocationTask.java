@@ -22,12 +22,10 @@ public class LocationTask {
                         Location location = Util.getStringLocation(map.getKey());
                         try {
                             location.getWorld().playEffect(location.add(0.5, 0.7, 0.5), Effect.valueOf(Settings.particleType), Settings.particleAmount);
-                        } catch (Exception e) {
-                            continue;
-                        }
+                        } catch (Exception e) {}
                     }
                 }
-            }, 0L, 15L);
+            }, 0L, 20L);
         }
     }
 
