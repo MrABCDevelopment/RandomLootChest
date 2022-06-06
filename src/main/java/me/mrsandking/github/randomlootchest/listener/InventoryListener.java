@@ -23,8 +23,10 @@ public class InventoryListener implements Listener {
     public void clickEvent(InventoryClickEvent event) {
         if(event.getClickedInventory() == null) return;
         if(event.getClickedInventory().getHolder() instanceof GUI) {
-            event.setResult(Event.Result.DENY);
             GUI gui = guis.get(event.getWhoClicked().getUniqueId());
+            if(gui.isProtect()) {
+                event.setResult(Event.Result.DENY);
+            }
             int slot = event.getRawSlot();
             Player player = (Player) event.getWhoClicked();
             if (slot >= 0 && slot < gui.getSize() && slot < gui.getGItems().size()) {

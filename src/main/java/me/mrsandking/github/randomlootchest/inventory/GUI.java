@@ -19,12 +19,18 @@ public class GUI implements InventoryHolder {
     private String title;
     private int size;
     private List<GItem> gItems;
+    private boolean protect;
 
-    public GUI(String title, GUISize guiSize) {
+    public GUI(String title, GUISize guiSize, boolean protect) {
         this.title = ChatColor.translateAlternateColorCodes('&', title);
         this.size = guiSize.getSize();
         this.gItems = new ArrayList<>();
+        this.protect = protect;
         this.inventory = Bukkit.createInventory(this, size, this.title);
+    }
+
+    public GUI(String title, GUISize guiSize) {
+        this(title, guiSize, true);
     }
 
     public void openGUI(Player player) {
@@ -40,8 +46,22 @@ public class GUI implements InventoryHolder {
     }
 
     public void addItem(GItem gItem) {
-        gItems.add(gItem);
+        if(isProtect())
+            gItems.add(gItem);
         inventory.addItem(gItem.getItemStack());
+    }
+
+    public void setItem(int slot, GItem gItem) {
+        if(isProtect())
+            gItems.add(slot, gItem);
+        inventory.setItem(slot, gItem.getItemStack());
+    }
+
+    public void update() {
+        inventory.clear();
+        for(GItem gItem : gItems) {
+            addItem(gItem);
+        }
     }
 
     @Override

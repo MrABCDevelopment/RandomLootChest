@@ -2,6 +2,7 @@ package me.mrsandking.github.randomlootchest.manager;
 
 import lombok.Getter;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
+import me.mrsandking.github.randomlootchest.events.RLCCooldownSetEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
@@ -20,9 +21,11 @@ public class CooldownManager
     }
 
     public void setCooldown(UUID uuid, Location location, int seconds) {
+        RLCCooldownSetEvent rlcCooldownSetEvent = new RLCCooldownSetEvent(uuid, location, seconds);
         HashMap<UUID, Location> map = new HashMap<>();
         map.put(uuid, location);
         chestCooldowns.put(map, new AtomicInteger(seconds));
+        Bukkit.getPluginManager().callEvent(rlcCooldownSetEvent);
     }
 
     private void onSecond() {

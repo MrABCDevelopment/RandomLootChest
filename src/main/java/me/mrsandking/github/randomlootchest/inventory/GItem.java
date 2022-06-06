@@ -6,13 +6,12 @@ import me.mrsandking.github.randomlootchest.events.RLCClickInventoryEvent;
 import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Getter @Setter
 public class GItem {
@@ -22,29 +21,52 @@ public class GItem {
     private int amount;
     private List<Action> actions;
     private String displayName;
+    private Map<Enchantment, Integer> enchantments;
+    private Set<ItemFlag> itemFlags;
+    private boolean unbreakable;
+    private List<String> lore;
+    private ItemMeta itemMeta;
+
+    public GItem(ItemStack itemStack) {
+        this(itemStack.getType(), itemStack.getItemMeta().getDisplayName(), itemStack.getItemMeta().getLore(), itemStack.getAmount(), itemStack.getEnchantments(), itemStack.getItemMeta().getItemFlags(), itemStack.getItemMeta().isUnbreakable(), new Action[0]);
+    }
+
+    public GItem(Material material, String displayName, List<String> lore, int amount, Map<Enchantment, Integer> enchantments, Set<ItemFlag> itemFlags, boolean unbreakable, Action... actions) {
+        this.material = material;
+        this.displayName = ChatColor.translateAlternateColorCodes('&', displayName);
+        this.lore = Util.colouredLore(lore);
+        this.amount = amount;
+        this.enchantments = enchantments;
+        this.itemFlags = itemFlags;
+        this.unbreakable = unbreakable;
+        this.actions = new ArrayList<>();
+        this.actions.addAll(Collections.unmodifiableList(Arrays.asList(actions)));
+        this.itemStack = new ItemStack(material, amount);
+        this.itemMeta = this.itemStack.getItemMeta();
+        this.itemMeta.setDisplayName(this.displayName);
+        this.itemMeta.setLore(this.lore);
+        for(ItemFlag flag : this.itemFlags)
+            this.itemMeta.addItemFlags(flag);
+        this.itemMeta.setUnbreakable(this.unbreakable);
+        this.itemStack.setItemMeta(this.itemMeta);
+        this.itemStack.setAmount(this.amount);
+        this.itemStack.addEnchantments(this.enchantments);
+    }
 
     public GItem(Material material, int amount, Action... action) {
-        this.material = material;
-        this.amount = amount;
-        this.actions = new ArrayList<>();
-        actions.addAll(Collections.unmodifiableList(Arrays.asList(action)));
-        this.itemStack = new ItemStack(material, amount);
+        this(material, null, new ArrayList<>(), amount, new HashMap<>(), new HashSet<>(), false, action);
     }
 
     public GItem(Material material, int amount) {
-        this(material, amount, new Action[0]);
+        this(material, null, new ArrayList<>(), amount, new HashMap<>(), new HashSet<>(), false,  new Action[0]);
     }
 
     public GItem(Material material) {
-        this(material, 1, new Action[0]);
+        this(material, null, new ArrayList<>(), 1, new HashMap<>(), new HashSet<>(), false, new Action[0]);
     }
 
     public GItem(Material material, String displayName, List<String> list) {
-        this(material, 1, new Action[0]);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', displayName));
-        itemMeta.setLore(Util.colouredLore(list));
-        itemStack.setItemMeta(itemMeta);
+        this(material, displayName, list, 1, new HashMap<>(), new HashSet<>(), false, new Action[0]);
     }
 
     public void addAction(Action action) {

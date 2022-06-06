@@ -1,12 +1,13 @@
 package me.mrsandking.github.randomlootchest.manager;
 
+import me.mrsandking.github.randomlootchest.inventory.GItem;
+import me.mrsandking.github.randomlootchest.inventory.GUI;
+import me.mrsandking.github.randomlootchest.inventory.GUISize;
 import me.mrsandking.github.randomlootchest.objects.RandomItem;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
 import me.mrsandking.github.randomlootchest.util.Util;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 
 public class GameManager {
 
@@ -18,7 +19,7 @@ public class GameManager {
 
     public void openChest(Player player, String type) {
         ChestGame chestGame = RandomLootChestMain.getInstance().getChestsManager().getChests().get(type);
-        Inventory inventory = Bukkit.createInventory(null, 27, chestGame.getTitle());
+        GUI gui = new GUI(chestGame.getTitle(), GUISize.THREE_ROWS, false);
         int counter = 0;
         for(RandomItem randomItem : chestGame.getItems()) {
             if(counter == chestGame.getMaxItems())
@@ -27,22 +28,22 @@ public class GameManager {
                 int max = chestGame.getMaxItemsInTheSameType();
                 if(max > 0) {
                     int i = 0;
-                    for(int x = 0; x<inventory.getSize(); x++) {
-                        if(inventory.getItem(x) != null && inventory.getItem(x).getType() == randomItem.getItemStack().getType() && i<max) {
+                    for(int x = 0; x<gui.getSize(); x++) {
+                        if(gui.getInventory().getItem(x) != null && gui.getInventory().getItem(x).getType() == randomItem.getItemStack().getType() && i<max) {
                             i++;
                         }
                     }
                     if(i<max) {
-                        inventory.setItem(Util.randomSlot(inventory.getSize()), randomItem.getItemStack());
+                        gui.setItem(Util.randomSlot(gui.getSize()), new GItem(randomItem.getItemStack()));
                         counter++;
                     }
                 } else {
-                    inventory.setItem(Util.randomSlot(inventory.getSize()), randomItem.getItemStack());
+                    gui.setItem(Util.randomSlot(gui.getSize()), new GItem(randomItem.getItemStack()));
                     counter++;
                 }
             }
         }
-        player.openInventory(inventory);
+        gui.openGUI(player);
     }
 
 }

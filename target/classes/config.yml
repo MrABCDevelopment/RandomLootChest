@@ -10,6 +10,8 @@ particles:
 database:
   use: false
   type: "YAML"
+  #in seconds
+  auto-save-time: 300
   host: "localhost"
   user: "user"
   password: "password"
