@@ -35,9 +35,7 @@ public class GUI implements InventoryHolder {
 
     public void openGUI(Player player) {
         InventoryListener.guis.put(player.getUniqueId(), this);
-        RLCOpenInventoryEvent openInventoryEvent = new RLCOpenInventoryEvent(player, this);
         player.openInventory(inventory);
-        Bukkit.getPluginManager().callEvent(openInventoryEvent);
     }
 
     public void fillGUI(GItem gItem) {

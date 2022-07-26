@@ -1,6 +1,10 @@
 #Bez względu na ustawioną skrzynię na danej lokacji, otworzy się losowa skrzynia.
 random-chests: false
 
+filled-chest-info: true
+
+holograms-on-chests: false
+
 #Cząsteczki nad skrzyniami.
 particles:
   active: true

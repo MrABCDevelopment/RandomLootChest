@@ -14,6 +14,8 @@ public class ChestGame {
     private int time;
     private int maxItems;
     private int maxItemsInTheSameType;
+
+    private RandomMoney money;
     private List<RandomItem> items = new ArrayList<>();
 
     public ChestGame(String id) {

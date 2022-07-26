@@ -5,6 +5,7 @@ me\mrsandking\github\randomlootchest\listener\PlayerJoinListener.class
 me\mrsandking\github\randomlootchest\objects\RandomItem.class
 me\mrsandking\github\randomlootchest\database\DatabaseConnector.class
 me\mrsandking\github\randomlootchest\manager\LocationTask$1.class
+me\mrsandking\github\randomlootchest\hooks\VaultHook.class
 me\mrsandking\github\randomlootchest\database\DatabaseSQLite.class
 me\mrsandking\github\randomlootchest\inventory\GUI.class
 me\mrsandking\github\randomlootchest\listener\PlayerInteractListener.class
@@ -18,6 +19,7 @@ me\mrsandking\github\randomlootchest\commands\ArgumentCommand.class
 me\mrsandking\github\randomlootchest\manager\ConfigManager.class
 me\mrsandking\github\randomlootchest\util\Settings.class
 me\mrsandking\github\randomlootchest\events\RLCOpenInventoryEvent.class
+me\mrsandking\github\randomlootchest\hooks\HolographicDisplaysHook.class
 me\mrsandking\github\randomlootchest\manager\StarterManager.class
 me\mrsandking\github\randomlootchest\commands\subcommands\WandSubCommand.class
 me\mrsandking\github\randomlootchest\manager\ChestsManager.class
@@ -26,7 +28,9 @@ me\mrsandking\github\randomlootchest\inventory\actions\CloseAction.class
 me\mrsandking\github\randomlootchest\objects\ChestGame.class
 me\mrsandking\github\randomlootchest\inventory\GUISize.class
 me\mrsandking\github\randomlootchest\commands\subcommands\SaveSubCommand.class
+me\mrsandking\github\randomlootchest\objects\RandomMoney.class
 me\mrsandking\github\randomlootchest\database\DatabaseYAML.class
+me\mrsandking\github\randomlootchest\hooks\HolographicDisplaysHook$1.class
 me\mrsandking\github\randomlootchest\database\Database.class
 me\mrsandking\github\randomlootchest\util\Util.class
 me\mrsandking\github\randomlootchest\database\DatabaseMySQL.class

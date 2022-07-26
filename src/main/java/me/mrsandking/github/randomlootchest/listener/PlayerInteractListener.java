@@ -2,6 +2,7 @@ package me.mrsandking.github.randomlootchest.listener;
 
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.events.RLCClickInventoryEvent;
+import me.mrsandking.github.randomlootchest.events.RLCOpenInventoryEvent;
 import me.mrsandking.github.randomlootchest.inventory.GItem;
 import me.mrsandking.github.randomlootchest.inventory.GUI;
 import me.mrsandking.github.randomlootchest.inventory.GUISize;
@@ -45,7 +46,11 @@ public class PlayerInteractListener implements Listener {
             event.setCancelled(true);
 
             if(plugin.getCooldownManager().isOnCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation())) {
-                event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("gamechest-cooldown").replace("[time]", TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
+                if(plugin.getHolographicDisplaysHook() != null && Settings.hologramsInfo) {
+                    if (!plugin.getHolographicDisplaysHook().getMaps().containsKey(event.getPlayer().getUniqueId()))
+                        plugin.getHolographicDisplaysHook().createTempHolo(event.getPlayer(), event.getClickedBlock().getLocation());
+                } else
+                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("gamechest-cooldown").replace("[time]", TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
                 return;
             }
 
@@ -73,6 +78,7 @@ public class PlayerInteractListener implements Listener {
                 return;
             if (Settings.wandItemPermissionToUse && !event.getPlayer().hasPermission("wanditem.permission"))
                 return;
+            event.setCancelled(true);
             locationHashMap.put(event.getPlayer().getUniqueId(), event.getBlock().getLocation());
             openMenu(event.getPlayer());
         }
@@ -90,7 +96,7 @@ public class PlayerInteractListener implements Listener {
                         if(event.getSlot() < list.size() && event.getSlot() >= 0 && event.getSlot() <= 8) {
                             if(event.getSlot() > list.size()) return;
 
-                            event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("add-chest"));
+                            event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("add-chest").replace("{CHEST}", chestGame.getTitle()).replace("{LOCATION}", Util.getLocationString(locationHashMap.get(player.getUniqueId()))));
                             plugin.getLocationManager().addLocation(list.get(event.getSlot()).getId(), locationHashMap.get(event.getPlayer().getUniqueId()));
                             locationHashMap.remove(event.getPlayer().getUniqueId());
                             inventoryHashMap.remove(event.getPlayer().getUniqueId());
@@ -116,6 +122,22 @@ public class PlayerInteractListener implements Listener {
             event.setCancelled(true);
             event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("remove-chest"));
             plugin.getLocationManager().removeLocation(event.getClickedBlock().getLocation());
+        }
+    }
+
+    @EventHandler
+    public void openChestEvent(RLCOpenInventoryEvent event) {
+        if(plugin.getVaultHook() != null) {
+            if(event.getChestGame().getMoney() != null) {
+                int money = event.getChestGame().getMoney().getMoney();
+                if (money > 0) {
+                    plugin.getVaultHook().addMoney(event.getPlayer(), money);
+                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("found-money").replace("{MONEY}", String.valueOf(money)));
+                } else if (money < 0) {
+                    plugin.getVaultHook().removeMoney(event.getPlayer(), money);
+                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("lost-money").replace("{MONEY}", String.valueOf(money)));
+                }
+            }
         }
     }
 

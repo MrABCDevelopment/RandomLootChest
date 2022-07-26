@@ -4,9 +4,11 @@ import lombok.Getter;
 import me.mrsandking.github.randomlootchest.objects.RandomItem;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
+import me.mrsandking.github.randomlootchest.objects.RandomMoney;
 import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -16,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 public class ChestsManager {
@@ -37,6 +40,11 @@ public class ChestsManager {
             chestGame.setTime(config.getInt("chests."+id+".Cooldown"));
             chestGame.setMaxItems(config.getInt("chests."+id+".MaxItems"));
             chestGame.setMaxItemsInTheSameType(config.getInt("chests."+id+".MaxItemsInTheSameType"));
+            if(config.get("chests."+id+".Money") != null) {
+                String moneyString = config.getString("chests." + id + ".Money");
+                String[] strings = moneyString.split(";");
+                chestGame.setMoney(new RandomMoney(Integer.parseInt(strings[0]), Integer.parseInt(strings[1])));
+            }
             for(String content : config.getConfigurationSection("chests."+id+".Contents").getKeys(false)) {
                 try {
                     ItemStack itemStack = null;
@@ -94,11 +102,19 @@ public class ChestsManager {
         }
         return null;
     }
-
     public ChestGame getRandomChest() {
         ArrayList<ChestGame> chestGames = new ArrayList<ChestGame>(chests.values());
         int rN = Util.getRandom().nextInt(chests.size());
         return chestGames.get(rN);
+    }
+
+    public ChestGame getChestByLocation(Location location) {
+        for(Map.Entry<String, String> map : RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet()) {
+            if(Util.getStringLocation(map.getKey()).equals(location)) {
+                return chests.get(map.getValue());
+            }
+        }
+        return null;
     }
 
 }

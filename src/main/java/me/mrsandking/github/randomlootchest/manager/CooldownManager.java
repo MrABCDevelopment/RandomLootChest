@@ -3,8 +3,11 @@ package me.mrsandking.github.randomlootchest.manager;
 import lombok.Getter;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.events.RLCCooldownSetEvent;
+import me.mrsandking.github.randomlootchest.util.Settings;
+import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,10 +36,17 @@ public class CooldownManager
             @Override
             public void run() {
                 if (chestCooldowns.isEmpty()) return;
-                for(HashMap<UUID, Location> map : chestCooldowns.keySet()) {
-                    int value = chestCooldowns.get(map).decrementAndGet();
-                    if(value<=0) {
-                        chestCooldowns.remove(map);
+                for(Map.Entry<HashMap<UUID, Location>, AtomicInteger> map : chestCooldowns.entrySet()) {
+                    for(Map.Entry<UUID, Location> entry : map.getKey().entrySet()) {
+                        int value = chestCooldowns.get(map.getKey()).decrementAndGet();
+                        if (value <= 0) {
+                            Player player = Bukkit.getPlayer(entry.getKey());
+                            if(Settings.filledChestInfo) {
+                                if (player != null)
+                                    player.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("filled-chest-info").replace("{LOCATION}", Util.getLocationString(entry.getValue())));
+                            }
+                            chestCooldowns.remove(map.getKey());
+                        }
                     }
                 }
             }

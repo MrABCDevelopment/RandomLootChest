@@ -3,6 +3,8 @@ package me.mrsandking.github.randomlootchest;
 import lombok.Getter;
 import me.mrsandking.github.randomlootchest.commands.CommandHandler;
 import me.mrsandking.github.randomlootchest.database.Database;
+import me.mrsandking.github.randomlootchest.hooks.HolographicDisplaysHook;
+import me.mrsandking.github.randomlootchest.hooks.VaultHook;
 import me.mrsandking.github.randomlootchest.listener.InventoryListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerDeathListener;
 import me.mrsandking.github.randomlootchest.listener.PlayerInteractListener;
@@ -10,6 +12,8 @@ import me.mrsandking.github.randomlootchest.listener.PlayerJoinListener;
 import me.mrsandking.github.randomlootchest.manager.*;
 import me.mrsandking.github.randomlootchest.objects.WandItem;
 import me.mrsandking.github.randomlootchest.util.Settings;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RandomLootChestMain extends JavaPlugin {
@@ -25,6 +29,10 @@ public class RandomLootChestMain extends JavaPlugin {
     private @Getter ChestsManager chestsManager;
     private static @Getter RandomLootChestMain instance;
 
+    private @Getter VaultHook vaultHook;
+
+    private @Getter HolographicDisplaysHook holographicDisplaysHook;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -38,6 +46,14 @@ public class RandomLootChestMain extends JavaPlugin {
         this.messagesManager = new MessagesManager(this);
         this.gameManager = new GameManager(this);
         this.starterManager = new StarterManager();
+        if (getServer().getPluginManager().getPlugin("Vault") != null) {
+            this.vaultHook = new VaultHook(this);
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Hooked with Vault!");
+        }
+        if (getServer().getPluginManager().getPlugin("HolographicDisplays") != null) {
+            this.holographicDisplaysHook = new HolographicDisplaysHook(this);
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Hooked with HolographicDisplays!");
+        }
 
         if(Settings.useDatabase) {
             this.databaseManager = new Database();

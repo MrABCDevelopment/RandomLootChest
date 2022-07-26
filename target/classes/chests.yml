@@ -8,6 +8,7 @@ chests:
     Cooldown: 30
     MaxItems: 4
     MaxItemsInTheSameType: 2
+    Money: -20;10
     Contents:
       CommonSword:
         DisplayName: 'Common Sword'
@@ -24,6 +25,7 @@ chests:
     Cooldown: 60
     MaxItems: 4
     MaxItemsInTheSameType: 3
+    Money: 0;20
     Contents:
       Potion1:
         DisplayName: '&bPotion of Swiftness'

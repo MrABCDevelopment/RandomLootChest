@@ -1,5 +1,6 @@
 package me.mrsandking.github.randomlootchest.manager;
 
+import me.mrsandking.github.randomlootchest.events.RLCOpenInventoryEvent;
 import me.mrsandking.github.randomlootchest.inventory.GItem;
 import me.mrsandking.github.randomlootchest.inventory.GUI;
 import me.mrsandking.github.randomlootchest.inventory.GUISize;
@@ -7,6 +8,7 @@ import me.mrsandking.github.randomlootchest.objects.RandomItem;
 import me.mrsandking.github.randomlootchest.RandomLootChestMain;
 import me.mrsandking.github.randomlootchest.objects.ChestGame;
 import me.mrsandking.github.randomlootchest.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class GameManager {
@@ -44,6 +46,8 @@ public class GameManager {
             }
         }
         gui.openGUI(player);
+        RLCOpenInventoryEvent rlcOpenInventoryEvent = new RLCOpenInventoryEvent(player, chestGame, gui);
+        Bukkit.getPluginManager().callEvent(rlcOpenInventoryEvent);
     }
 
 }

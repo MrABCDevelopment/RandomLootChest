@@ -22,6 +22,9 @@ public class Settings {
     public static String databaseDatabase;
     public static int databasePort;
 
+    public static boolean filledChestInfo;
+
+    public static boolean hologramsInfo;
     public Settings(RandomLootChestMain plugin) {
         useDatabase = plugin.getConfigManager().getConfig("config.yml").getBoolean("database.use");
         databaseType = plugin.getConfigManager().getConfig("config.yml").getString("database.type");
@@ -37,6 +40,8 @@ public class Settings {
         particleAmount = plugin.getConfigManager().getConfig("config.yml").getInt("particles.amount");
         wandItemDisplayName = ChatColor.translateAlternateColorCodes('&', plugin.getConfigManager().getConfig("config.yml").getString("wand-item.displayName"));
         wandItemPermissionToUse = plugin.getConfigManager().getConfig("config.yml").getBoolean("wand-item.permission-to-use");
+        filledChestInfo = plugin.getConfigManager().getConfig("config.yml").getBoolean("filled-chest-info");
+        hologramsInfo = plugin.getConfigManager().getConfig("config.yml").getBoolean("holograms-on-chests");
     }
 
 }

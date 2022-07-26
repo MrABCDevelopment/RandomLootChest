@@ -36,6 +36,7 @@ public class ChestsSubCommand implements ArgumentCommand {
             strings.add(ChatColor.GOLD+"» Cooldown: "+ ChatColor.YELLOW+TimeUtil.formattedTime(mapEntry.getValue().getTime()));
             strings.add(ChatColor.GOLD+"» Max Items: "+ ChatColor.YELLOW+mapEntry.getValue().getMaxItems());
             strings.add(ChatColor.GOLD+"» Max Items In The Same Type: "+ ChatColor.YELLOW+mapEntry.getValue().getMaxItemsInTheSameType());
+            strings.add(ChatColor.GOLD+"» Money: "+ ChatColor.YELLOW+mapEntry.getValue().getMoney().getMin()+"-"+mapEntry.getValue().getMoney().getMax()+"$");
             strings.add(ChatColor.GOLD+"» Items: ("+mapEntry.getValue().getItems().size()+")");
             for(RandomItem randomItem : mapEntry.getValue().getItems()) {
                 strings.add(ChatColor.GOLD+"➢ "+ChatColor.YELLOW+randomItem.getItemStack().getType().toString() + " - "+(randomItem.getChance()*100)+"%");

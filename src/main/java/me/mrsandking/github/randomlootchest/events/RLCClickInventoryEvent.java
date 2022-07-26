@@ -30,6 +30,9 @@ public class RLCClickInventoryEvent extends Event {
         this.clickType = clickType;
     }
 
+    public static HandlerList getHandlerList() {
+        return list;
+    }
     @Override
     public HandlerList getHandlers() {
         return list;

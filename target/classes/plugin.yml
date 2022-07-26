@@ -1,8 +1,11 @@
 name: RandomLootChest
-version: 1.3.1
+version: 1.4.0
 main: me.mrsandking.github.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
 api-version: 1.13
+softdepend:
+  - Vault
+  - HolographicDisplays
 
 commands:
   randomlootchest:
