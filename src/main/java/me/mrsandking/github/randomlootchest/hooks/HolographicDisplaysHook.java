@@ -22,10 +22,11 @@ public class HolographicDisplaysHook {
     }
 
     public void createTempHolo(Player player, Location location) {
+        String text = RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("hologram-on-chest");
         String time = TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(player.getUniqueId(), location));
         maps.put(player.getUniqueId(), location);
         Hologram holo = HologramsAPI.createHologram(plugin, location.add(0.5,1.5,0.5));
-        holo.appendTextLine(ChatColor.RED+"Time to open chest: "+ time);
+        holo.appendTextLine(text.replace("{TIME}", time));
         holo.getVisibilityManager().setVisibleByDefault(false);
         holo.getVisibilityManager().showTo(player);
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {

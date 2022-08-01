@@ -8,7 +8,6 @@ import me.mrsandking.github.randomlootchest.objects.RandomMoney;
 import me.mrsandking.github.randomlootchest.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -18,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 public class ChestsManager {
@@ -106,15 +104,6 @@ public class ChestsManager {
         ArrayList<ChestGame> chestGames = new ArrayList<ChestGame>(chests.values());
         int rN = Util.getRandom().nextInt(chests.size());
         return chestGames.get(rN);
-    }
-
-    public ChestGame getChestByLocation(Location location) {
-        for(Map.Entry<String, String> map : RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet()) {
-            if(Util.getStringLocation(map.getKey()).equals(location)) {
-                return chests.get(map.getValue());
-            }
-        }
-        return null;
     }
 
 }

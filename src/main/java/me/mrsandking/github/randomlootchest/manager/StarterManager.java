@@ -22,7 +22,6 @@ public class StarterManager {
         itemStacks = new ArrayList<>();
         load();
     }
-
     public void load() {
         itemStacks.clear();
         for(String k : RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getStringList("start-items")) {

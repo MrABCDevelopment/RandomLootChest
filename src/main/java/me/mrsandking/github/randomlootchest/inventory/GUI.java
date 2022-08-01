@@ -38,11 +38,6 @@ public class GUI implements InventoryHolder {
         player.openInventory(inventory);
     }
 
-    public void fillGUI(GItem gItem) {
-        for(int x = 0; x<size; x++)
-            addItem(gItem);
-    }
-
     public void addItem(GItem gItem) {
         if(isProtect())
             gItems.add(gItem);
@@ -53,13 +48,6 @@ public class GUI implements InventoryHolder {
         if(isProtect())
             gItems.add(slot, gItem);
         inventory.setItem(slot, gItem.getItemStack());
-    }
-
-    public void update() {
-        inventory.clear();
-        for(GItem gItem : gItems) {
-            addItem(gItem);
-        }
     }
 
     @Override
