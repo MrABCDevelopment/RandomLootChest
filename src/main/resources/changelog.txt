@@ -1,0 +1,19 @@
+Update 1.5.0
+- New subcommands (create, delete, edit)
+- Recode StarterItems, starter.yml, leather armor support for colours
+- Hex messages
+- New chests systems (seperate chests files, each chest = new file in chests directory) - done
+- more configuration options
+- Cooldown settings changed - in progress
+- CombatLogX support - done
+- Support all versions 1.7-1.19.x (but older versions could work) - done
+- Add metrics, update info and statistics - done
+- Remove useless methods, imports, etc.
+- Add support for new potions
+- Add more settings to chests and items
+- Add file items.yml which allows to create one item and put it into several chests!
+- Better randomize items
+- Better API (new events, new functions, easy to use)
+
+FIXED:
+- max chests

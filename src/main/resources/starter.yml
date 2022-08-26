@@ -1,0 +1,13 @@
+# Starter items has reworked since RandomLootChest v1.5.0
+# It should works throught the all Minecraft versions, but some features may be disabled.
+
+config-version: 1
+
+use-starter-items: true
+
+starter-items:
+  - IRON_HELMET
+  - IRON_CHESTPLATE
+  - IRON_LEGGINGS
+  - IRON_BOOTS
+  - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je

@@ -1,16 +1,33 @@
-#Bez względu na ustawioną skrzynię na danej lokacji, otworzy się losowa skrzynia.
+# Since update v1.5.0 all configs has one version. If the version is changed, all config files are copied and moved
+# to the "RandomLootChest/old" directory, new files are loaded, so if there is a new change, all data are copied
+# and saved to this directory. Version of configs are changed, when new option is added and this option is
+# needed to work, otherwise nothing happens. Don't change on your own!
+config-version: 1
+
+# Opens random chest
 random-chests: false
 
-filled-chest-info: true
+# If chest is filled, the information is send to the player. Here you can choose how players
+# recive the information about filled chest. You can choose all the options or disable them.
+filled-chest-info:
+  actionbar: true
+  title: false
+  chat: false
 
+# If you have your old own cooldowns and you don't trust enough about new system,
+# just switch this option to true.
+old-cooldown-parse: false
+
+# Currently, this option works only with HolographicDisplays - it sends hologram with information about the cooldown
 holograms-on-chests: false
 
-#Cząsteczki nad skrzyniami.
-particles:
-  active: true
-  amount: 1
-  type: "HEART"
+# When player is in Combat (CombatLogX), he cannot open any chest.
+openchest-in-combat: false
 
+chest-add-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+
+# In database, this plugin saves information about cooldowns to chests. If it is disabled, all cooldowns after reload plugin
+# or server shutdown, will disappear.
 database:
   use: false
   type: "YAML"
@@ -25,13 +42,3 @@ database:
 wand-item:
   displayName: '&6Chest Wand'
   permission-to-use: true
-
-#Jest to mini-dodatek możesz po prostu usunąć wszystko z listy aby nic on nie dodawał na starcie.
-#Jednak jeśli cię on zainteresował to działa on w następujący sposób,
-#na starcie gracz otrzymuje wszystkie przedmioty z listy jednak SET nie wypada z niego!
-start-items:
-  - IRON_HELMET
-  - IRON_CHESTPLATE
-  - IRON_LEGGINGS
-  - IRON_BOOTS
-  - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je

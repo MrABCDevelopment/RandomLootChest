@@ -1,3 +1,4 @@
+config-version: 1
 messages:
   loaded-messages: '&aLoaded {MESSAGES} messages!'
   not-player: '&cConsole cannot perform this command!'
@@ -6,8 +7,9 @@ messages:
   location-save: '&aPlease use /rlc save to save all locations!'
   add-chest: '&aAdded new chest: {CHEST}&a at location: {LOCATION}!'
   remove-chest: '&cRemoved chest!'
-  gamechest-inv-title: 'Random Loot'
-  gamechest-cooldown: 'Please wait [time] to open this chest!'
+  gamechest-cooldown: 'Please wait {TIME} to open this chest!'
   filled-chest-info: 'Chest at: {LOCATION} has filled!'
   found-money: 'You found: {MONEY}$'
   lost-money: 'You lost: {MONEY}$'
+  hologram-on-chest: '&cTime to open chest: {TIME}'
+  openchest-in-combat: '&cYou cannot open chest while you are in combat!'
