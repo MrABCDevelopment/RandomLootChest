@@ -42,7 +42,7 @@ public class PlayerUtils {
             armor.getClass().getMethod("setCustomName", new Class[] { ReflectionUtils.getNMSClass("IChatBaseComponent") }).invoke(armor, new Object[] {icbc});
             armor.getClass().getMethod("setCustomNameVisible", new Class[] {boolean.class}).invoke(armor, new Object[]{true});
             Object packet = entityMetaConstructor.newInstance(new Object[] { id, dataWatcher, true });
-            ReflectionUtils.packet(player, packet);
+            ReflectionUtils.sendPacket(player, packet);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class PlayerUtils {
 
             entity.getClass().getMethod("setCustomName", new Class[] { ReflectionUtils.getNMSClass("IChatBaseComponent") }).invoke(entity, new Object[] {icbc});
             Object packet = entityMetaConstructor.newInstance(new Object[] { id, dataWatcher, true });
-            ReflectionUtils.packet(player, packet);
+            ReflectionUtils.sendPacket(player, packet);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class PlayerUtils {
             Constructor<?> spawnEntityConstructor = spawnEntityPacket.getConstructor(new Class[] { ReflectionUtils.getNMSClass("Entity"), int.class });
 
             Object packet = spawnEntityConstructor.newInstance(new Object[] { armor.getClass().cast(ReflectionUtils.getNMSClass("EntityArmorStand")), 1 });
-            ReflectionUtils.packet(player, packet);
+            ReflectionUtils.sendPacket(player, packet);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,7 +106,7 @@ public class PlayerUtils {
             Bukkit.broadcastMessage(nmsWorld.toString());
 
             Object packet = inventoryConstructor.newInstance(new Object[] { finalEntity, 1 });
-            ReflectionUtils.packet(player, packet);
+            ReflectionUtils.sendPacket(player, packet);
             sendMessage(player, "Poszlo ci swietnie!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +120,7 @@ public class PlayerUtils {
             Object chatType = ReflectionUtils.getNMSClass("ChatMessageType").getField("CHAT").get(null);
             Constructor<?> constructor = chatPacket.getConstructor(new Class[] { ReflectionUtils.getNMSClass("IChatBaseComponent"), ReflectionUtils.getNMSClass("ChatMessageType"), UUID.class});
             Object packet = constructor.newInstance(new Object[] {icbc, chatType, player.getUniqueId()});
-            ReflectionUtils.packet(player, packet);
+            ReflectionUtils.sendPacket(player, packet);
         } catch (Exception e) {}
     }
 

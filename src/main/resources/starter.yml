@@ -1,0 +1,10 @@
+lore-id-text: '&6Starter Item'
+
+use-starter-items: true
+
+starter-items:
+  - IRON_HELMET:1
+  - IRON_CHESTPLATE:1
+  - IRON_LEGGINGS:1
+  - IRON_BOOTS:1
+  - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je

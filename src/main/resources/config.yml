@@ -1,16 +1,20 @@
-#Bez względu na ustawioną skrzynię na danej lokacji, otworzy się losowa skrzynia.
+# Enable or disable update message
+update-checker: true
+
+# Opens random chest
 random-chests: false
 
-filled-chest-info: true
+# If you have your old own cooldowns and you don't trust enough about new system,
+# just switch this option to true.
+old-cooldown-parse: false
 
+# Currently, this option works only with HolographicDisplays - it sends hologram with information about the cooldown
 holograms-on-chests: false
 
-#Cząsteczki nad skrzyniami.
-particles:
-  active: true
-  amount: 1
-  type: "HEART"
+chest-add-sound: ENTITY_EXPERIENCE_ORB_PICKUP
 
+# In database, this plugin saves information about cooldowns to chests. If it is disabled, all cooldowns after reload plugin
+# or server shutdown, will disappear.
 database:
   use: false
   type: "YAML"
@@ -25,13 +29,3 @@ database:
 wand-item:
   displayName: '&6Chest Wand'
   permission-to-use: true
-
-#Jest to mini-dodatek możesz po prostu usunąć wszystko z listy aby nic on nie dodawał na starcie.
-#Jednak jeśli cię on zainteresował to działa on w następujący sposób,
-#na starcie gracz otrzymuje wszystkie przedmioty z listy jednak SET nie wypada z niego!
-start-items:
-  - IRON_HELMET
-  - IRON_CHESTPLATE
-  - IRON_LEGGINGS
-  - IRON_BOOTS
-  - IRON_SWORD:1:&b&lMiecz:&7Je;&8je;&9je
