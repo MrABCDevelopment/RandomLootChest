@@ -27,7 +27,7 @@ public class ChestsInfoMenu {
             strings.add(ChatColor.GOLD+"» Max Items In The Same Type: "+ ChatColor.YELLOW+mapEntry.getValue().getMaxItemsInTheSameType());
             strings.add(ChatColor.GOLD+"» Money: "+ ChatColor.YELLOW+mapEntry.getValue().getMoney().getMin()+"-"+mapEntry.getValue().getMoney().getMax()+"$");
             strings.add(ChatColor.GOLD+"» Use Particle: "+ ChatColor.YELLOW+((mapEntry.getValue().isParticleUse()) ? "on" : "off"));
-            strings.add(ChatColor.GOLD+"» Particle Type: "+ ChatColor.YELLOW+mapEntry.getValue().getParticleType());
+            strings.add(ChatColor.GOLD+"» Particle Type: "+ ChatColor.YELLOW+((mapEntry.getValue().getParticleType() != null) ? mapEntry.getValue().getParticleType() : "none"));
             strings.add(ChatColor.GOLD+"» Particle Amount: "+ ChatColor.YELLOW+mapEntry.getValue().getParticleAmount());
             strings.add(ChatColor.GOLD+"» Items: ("+mapEntry.getValue().getItems().size()+")");
             for(RandomItem randomItem : mapEntry.getValue().getItems()) {

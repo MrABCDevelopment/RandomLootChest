@@ -6,6 +6,7 @@ import me.dreamdevs.github.randomlootchest.api.events.CooldownExpiredEvent;
 import me.dreamdevs.github.randomlootchest.api.events.CooldownSetEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -42,7 +43,7 @@ public class CooldownManager
                     for(Map.Entry<UUID, Location> entry : map.getKey().entrySet()) {
                         int value = chestCooldowns.get(map.getKey()).decrementAndGet();
                         if (value <= 0) {
-                            Player player = Bukkit.getPlayer(entry.getKey());
+                            OfflinePlayer player = Bukkit.getOfflinePlayer(entry.getKey());
                             Location location = entry.getValue();
                             chestCooldowns.remove(map.getKey());
                             CooldownExpiredEvent cooldownExpiredEvent = new CooldownExpiredEvent(player.getUniqueId(), location);
