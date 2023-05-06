@@ -1,0 +1,19 @@
+ /* public static ItemStack colouredLeatherItem(ItemStack itemStack, Color color) {
+        if(itemStack.getItemMeta() instanceof LeatherArmorMeta) {
+            LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemStack.getItemMeta();
+            leatherArmorMeta.setColor(color);
+            itemStack.setItemMeta(leatherArmorMeta);
+            return itemStack;
+        }
+        return itemStack;
+    }
+
+    public static ItemStack colouredLeatherItem(ItemStack itemStack, int red, int green, int blue) {
+        if(itemStack.getItemMeta() instanceof LeatherArmorMeta) {
+            LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemStack.getItemMeta();
+            leatherArmorMeta.setColor(Color.fromRGB(red,green,blue));
+            itemStack.setItemMeta(leatherArmorMeta);
+            return itemStack;
+        }
+        return itemStack;
+    }*/

@@ -1,0 +1,31 @@
+
+P
+java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+r
+java:S1104"\Make playerConnection a static final constant or non-public and provide accessors if needed.(µ‘ùŒ
+L
+java:S1444"6Make this "public static playerConnection" field final(µ‘ùŒ
+c
+java:S2259-"HA "NullPointerException" could be thrown; "connection" is nullable here.(¼¬Œ‡ýÿÿÿÿ
+c
+java:S2259@"HA "NullPointerException" could be thrown; "getHandle()" can return null.(£°¾øüÿÿÿÿ
+o
+java:S2259 "TA "NullPointerException" could be thrown; "chatComponentTextClass" is nullable here.(ößƒÚøÿÿÿÿ
+S
+java:S3878 "8Remove this array creation and simply pass the elements.(ößƒÚøÿÿÿÿ
+S
+java:S3878!"8Remove this array creation and simply pass the elements.(ž–ÉÌúÿÿÿÿ
+;
+java:S1181."%Catch Exception instead of Throwable.(ëß‹™
+S
+java:S3878-"8Remove this array creation and simply pass the elements.(¼¬Œ‡ýÿÿÿÿ
+\
+java:S3878-"ADisambiguate this call by either casting as "Class" or "Class[]".(¼¬Œ‡ýÿÿÿÿ
+;
+java:S11817"%Catch Exception instead of Throwable.(ëß‹™
+0
+java:S38786"Remove this array creation.(ªÑêt
+V
+java:S38786"ADisambiguate this call by either casting as "Class" or "Class[]".(ªÑêt
+;
+java:S1181A"%Catch Exception instead of Throwable.(ëß‹™

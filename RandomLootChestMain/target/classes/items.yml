@@ -1,0 +1,6 @@
+Items:
+  example:
+    Material: STONE
+    Amount: 64
+    DisplayName: '&6Example Stone'
+    Chance: 0.9
