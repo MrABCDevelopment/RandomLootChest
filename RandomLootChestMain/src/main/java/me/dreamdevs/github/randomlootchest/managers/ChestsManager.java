@@ -13,10 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 public class ChestsManager {
@@ -43,16 +40,16 @@ public class ChestsManager {
             chestsDirectory.mkdirs();
             plugin.saveResource("chests/default.yml", false);
         }
-        if(chestsDirectory.listFiles().length == 0) return;
 
-        for(File chestFile : chestsDirectory.listFiles()) {
-            if(chestFile.getName().endsWith(".yml")) {
+        Optional.ofNullable(chestsDirectory.listFiles(((dir, name) -> name.endsWith(".yml")))).ifPresent(files -> {
+            Arrays.stream(files).forEach(chestFile -> {
                 FileConfiguration config = YamlConfiguration.loadConfiguration(chestFile);
                 ChestGame chestGame = new ChestGame(chestFile.getName().substring(0, chestFile.getName().length()-4), true);
                 chestGame.setTitle(ColourUtil.colorize(config.getString("Title")));
                 chestGame.setTime(TimeUtil.convertStringToCooldown(config.getString("Cooldown")));
                 chestGame.setMaxItems(config.getInt("MaxItems"));
                 chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType"));
+
                 if(config.get("Money") != null) {
                     String moneyString = config.getString("Money");
                     String[] strings = moneyString.split(";");
@@ -86,8 +83,8 @@ public class ChestsManager {
                                         config.getString(CONTENTS+"." + content + ".PotionEffect"), config.getInt(CONTENTS+"." + content + ".Tier"));
                             } else {
                                 itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
-                                config.getString(CONTENTS+"."+content+".PotionEffect"),
-                                config.getBoolean(CONTENTS+"."+content+".Extended"), config.getBoolean(CONTENTS+"."+content+".Upgraded"));
+                                        config.getString(CONTENTS+"."+content+".PotionEffect"),
+                                        config.getBoolean(CONTENTS+"."+content+".Extended"), config.getBoolean(CONTENTS+"."+content+".Upgraded"));
                             }
                         }
                         RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
@@ -98,8 +95,9 @@ public class ChestsManager {
                     }
                 }
                 chests.put(chestGame.getId(), chestGame);
-            }
-        }
+            });
+        });
+
         Util.sendPluginMessage("&a"+chests.size()+" chests loaded!");
     }
 

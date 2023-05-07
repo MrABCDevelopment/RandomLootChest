@@ -22,7 +22,6 @@ public class ChestGame {
     private int particleAmount;
     private boolean particleUse;
     private List<RandomItem> items = new ArrayList<>();
-
     public ChestGame(String id, boolean createFile) {
         this.id = id;
         this.chestFile = new File(RandomLootChestMain.getInstance().getDataFolder(), "chests/"+id+".yml");

@@ -73,4 +73,5 @@ public class TreasureChest implements IChestGame {
         randomItems.add(new RandomItem(new ItemStack(Material.GOLDEN_APPLE), 0.7));
         return randomItems;
     }
+
 }

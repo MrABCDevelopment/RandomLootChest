@@ -53,7 +53,7 @@ public class CooldownManager
     }
 
     public int getPlayerCooldown(UUID uuid, Location location) {
-        return chestCooldowns.keySet().stream().filter(entry -> entry.containsKey(uuid) && entry.containsValue(location)).map(entry -> chestCooldowns.get(entry).get()).findAny().orElse(null);
+        return chestCooldowns.keySet().stream().filter(entry -> entry.containsKey(uuid) && entry.containsValue(location)).map(entry -> chestCooldowns.get(entry).get()).findAny().orElse(0);
     }
 
     public boolean isOnCooldown(UUID uuid, Location location) {

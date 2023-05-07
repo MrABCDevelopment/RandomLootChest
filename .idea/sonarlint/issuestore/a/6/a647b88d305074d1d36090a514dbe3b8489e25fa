@@ -1,0 +1,10 @@
+
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ÏÏãñÿÿÿÿÿ
+@
+java:S3010"%Remove this assignment of "instance".(ñõîÙşÿÿÿÿ
+W
+java:S1126>"AReplace this if-then-else statement by a single return statement.(Ôûñ§
+h	java:S100C"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´ÿÖÚúÿÿÿÿ
+V
+java:S1126D"AReplace this if-then-else statement by a single return statement.(÷ÏõU

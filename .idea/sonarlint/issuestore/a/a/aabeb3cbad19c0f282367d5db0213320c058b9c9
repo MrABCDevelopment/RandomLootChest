@@ -1,0 +1,27 @@
+
+}
+java:S1192"`Define a constant instead of duplicating this literal "&cCannot parse item with type: " 4 times.(¯§Ğ8öª´õ0
+J
+java:S1066,"/Merge this if statement with the enclosing one.(ôôÜÜúÿÿÿÿ
+Q	java:S107G"<Method has 9 parameters, which is greater than 7 authorized.(±É¨
+W	java:S107c"=Method has 10 parameters, which is greater than 7 authorized.(Ê€×şÿÿÿÿ
+v
+java:S1488"aImmediately return this expression instead of assigning it to the temporary variable "itemStack".(êüN
+W
+java:S4973I"<Strings and Boxed types should be compared using "equals()".(ä¼„»ÿÿÿÿÿ
+]
+java:S2259"GA "NullPointerException" could be thrown; "itemStack" is nullable here.(ÖõÜ
+b
+java:S2259f"GA "NullPointerException" could be thrown; "itemStack" is nullable here.(•ÙêÃùÿÿÿÿ
+]
+java:S22592"GA "NullPointerException" could be thrown; "itemStack" is nullable here.(ÖõÜ
+G
+java:S1874-"1Remove this use of "ItemStack"; it is deprecated.(™«ò¦
+L
+java:S1874>"1Remove this use of "getByName"; it is deprecated.(Ìêä’ÿÿÿÿÿ
+I
+java:S1874I".Remove this use of "Potion"; it is deprecated.(ä¼„»ÿÿÿÿÿ
+I
+java:S1874I".Remove this use of "Potion"; it is deprecated.(ä¼„»ÿÿÿÿÿ
+L
+java:S1874Z"1Remove this use of "getByName"; it is deprecated.(Ìêä’ÿÿÿÿÿ
