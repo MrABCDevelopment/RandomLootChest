@@ -39,8 +39,6 @@ aRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/database/
 bRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/database/DatabaseSQLite.java,0\b\0b6016ebebc42f5e319057ccbd1f14bceb261f60
 ‡
 WRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/HooksAPI.java,5\6\5697a83bc828fbf7bbd5a0e39992bb0492436898
-ž
-nRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/extensions/ExtensionDescription.java,3\5\355cc31c09feab1481fa0995965f05a2e54670ea
 “
 cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/MessagesManager.java,d\d\dd91eb316a18f19d7fd0eb05e16e1975cb33b775
 –
@@ -59,8 +57,6 @@ gRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/comma
 `RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/database/DatabaseYAML.java,9\c\9c3a3e36202544458f6dfa8f3efda3b8cf36eaf9
 ™
 iRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/database/DatabaseConnector.java,2\a\2a59c4e4cdffbba06bd33731c9391e54f83cbe3a
-N
-TreasureChestExtension/pom.xml,3\b\3b802696224fedb4d633e1a397e8bba005cdd2e9
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 K
@@ -79,8 +75,6 @@ gRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/hooks
 lRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/hooks/HolographicDisplaysHook.java,b\0\b091be8a9eb57847c85577f01a7abebd83b202bf
 ‰
 YRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/utils/Settings.java,b\4\b48c0a601fb4c39128f8b07b6a71610b33e087a7
-“
-cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/extensions/Extension.java,5\8\589437ad367d8bb71fa5dd74aa8d78019f1eed03
 ˆ
 XRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/UpdateChecker.java,a\9\a93a4ca907cee878cd9090750a6de4ba5896c149
 —
