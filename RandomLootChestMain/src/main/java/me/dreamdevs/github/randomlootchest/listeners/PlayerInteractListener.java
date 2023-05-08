@@ -21,7 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class PlayerInteractListener implements Listener {
 
-    private RandomLootChestMain plugin;
+    private final RandomLootChestMain plugin;
 
     public PlayerInteractListener(RandomLootChestMain plugin) {
         this.plugin = plugin;

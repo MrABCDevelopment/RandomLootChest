@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
-    private RandomLootChestMain plugin;
+    private final RandomLootChestMain plugin;
 
     public PlayerJoinListener(RandomLootChestMain plugin) {
         this.plugin = plugin;
