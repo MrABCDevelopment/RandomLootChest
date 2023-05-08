@@ -1,5 +1,6 @@
 package me.dreamdevs.github.randomlootchest.managers;
 
+import me.dreamdevs.github.randomlootchest.api.events.ChestOpenEvent;
 import me.dreamdevs.github.randomlootchest.api.events.OpenInventoryEvent;
 import me.dreamdevs.github.randomlootchest.api.inventory.GItem;
 import me.dreamdevs.github.randomlootchest.api.inventory.GUI;
@@ -41,6 +42,9 @@ public class GameManager {
             }
         }
         gui.openGUI(player);
+
+        ChestOpenEvent event = new ChestOpenEvent(player, chestGame);
+        Bukkit.getPluginManager().callEvent(event);
 
         OpenInventoryEvent rlcOpenInventoryEvent = new OpenInventoryEvent(player, chestGame, gui);
         Bukkit.getPluginManager().callEvent(rlcOpenInventoryEvent);

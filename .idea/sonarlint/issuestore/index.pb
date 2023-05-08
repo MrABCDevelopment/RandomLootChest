@@ -11,8 +11,6 @@ kRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/event
 ^RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/hooks/VaultHook.java,b\f\bf61d5145fba5d19afcd0daedd7ab045b7a116dd
 ’
 bRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/objects/RandomMoney.java,8\6\866d1c9b8bf5a949dcf01421e750d28c7503ab54
-
-]RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/menus/ChestAddMenu.java,4\f\4fb589dfcf8f022cf14d4e805edf452ac1c8486e
 “
 cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/events/ChestAddEvent.java,5\6\569792ee16623274c1583cd409c1cec50e6eb214
 š
@@ -23,8 +21,6 @@ _RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/inven
 ^RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/inventory/GItem.java,a\e\ae2757fd63a23d371a215d9572a02b4ca7640a85
 
 `RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/inventory/GUISize.java,c\9\c92d245dfc852032752f3f826d397c5f59c134ab
-˜
-hRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/listeners/PlayerDeathListener.java,5\8\5831143ba67419b621d058baa519a5c98467c705
 ž
 nRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/commands/subcommands/WandSubCommand.java,6\b\6befab4f8586b18d98e137e7687c4b04a890d90c
 ž
@@ -71,12 +67,8 @@ K
 RandomLootChestMain/pom.xml,2\b\2b619e5e3facb026355b1cf0fcf3cd8788e4ea60
 >
 .gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a
-<
-test/sds.txt,9\2\924d7288d40d3e7049ac9cc26901f44d11a93425
 “
 cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/listeners/CombatListener.java,6\a\6a3571d7ce534859579ea26d76d46408fd3a05a9
-B
-test/changelog.txt,4\8\485ffc99e943477661f2158d5929fdd930dcd6da
 ”
 dRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/tasks/CombatTask.java,0\f\0fd987b0aa78812531657d8592c5970af5ffa4c0
 –
@@ -85,8 +77,6 @@ fRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/
 gRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/hooks/PlaceholderAPIHook.java,1\b\1bd647631b47edede68b0d28b3b68abe2bdb2c02
 œ
 lRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/hooks/HolographicDisplaysHook.java,b\0\b091be8a9eb57847c85577f01a7abebd83b202bf
-Œ
-\RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/database/Database.java,b\7\b7f299abdfd4053539aba64f9243b68d0130cc41
 ‰
 YRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/utils/Settings.java,b\4\b48c0a601fb4c39128f8b07b6a71610b33e087a7
 “
@@ -95,8 +85,6 @@ cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/exten
 XRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/UpdateChecker.java,a\9\a93a4ca907cee878cd9090750a6de4ba5896c149
 —
 gRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/listeners/PlayerJoinListener.java,4\4\44613be91832a4f0585040f31d749c9937541b9e
-›
-kTreasureChestExtension/src/main/java/me/dreamdevs/treasurechestextension/listeners/PlayerBreakListener.java,d\3\d350cae00620a03b659f3c33fa995e2e2c520954
 “
 cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/LocationManager.java,1\6\164d21217b7af854c14fb974fb5cb13e438624d0
 ‰
@@ -109,3 +97,27 @@ YRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/utils/Ite
 [RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/utils/ColourUtil.java,3\e\3ec7e211ea4575d8151c314b66a4c99965413cd3
 ’
 bRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/StarterManager.java,9\9\99a7f84e0f285a4ed42a1a3232e31e42d18bb951
+Ž
+^RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/RandomLootChestMain.java,b\4\b4289d92e4e8bb030eb46d264a81805fafa6c3ac
+‘
+aRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/ConfigManager.java,f\3\f32f1a91448596be7c1c4e78c77fb8c687a7351e
+›
+kRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/listeners/PlayerInteractListener.java,3\a\3aa99f68bf505be0d89e035580e469b11291a13e
+‚
+RRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/Metrics.java,c\a\ca5c11aca8ec5ceb4fefc2de4b9e1697a18ccd40
+
+`RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/ItemsManager.java,0\3\03f96b41fd7f8fbd04f97b868311f7b82a17e864
+‘
+aRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/objects/RandomItem.java,2\9\29de0da44eb0248d586c165716a3d3adb13571fb
+ 
+pRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/commands/subcommands/ChestsSubCommand.java,e\a\ea8269b3c6d9d54f6bec3c886c22bb811a3650a1
+‘
+aRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/ChestsManager.java,0\6\06699bfb6380ba98db6d6df845a78d0dd7e46a43
+”
+dRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/ExtensionManager.java,d\a\da0a2c12c6cba41fe5b4d0a09937a986c71e2223
+“
+cRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/managers/CooldownManager.java,6\b\6b3f6c5bbe0a91e11d469f4313d672f569c189c9
+
+`RandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/objects/ChestGame.java,6\8\68b55587af839cbb28d20b87e62abc0cf2bbd483
+‰
+YRandomLootChestMain/src/main/java/me/dreamdevs/github/randomlootchest/api/IChestGame.java,c\9\c994de7aeb0edc11202fa8816eb377f16aa0cd16
