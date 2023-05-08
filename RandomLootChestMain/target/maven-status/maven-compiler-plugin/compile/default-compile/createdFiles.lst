@@ -78,6 +78,7 @@ me\dreamdevs\github\randomlootchest\api\events\CooldownExpiredEvent.class
 me\dreamdevs\github\randomlootchest\api\objects\ChestGame.class
 me\dreamdevs\github\randomlootchest\Metrics$MultiLineChart.class
 me\dreamdevs\github\randomlootchest\managers\CombatManager.class
+me\dreamdevs\github\randomlootchest\api\events\ChestOpenEvent.class
 me\dreamdevs\github\randomlootchest\listeners\PlayerDeathListener.class
 me\dreamdevs\github\randomlootchest\api\hooks\VaultHook.class
 me\dreamdevs\github\randomlootchest\database\DatabaseSQLite.class
