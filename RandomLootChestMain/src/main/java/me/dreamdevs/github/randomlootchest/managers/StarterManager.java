@@ -18,6 +18,7 @@ public class StarterManager {
 
     private @Getter ItemStack[] itemStacks;
     private boolean useStarterItems;
+    private String text;
 
     public StarterManager() {
         load();
@@ -26,7 +27,7 @@ public class StarterManager {
     public void load() {
         FileConfiguration config = RandomLootChestMain.getInstance().getConfigManager().getConfig("starter.yml");
         itemStacks = new ItemStack[config.getStringList("starter-items").size()];
-        String text = ColourUtil.colorize(config.getString("lore-id-text"));
+        text = ColourUtil.colorize(config.getString("lore-id-text"));
         useStarterItems = config.getBoolean("use-starter-items");
         for(String k : config.getStringList("starter-items")) {
             String[] param = k.split(":");
@@ -53,7 +54,7 @@ public class StarterManager {
     }
 
     public boolean isStarterItem(ItemStack itemStack) {
-        return itemStack.getItemMeta().getLore() != null && itemStack.getItemMeta().getLore().contains(ChatColor.GOLD+"Starter Item");
+        return itemStack.getItemMeta().getLore() != null && itemStack.getItemMeta().getLore().contains(text);
     }
 
 }

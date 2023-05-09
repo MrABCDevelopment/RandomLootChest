@@ -16,7 +16,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class VaultHook {
 
-    private RandomLootChestMain plugin;
+    private final RandomLootChestMain plugin;
     private @Getter static Economy economy;
 
     public VaultHook(RandomLootChestMain randomLootChestMain) {

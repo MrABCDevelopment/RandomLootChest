@@ -16,8 +16,7 @@ public class ItemUtil {
 
     public static ItemStack parsedBasicItem(String material, int amount) {
         try {
-            ItemStack itemStack = new ItemStack(Material.getMaterial(material.toUpperCase()), amount);
-            return itemStack;
+            return new ItemStack(Material.getMaterial(material.toUpperCase()), amount);
         } catch (NullPointerException e) {
             Util.sendPluginMessage("&cCannot parse item with type: "+material);
             return null;

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>RandomLootChest</artifactId>
         <groupId>me.DreamDevs.GitHub</groupId>
-        <version>1.6.0-BETA</version>
+        <version>1.6.0-BETA-dev2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,10 +21,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>rlc-repo</id>
+            <url>https://jitpack.io/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
-            <groupId>me.DreamDevs.GitHub</groupId>
-            <artifactId>RandomLootChestMain</artifactId>
+            <groupId>com.github.MrABCDevelopment</groupId>
+            <artifactId>RandomLootChest</artifactId>
             <version>1.6.0-BETA</version>
             <scope>provided</scope>
         </dependency>
