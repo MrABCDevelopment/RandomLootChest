@@ -37,6 +37,10 @@ public abstract class Extension {
         return Optional.of(yamlFile).map(YamlConfiguration::loadConfiguration).orElse(null);
     }
 
+    public void registerListener(Listener listener) {
+        RandomLootChestMain.getInstance().getExtensionManager().registerListener(listener);
+    }
+
     public void saveConfig() {
         try {
             getConfig().save(new File(dataFolder, configFileName));
