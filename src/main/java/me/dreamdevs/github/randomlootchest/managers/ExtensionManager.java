@@ -8,6 +8,7 @@ import me.dreamdevs.github.randomlootchest.api.extensions.ExtensionDescription;
 import me.dreamdevs.github.randomlootchest.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.Listener;
 
 import java.io.*;
 import java.net.URL;
@@ -104,6 +105,10 @@ public class ExtensionManager {
 
     public List<Extension> getEnabledExtensions() {
         return extensions.stream().filter(Extension::isEnabled).collect(Collectors.toList());
+    }
+
+    public void registerListener(Listener listener) {
+        Bukkit.getServer().getPluginManager().registerEvents(listener, RandomLootChestMain.getInstance());
     }
 
 }

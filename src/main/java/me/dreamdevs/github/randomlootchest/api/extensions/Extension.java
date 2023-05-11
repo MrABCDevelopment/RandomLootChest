@@ -147,8 +147,4 @@ public abstract class Extension {
         return state == State.ENABLED;
     }
 
-    public RandomLootChestMain getPlugin() {
-        return RandomLootChestMain.getInstance();
-    }
-
 }

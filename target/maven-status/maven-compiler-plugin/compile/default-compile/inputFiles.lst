@@ -26,7 +26,6 @@ D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\commands\subcommands\SaveSubCommand.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\CooldownSetEvent.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\database\DatabaseYAML.java
-D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\objects\RandomMoney.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\CooldownExpiredEvent.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\commands\subcommands\ExtensionsSubCommand.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\commands\ArgumentCommand.java
