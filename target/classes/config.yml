@@ -4,10 +4,6 @@ update-checker: true
 # Opens random chest
 random-chests: false
 
-# If you have your old own cooldowns and you don't trust enough about new system,
-# just switch this option to true.
-old-cooldown-parse: false
-
 # Currently, this option works only with HolographicDisplays - it sends hologram with information about the cooldown
 holograms-on-chests: false
 

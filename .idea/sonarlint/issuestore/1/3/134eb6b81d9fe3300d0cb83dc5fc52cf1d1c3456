@@ -1,0 +1,15 @@
+
+D
+java:S1066%"/Merge this if statement with the enclosing one.(³¹‡w
+Z
+java:S2583T"DChange this condition so that it does not always evaluate to "false"(Õ‚Ç‘
+Z
+java:S2583C"DChange this condition so that it does not always evaluate to "false"(Õ‚Ç‘
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(‘Ã­‡
+K
+java:S1874C"5Remove this use of "getItemInHand"; it is deprecated.(Õ‚Ç‘
+K
+java:S1874T"5Remove this use of "getItemInHand"; it is deprecated.(Õ‚Ç‘
+K
+java:S1874V"5Remove this use of "getItemInHand"; it is deprecated.(¨‘”Þ

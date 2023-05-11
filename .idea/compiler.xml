@@ -7,13 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="RandomLootChestMain" />
-        <module name="TreasureChestExtension" />
+        <module name="RandomLootChest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CommandChestExtension" target="1.8" />
       <module name="ItemActionExtension" target="1.8" />
+      <module name="RandomLootChestMain" target="1.8" />
+      <module name="TreasureChestExtension" target="1.8" />
+      <module name="VaultExtension" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

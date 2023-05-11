@@ -16,6 +16,9 @@
       <set>
         <option value="$PROJECT_DIR$/CommandChestExtension/pom.xml" />
         <option value="$PROJECT_DIR$/ItemActionExtension/pom.xml" />
+        <option value="$PROJECT_DIR$/RandomLootChestMain/pom.xml" />
+        <option value="$PROJECT_DIR$/TreasureChestExtension/pom.xml" />
+        <option value="$PROJECT_DIR$/VaultExtension/pom.xml" />
       </set>
     </option>
   </component>

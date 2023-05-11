@@ -1,9 +1,0 @@
-
-w
-java:S1319"aThe type of "guis" should be an interface such as "Map" rather than the implementation "HashMap".(‰ŠŸ¼
-@
-java:S1444"*Make this "public static guis" field final(‰ŠŸ¼
-3
-java:S2386"Make this member "protected".(‰ŠŸ¼
-[
-java:S1124"EReorder the modifiers to comply with the Java Language Specification.(‰ŠŸ¼

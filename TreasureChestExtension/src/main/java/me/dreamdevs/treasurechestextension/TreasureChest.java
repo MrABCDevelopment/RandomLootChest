@@ -2,7 +2,6 @@ package me.dreamdevs.treasurechestextension;
 
 import me.dreamdevs.github.randomlootchest.api.IChestGame;
 import me.dreamdevs.github.randomlootchest.api.objects.RandomItem;
-import me.dreamdevs.github.randomlootchest.api.objects.RandomMoney;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
