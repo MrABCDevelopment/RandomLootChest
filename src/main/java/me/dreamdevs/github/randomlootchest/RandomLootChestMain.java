@@ -54,6 +54,7 @@ public class RandomLootChestMain extends JavaPlugin {
         HooksAPI.hook(this);
 
         this.extensionManager = new ExtensionManager(this);
+        this.extensionManager.loadExtensions();
 
         if(Settings.useDatabase) {
             this.databaseManager = new Database();

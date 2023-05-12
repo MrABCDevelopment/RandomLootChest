@@ -1,0 +1,8 @@
+
+t
+java:S2293|"YReplace the type specification in this constructor call with the diamond operator ("<>").(¹»îËùÿÿÿÿ
+m
+java:S3776#"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(°ª¼üÿÿÿÿ
+G
+java:S1602+",Remove useless curly braces around statement(¡ŠÙÊüÿÿÿÿ
+C	java:S108x")Either remove or fill this block of code.(›“°ëùÿÿÿÿ

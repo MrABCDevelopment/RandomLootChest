@@ -28,6 +28,8 @@ public abstract class Extension {
     private Extension.State state;
     private final String configFileName = "config.yml";
 
+    public abstract void onExtensionLoad();
+
     public abstract void onExtensionEnable();
 
     public abstract void onExtensionDisable();
@@ -149,6 +151,10 @@ public abstract class Extension {
 
     public boolean isEnabled() {
         return state == State.ENABLED;
+    }
+
+    public boolean isLoaded() {
+        return state == State.LOADED;
     }
 
 }

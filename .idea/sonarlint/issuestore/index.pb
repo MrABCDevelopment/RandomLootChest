@@ -25,3 +25,15 @@ Osrc/main/java/me/dreamdevs/github/randomlootchest/managers/CooldownManager.java
 Msrc/main/java/me/dreamdevs/github/randomlootchest/managers/ConfigManager.java,c\1\c1994d58b06793a63288bfb2c5586dac85629060
 }
 Msrc/main/java/me/dreamdevs/github/randomlootchest/managers/CombatManager.java,4\e\4ed68210ca1d9612d44593500fb5c5caab84cbb8
+{
+Ksrc/main/java/me/dreamdevs/github/randomlootchest/managers/GameManager.java,f\c\fc86ce48746283be8574c67e4d5f542dbac93795
+s
+Csrc/main/java/me/dreamdevs/github/randomlootchest/api/HooksAPI.java,8\7\87b073ab0c114b170f7a09b89b2c387dbae9a60b
+u
+Esrc/main/java/me/dreamdevs/github/randomlootchest/api/IChestGame.java,e\d\ed1c212785458ac3fe2e352fb19b6857ccace1af
+|
+Lsrc/main/java/me/dreamdevs/github/randomlootchest/api/objects/ChestGame.java,d\5\d530076c386ac027b2d57dc25020fd999b32adc4
+{
+Ksrc/main/java/me/dreamdevs/github/randomlootchest/menus/ChestsInfoMenu.java,3\f\3ff060fa91cff186be1cf765d7bcfaba84ee58db
+}
+Msrc/main/java/me/dreamdevs/github/randomlootchest/managers/ChestsManager.java,4\a\4a33fa91125713154ba3ed6ece0b469263323e1a

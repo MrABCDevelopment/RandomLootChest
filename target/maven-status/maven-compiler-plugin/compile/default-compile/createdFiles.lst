@@ -66,6 +66,7 @@ me\dreamdevs\github\randomlootchest\Metrics$SimplePie.class
 me\dreamdevs\github\randomlootchest\api\hooks\HolographicDisplaysHook.class
 me\dreamdevs\github\randomlootchest\api\IChestGame.class
 me\dreamdevs\github\randomlootchest\database\DatabaseMySQL.class
+me\dreamdevs\github\randomlootchest\api\extensions\ExtensionClassLoader.class
 me\dreamdevs\github\randomlootchest\managers\ChestsManager.class
 me\dreamdevs\github\randomlootchest\utils\TimeUtil.class
 me\dreamdevs\github\randomlootchest\api\extensions\Extension.class
