@@ -1,6 +1,7 @@
 package me.dreamdevs.github.randomlootchest;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.dreamdevs.github.randomlootchest.api.HooksAPI;
 import me.dreamdevs.github.randomlootchest.commands.CommandHandler;
 import me.dreamdevs.github.randomlootchest.database.Database;
@@ -30,11 +31,11 @@ public class RandomLootChestMain extends JavaPlugin {
     private CombatManager combatManager;
     private ExtensionManager extensionManager;
     private CommandHandler commandHandler;
-    private static @Getter RandomLootChestMain instance;
+    private static @Getter @Setter RandomLootChestMain instance;
 
     @Override
     public void onEnable() {
-        instance = this;
+        setInstance(this);
 
         new VersionUtil();
 
@@ -55,6 +56,9 @@ public class RandomLootChestMain extends JavaPlugin {
 
         this.extensionManager = new ExtensionManager(this);
         this.extensionManager.loadExtensions();
+        Bukkit.getScheduler().runTask(instance, () -> {
+            this.extensionManager.enableExtensions();
+        });
 
         if(Settings.useDatabase) {
             this.databaseManager = new Database();

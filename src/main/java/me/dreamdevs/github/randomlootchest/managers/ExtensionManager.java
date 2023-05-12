@@ -23,8 +23,10 @@ public class ExtensionManager {
     private List<Extension> extensions;
     private final Map<String, Class<?>> classes;
     private final Map<@NonNull Extension, ExtensionClassLoader> loaders;
+    private RandomLootChestMain plugin;
 
     public ExtensionManager(RandomLootChestMain plugin) {
+        this.plugin = plugin;
         this.extensions = new ArrayList<>();
         this.loaders = new HashMap<>();
         this.classes = new HashMap<>();
@@ -38,7 +40,9 @@ public class ExtensionManager {
             for(File file : files)
                 loadExtension(file);
         });
+    }
 
+    public void enableExtensions() {
         getLoadedExtensions().forEach(this::enableExtension);
 
         Util.sendPluginMessage("&aLoaded "+getEnabledExtensions().size()+" extensions!");
@@ -103,7 +107,7 @@ public class ExtensionManager {
     }
 
     public void registerListener(Listener listener) {
-        Bukkit.getPluginManager().registerEvents(listener, RandomLootChestMain.getInstance());
+        Bukkit.getPluginManager().registerEvents(listener, plugin);
     }
 
     @NonNull

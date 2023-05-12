@@ -27,6 +27,7 @@ public abstract class Extension {
     private File file;
     private Extension.State state;
     private final String configFileName = "config.yml";
+    private RandomLootChestMain plugin;
 
     public abstract void onExtensionLoad();
 
@@ -156,5 +157,6 @@ public abstract class Extension {
     public boolean isLoaded() {
         return state == State.LOADED;
     }
+
 
 }
