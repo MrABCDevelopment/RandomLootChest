@@ -29,7 +29,9 @@ public abstract class Extension {
     private final String configFileName = "config.yml";
     private RandomLootChestMain plugin;
 
-    public abstract void onExtensionLoad();
+    protected Extension() {
+        this.plugin = RandomLootChestMain.getInstance();
+    }
 
     public abstract void onExtensionEnable();
 
@@ -41,7 +43,7 @@ public abstract class Extension {
     }
 
     public void registerListener(Listener listener) {
-        RandomLootChestMain.getInstance().getExtensionManager().registerListener(listener);
+        Bukkit.getPluginManager().registerEvents(listener, RandomLootChestMain.getInstance());
     }
 
     public void saveConfig() {
@@ -157,6 +159,5 @@ public abstract class Extension {
     public boolean isLoaded() {
         return state == State.LOADED;
     }
-
 
 }

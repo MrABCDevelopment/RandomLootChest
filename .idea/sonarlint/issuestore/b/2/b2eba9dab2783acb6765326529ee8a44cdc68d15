@@ -1,15 +1,0 @@
-
-m
-java:S1104"RMake CHANCE a static final constant or non-public and provide accessors if needed.(Í²ð’üÿÿÿÿ
-G
-java:S1444",Make this "public static CHANCE" field final(Í²ð’üÿÿÿÿ
-l
-java:S3008"QRename this field "CHANCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í²ð’üÿÿÿÿ
-—
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(åÆÙÀ
-[
-java:S1124"EReorder the modifiers to comply with the Java Language Specification.(çÑ³â
-Q
-java:S2696"6Make the enclosing method "static" or remove this set.(ÉÄ‰“ùÿÿÿÿ
-Q
-java:S2696"6Make the enclosing method "static" or remove this set.(ÌÐÀÈýÿÿÿÿ

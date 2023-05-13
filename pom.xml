@@ -6,7 +6,7 @@
 
     <groupId>me.DreamDevs.GitHub</groupId>
     <artifactId>RandomLootChest</artifactId>
-    <version>1.6.0-build5</version>
+    <version>1.6.1</version>
     <name>RandomLootChest</name>
 
     <properties>

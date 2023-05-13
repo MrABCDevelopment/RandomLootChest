@@ -9,7 +9,7 @@ import org.bukkit.event.HandlerList;
 @Getter
 public class ChestOpenEvent extends Event {
 
-    private final HandlerList handlerList = new HandlerList();
+    private @Getter static final HandlerList handlerList = new HandlerList();
 
     private final Player player;
     private final ChestGame chestGame;

@@ -56,9 +56,6 @@ public class RandomLootChestMain extends JavaPlugin {
 
         this.extensionManager = new ExtensionManager(this);
         this.extensionManager.loadExtensions();
-        Bukkit.getScheduler().runTask(instance, () -> {
-            this.extensionManager.enableExtensions();
-        });
 
         if(Settings.useDatabase) {
             this.databaseManager = new Database();
