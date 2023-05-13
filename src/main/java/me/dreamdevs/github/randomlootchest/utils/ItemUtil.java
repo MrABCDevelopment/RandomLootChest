@@ -1,5 +1,6 @@
 package me.dreamdevs.github.randomlootchest.utils;
 
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,24 +15,13 @@ import java.util.List;
 @UtilityClass
 public class ItemUtil {
 
-    public static ItemStack parsedBasicItem(String material, int amount) {
+    private final String parseError = "&cCannot parse item with type: %MATERIAL%";
+
+    public static ItemStack parsedBasicItem(@NonNull String material, int amount) {
         try {
             return new ItemStack(Material.getMaterial(material.toUpperCase()), amount);
         } catch (NullPointerException e) {
-            Util.sendPluginMessage("&cCannot parse item with type: "+material);
-            return null;
-        }
-    }
-
-    public static ItemStack parsedBasicItem(String material, int amount, String displayName) {
-        try {
-            ItemStack itemStack = parsedBasicItem(material, amount);
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName(ColourUtil.colorize(displayName));
-            itemStack.setItemMeta(itemMeta);
-            return itemStack;
-        } catch (NullPointerException e) {
-            Util.sendPluginMessage("&cCannot parse item with type: "+material);
+            Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", material));
             return null;
         }
     }
@@ -45,8 +35,10 @@ public class ItemUtil {
                 }
             }
             if(itemStack == null)
-                itemStack = parsedBasicItem(material, amount, displayName);
+                itemStack = parsedBasicItem(material, amount);
             ItemMeta itemMeta = itemStack.getItemMeta();
+            if(displayName != null)
+                itemMeta.setDisplayName(ColourUtil.colorize(displayName));
             if(lore != null)
                 itemMeta.setLore(ColourUtil.colouredLore(lore));
             if(!VersionUtil.is1_8_orOlder())
@@ -62,7 +54,7 @@ public class ItemUtil {
             }
             return itemStack;
         } catch (Exception e) {
-            Util.sendPluginMessage("&cCannot parse item with type: "+material);
+            Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", material));
             return null;
         }
     }
@@ -128,7 +120,7 @@ public class ItemUtil {
             return itemStack;
         } catch (Exception e) {
             e.printStackTrace();
-            Util.sendPluginMessage("&cCannot parse item with type: " + strings[0]);
+            Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", strings[0]));
             return null;
         }
     }
