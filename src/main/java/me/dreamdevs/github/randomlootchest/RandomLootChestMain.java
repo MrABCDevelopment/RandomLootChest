@@ -23,7 +23,6 @@ public class RandomLootChestMain extends JavaPlugin {
     private CooldownManager cooldownManager;
     private MessagesManager messagesManager;
     private GameManager gameManager;
-    private StarterManager starterManager;
     private LocationManager locationManager;
     private Database databaseManager;
     private ChestsManager chestsManager;
@@ -40,7 +39,7 @@ public class RandomLootChestMain extends JavaPlugin {
         new VersionUtil();
 
         this.configManager = new ConfigManager(this);
-        this.configManager.loadConfigFiles("config.yml", "messages.yml", "locations.yml", "starter.yml", "items.yml");
+        this.configManager.loadConfigFiles("config.yml", "messages.yml", "locations.yml", "items.yml");
         this.itemsManager = new ItemsManager();
 
         Settings.loadVars();
@@ -49,7 +48,6 @@ public class RandomLootChestMain extends JavaPlugin {
         this.chestsManager = new ChestsManager(this);
         this.messagesManager = new MessagesManager(this);
         this.gameManager = new GameManager();
-        this.starterManager = new StarterManager();
         this.combatManager = new CombatManager();
         this.commandHandler = new CommandHandler(this);
         HooksAPI.hook(this);
@@ -67,8 +65,6 @@ public class RandomLootChestMain extends JavaPlugin {
         WandItem.loadVars();
 
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         getServer().getPluginManager().registerEvents(new CombatListener(), this);
 

@@ -102,27 +102,4 @@ public class ItemUtil {
         }
     }
 
-    public static ItemStack parsedItem(String[] strings) {
-        try {
-            ItemStack itemStack = null;
-            if (strings[0].equalsIgnoreCase("enchanted_golden_apple") && VersionUtil.isLegacy())
-                itemStack = new ItemStack(Material.GOLDEN_APPLE, Integer.parseInt(strings[1], (short)1));
-            if (itemStack == null)
-                itemStack = new ItemStack(Material.getMaterial(strings[0].toUpperCase()),  Integer.parseInt(strings[1]));
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            if(strings.length >= 3)
-                itemMeta.setDisplayName(ColourUtil.colorize(strings[2]));
-            if(strings.length >= 4) {
-                String[] lore = strings[3].split(";");
-                if (lore != null)
-                    itemMeta.setLore(ColourUtil.colouredLore(lore));
-            }
-            return itemStack;
-        } catch (Exception e) {
-            e.printStackTrace();
-            Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", strings[0]));
-            return null;
-        }
-    }
-
 }

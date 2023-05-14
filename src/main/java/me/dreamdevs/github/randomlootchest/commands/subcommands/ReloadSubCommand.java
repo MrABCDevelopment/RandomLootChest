@@ -17,7 +17,6 @@ public class ReloadSubCommand implements ArgumentCommand {
             RandomLootChestMain.getInstance().getConfigManager().reload("messages.yml");
             RandomLootChestMain.getInstance().getMessagesManager().load(RandomLootChestMain.getInstance());
             RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
-            RandomLootChestMain.getInstance().getStarterManager().load();
             RandomLootChestMain.getInstance().getLocationManager().save();
             WandItem.loadVars();
             commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("chest-command-reload"));

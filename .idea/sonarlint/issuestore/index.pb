@@ -5,8 +5,6 @@
 [TreasureChestExtension/src/main/java/me/dreamdevs/treasurechestextension/TreasureChest.java,d\9\d9ed4c44604e57f6df0c118cf2f10ca4730c8eb0
 N
 TreasureChestExtension/pom.xml,3\b\3b802696224fedb4d633e1a397e8bba005cdd2e9
-t
-Dsrc/main/java/me/dreamdevs/github/randomlootchest/UpdateChecker.java,b\9\b9c3810db4fc8f038a4bff5eb0f49454c1d1edee
 
 Osrc/main/java/me/dreamdevs/github/randomlootchest/managers/MessagesManager.java,8\7\8793c1bc044353645dae43c22598c2814a392aeb
 
@@ -19,3 +17,17 @@ Esrc/main/java/me/dreamdevs/github/randomlootchest/api/IChestGame.java,e\d\ed1c
 Lsrc/main/java/me/dreamdevs/github/randomlootchest/api/objects/ChestGame.java,d\5\d530076c386ac027b2d57dc25020fd999b32adc4
 {
 Ksrc/main/java/me/dreamdevs/github/randomlootchest/menus/ChestsInfoMenu.java,3\f\3ff060fa91cff186be1cf765d7bcfaba84ee58db
+
+Osrc/main/java/me/dreamdevs/github/randomlootchest/listeners/CombatListener.java,f\2\f2698e22e3ec9352c81629431689ad58795baa3b
+ˆ
+Xsrc/main/java/me/dreamdevs/github/randomlootchest/api/hooks/HolographicDisplaysHook.java,4\8\48aac9f9b0a596269431d8a9dc576644037b09da
+ƒ
+Ssrc/main/java/me/dreamdevs/github/randomlootchest/api/hooks/PlaceholderAPIHook.java,0\6\06bed027c44614b962f781ca8f7c1e6160bd1836
+w
+Gsrc/main/java/me/dreamdevs/github/randomlootchest/utils/ColourUtil.java,e\0\e0ba03b8efd2f8027bf22292d70bfedccadcccc6
+u
+Esrc/main/java/me/dreamdevs/github/randomlootchest/utils/TimeUtil.java,2\c\2c9d0288c10b42017eccaff45ecb28b7b30250b7
+~
+Nsrc/main/java/me/dreamdevs/github/randomlootchest/commands/CommandHandler.java,5\9\595c2fc8d6b57825b495ee979dee71d89c62e205
+t
+Dsrc/main/java/me/dreamdevs/github/randomlootchest/UpdateChecker.java,b\9\b9c3810db4fc8f038a4bff5eb0f49454c1d1edee
