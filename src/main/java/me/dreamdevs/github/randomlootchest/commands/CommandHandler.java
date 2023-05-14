@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CommandHandler implements TabExecutor {
 
-    private @Getter HashMap<String, Class<? extends ArgumentCommand>> arguments;
+    private final @Getter HashMap<String, Class<? extends ArgumentCommand>> arguments;
 
     public CommandHandler(RandomLootChestMain plugin) {
         this.arguments = new HashMap<>();

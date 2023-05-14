@@ -66,7 +66,9 @@ public class RandomLootChestMain extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
-        getServer().getPluginManager().registerEvents(new CombatListener(), this);
+
+        if(Settings.combatEnabled)
+            getServer().getPluginManager().registerEvents(new CombatListener(), this);
 
         new LocationTask();
         new CombatTask();
