@@ -60,7 +60,7 @@ public class CooldownManager
         return getPlayerCooldown(uuid, location) > 0;
     }
 
-    public HashMap<HashMap<UUID, Location>, AtomicInteger> getPlayerCooldowns(UUID uuid) {
+    public Map<HashMap<UUID, Location>, AtomicInteger> getPlayerCooldowns(UUID uuid) {
         HashMap<HashMap<UUID, Location>, AtomicInteger> hashMap = new HashMap<>();
         getChestCooldowns().keySet().stream().filter(uuidLocationHashMap -> uuidLocationHashMap.containsKey(uuid)).forEachOrdered(uuidLocationHashMap -> hashMap.put(uuidLocationHashMap, getChestCooldowns().get(uuidLocationHashMap)));
         return hashMap;

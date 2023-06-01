@@ -11,6 +11,8 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @UtilityClass
 public class ItemUtil {
@@ -19,38 +21,29 @@ public class ItemUtil {
 
     public static ItemStack parsedBasicItem(@NonNull String material, int amount) {
         try {
-            return new ItemStack(Material.getMaterial(material.toUpperCase()), amount);
+            return new ItemStack(Objects.requireNonNull(Material.getMaterial(material.toUpperCase())), amount);
         } catch (NullPointerException e) {
             Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", material));
             return null;
         }
     }
 
-    public static ItemStack parsedItem(String material, int amount, String displayName, List<String> lore, List<String> enchantments, boolean unbreakable, boolean glowing) {
+    public static ItemStack parsedItem(String material, int amount, String displayName, List<String> lore, Map<String, Integer> enchantments, boolean unbreakable, boolean glowing) {
         try {
-            ItemStack itemStack = null;
-            if(material.equalsIgnoreCase("enchanted_golden_apple")) {
-                if (VersionUtil.isLegacy()) {
-                    itemStack = new ItemStack(Material.GOLDEN_APPLE, amount, (byte) 1);
-                }
-            }
-            if(itemStack == null)
-                itemStack = parsedBasicItem(material, amount);
+            ItemStack itemStack = parsedBasicItem(material, amount);
             ItemMeta itemMeta = itemStack.getItemMeta();
             if(displayName != null)
                 itemMeta.setDisplayName(ColourUtil.colorize(displayName));
             if(lore != null)
                 itemMeta.setLore(ColourUtil.colouredLore(lore));
-            if(!VersionUtil.is1_8_orOlder())
-                itemMeta.setUnbreakable(unbreakable);
+            itemMeta.setUnbreakable(unbreakable);
             if(glowing) {
                 itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
             itemStack.setItemMeta(itemMeta);
-            for(String s : enchantments) {
-                String[] splits = s.split(":");
-                itemStack.addUnsafeEnchantment(Enchantment.getByName(splits[0].toUpperCase()), Integer.parseInt(splits[1]));
+            for(Map.Entry<String, Integer> enchantmentsEntry : enchantments.entrySet()) {
+                itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantmentsEntry.getKey())), enchantmentsEntry.getValue());
             }
             return itemStack;
         } catch (Exception e) {
@@ -59,35 +52,7 @@ public class ItemUtil {
         }
     }
 
-    public static ItemStack getPotion(String material, int amount, String displayName, List<String> lore, List<String> enchantments, boolean unbreakable, boolean glowing, String potionType, int tier) {
-        try {
-            Potion potion = new Potion(PotionType.valueOf(potionType.toUpperCase()), tier, material == "POTION_SPLASH");
-            ItemStack itemStack = potion.toItemStack(amount);
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            if(displayName != null) {
-                itemMeta.setDisplayName(ColourUtil.colorize(displayName));
-            }
-            if(lore != null)
-                itemMeta.setLore(ColourUtil.colouredLore(lore));
-            if(!VersionUtil.isLegacy())
-                itemMeta.setUnbreakable(unbreakable);
-            if(glowing) {
-                itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            }
-            itemStack.setItemMeta(itemMeta);
-            for(String s : enchantments) {
-                String[] splits = s.split(":");
-                itemStack.addUnsafeEnchantment(Enchantment.getByName(splits[0].toUpperCase()), Integer.parseInt(splits[1]));
-            }
-            return itemStack;
-        } catch (NullPointerException | IllegalArgumentException e) {
-            Util.sendPluginMessage("&cCannot get potion with type: "+potionType);
-            return null;
-        }
-    }
-
-    public static ItemStack getPotion(String material, int amount, String displayName, List<String> lore, List<String> enchantments, boolean unbreakable, boolean glowing, String potionType, boolean extended, boolean upgraded) {
+    public static ItemStack getPotion(String material, int amount, String displayName, List<String> lore, Map<String, Integer> enchantments, boolean unbreakable, boolean glowing, String potionType, boolean extended, boolean upgraded) {
         try {
             ItemStack itemStack = parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
             PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();

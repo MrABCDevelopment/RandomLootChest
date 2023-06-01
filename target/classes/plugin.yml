@@ -1,17 +1,14 @@
 name: RandomLootChest
-version: 1.6.4
+version: 1.7.0
 main: me.dreamdevs.github.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
 api-version: 1.13
 
-softdepend:
-  - Vault
-  - HolographicDisplays
-  - PlaceholderAPI
+softdepend: [MMOItems, PlaceholderAPI]
 
 commands:
   randomlootchest:
     aliases: [rlc, randomchest, chests]
-    permission: chests.use
+    permission: randomlootchest.admin
     permission-message: You cannot use this command.
     description: The main command of RandomLootChest plugin.

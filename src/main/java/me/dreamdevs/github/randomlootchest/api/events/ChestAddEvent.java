@@ -13,9 +13,9 @@ import java.util.UUID;
 @Getter
 public class ChestAddEvent extends Event {
 
-    private UUID uuid;
-    private Location location;
-    private ChestGame chestGame;
+    private final UUID uuid;
+    private final Location location;
+    private final ChestGame chestGame;
     private static final HandlerList list = new HandlerList();
 
     public ChestAddEvent(UUID uuid, ChestGame chestGame, Location location) {

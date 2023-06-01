@@ -1,9 +1,9 @@
 package me.dreamdevs.github.randomlootchest.listeners;
 
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.github.randomlootchest.api.HooksAPI;
 import me.dreamdevs.github.randomlootchest.api.events.ChestRemoveEvent;
-import me.dreamdevs.github.randomlootchest.menus.ChestAddMenu;
+import me.dreamdevs.github.randomlootchest.api.events.PlayerInteractChestEvent;
+import me.dreamdevs.github.randomlootchest.api.menu.place.ChestPlaceMenu;
 import me.dreamdevs.github.randomlootchest.api.objects.WandItem;
 import me.dreamdevs.github.randomlootchest.api.objects.ChestGame;
 import me.dreamdevs.github.randomlootchest.utils.Settings;
@@ -33,19 +33,18 @@ public class PlayerInteractListener implements Listener {
         if(event.getClickedBlock().getType() == Material.CHEST) {
             event.setCancelled(true);
 
+            PlayerInteractChestEvent playerInteractChestEvent = new PlayerInteractChestEvent(event.getPlayer(), event.getClickedBlock().getLocation());
+            Bukkit.getPluginManager().callEvent(playerInteractChestEvent);
+
             if(Settings.combatEnabled) {
                 if(RandomLootChestMain.getInstance().getCombatManager().isInCombat(event.getPlayer())) {
-                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("combat-cooldown"));
+                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("combat-info").replaceAll("%TIME%", TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
                     return;
                 }
             }
 
             if(plugin.getCooldownManager().isOnCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation())) {
-                if(HooksAPI.getHolographicDisplaysHook() != null && Settings.hologramsInfo) {
-                    if (!HooksAPI.getHolographicDisplaysHook().getMaps().containsKey(event.getPlayer().getUniqueId()))
-                        HooksAPI.createTempHolo(event.getPlayer(), event.getClickedBlock().getLocation());
-                } else
-                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("gamechest-cooldown").replace("{TIME}", TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
+                event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("chest-on-cooldown").replace("%TIME%", TimeUtil.formattedTime(plugin.getCooldownManager().getPlayerCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation()))));
                 return;
             }
 
@@ -64,7 +63,7 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void addBlockEvent(BlockBreakEvent event) {
-        if(event.getPlayer().getItemInHand() == null) return;
+        if(event.getPlayer().getInventory().getItemInMainHand() == null) return;
         if(event.getBlock().getType() != Material.CHEST) return;
         if(plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getBlock().getLocation()))) {
             event.setCancelled(true);
@@ -74,23 +73,23 @@ public class PlayerInteractListener implements Listener {
             if (Settings.wandItemPermissionToUse && !event.getPlayer().hasPermission("wanditem.permission"))
                 return;
             event.setCancelled(true);
-            new ChestAddMenu(event.getPlayer(), event.getBlock().getLocation());
+            new ChestPlaceMenu(event.getPlayer(), event.getBlock().getLocation());
         }
     }
 
     @EventHandler
     public void removeBlockEvent(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (event.getPlayer().getItemInHand() == null) return;
+        if (event.getPlayer().getInventory().getItemInMainHand() == null) return;
         if (event.getClickedBlock().getType() != Material.CHEST) return;
-        if (!event.getPlayer().getItemInHand().equals(WandItem.WANDITEM)) return;
+        if (!event.getPlayer().getInventory().getItemInMainHand().equals(WandItem.WANDITEM)) return;
         if(Settings.wandItemPermissionToUse && !event.getPlayer().hasPermission("wanditem.permission"))
             return;
         if (plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getClickedBlock().getLocation()))) {
             Location location = event.getClickedBlock().getLocation();
             ChestGame chestGame = RandomLootChestMain.getInstance().getChestsManager().getChestGameByLocation(location);
             event.setCancelled(true);
-            event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("remove-chest"));
+            event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("chest-remove-from-map"));
             plugin.getLocationManager().removeLocation(event.getClickedBlock().getLocation());
             ChestRemoveEvent chestRemoveEvent = new ChestRemoveEvent(event.getPlayer().getUniqueId(), chestGame, location);
             Bukkit.getPluginManager().callEvent(chestRemoveEvent);

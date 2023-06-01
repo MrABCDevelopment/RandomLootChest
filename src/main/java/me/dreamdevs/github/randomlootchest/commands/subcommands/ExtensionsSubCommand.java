@@ -2,17 +2,12 @@ package me.dreamdevs.github.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.github.randomlootchest.api.commands.ArgumentCommand;
-import me.dreamdevs.github.randomlootchest.api.extensions.Extension;
-import me.dreamdevs.github.randomlootchest.api.inventory.GItem;
-import me.dreamdevs.github.randomlootchest.api.inventory.GUI;
-import me.dreamdevs.github.randomlootchest.api.inventory.GUISize;
-import me.dreamdevs.github.randomlootchest.api.inventory.actions.CloseAction;
-import me.dreamdevs.github.randomlootchest.utils.ColourUtil;
-import org.bukkit.Material;
+import me.dreamdevs.github.randomlootchest.api.menu.extensions.ExtensionsMenu;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExtensionsSubCommand implements ArgumentCommand {
 
@@ -23,18 +18,7 @@ public class ExtensionsSubCommand implements ArgumentCommand {
             return false;
         }
         Player player = (Player) commandSender;
-        GUI extensionsGui = new GUI("&2&lExtensions Menu", GUISize.SIX_ROWS);
-        int x = 0;
-        for(Extension extension : RandomLootChestMain.getInstance().getExtensionManager().getEnabledExtensions()) {
-            GItem gItem = new GItem(Material.PAPER, extension.getDescription().getExtensionName() + " - " + extension.getDescription().getExtensionVersion(), new ArrayList<>());
-            gItem.addActions(new CloseAction(), event -> {
-                extension.reloadConfig();
-                event.getPlayer().sendMessage(ColourUtil.colorize("&aYou reloaded config of extension: "+extension.getDescription().getExtensionName()));
-            });
-            extensionsGui.setItem(x, gItem);
-            x++;
-        }
-        extensionsGui.openGUI(player);
+        new ExtensionsMenu(player);
         return true;
     }
 
@@ -46,5 +30,10 @@ public class ExtensionsSubCommand implements ArgumentCommand {
     @Override
     public String getPermission() {
         return "randomlootchest.admin.extensions";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return new ArrayList<>();
     }
 }

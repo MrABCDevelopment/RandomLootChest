@@ -6,6 +6,9 @@ import me.dreamdevs.github.randomlootchest.api.objects.WandItem;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WandSubCommand implements ArgumentCommand {
 
     @Override
@@ -27,5 +30,10 @@ public class WandSubCommand implements ArgumentCommand {
     @Override
     public String getPermission() {
         return "randomlootchest.admin.wand";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return new ArrayList<>();
     }
 }

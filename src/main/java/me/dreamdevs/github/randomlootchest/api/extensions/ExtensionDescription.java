@@ -2,6 +2,7 @@ package me.dreamdevs.github.randomlootchest.api.extensions;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Material;
 
 @Getter @Setter
 public class ExtensionDescription {
@@ -10,5 +11,6 @@ public class ExtensionDescription {
     private String extensionVersion;
     private String extensionMain;
     private String extensionAuthor;
+    private Material extensionMaterial;
 
 }

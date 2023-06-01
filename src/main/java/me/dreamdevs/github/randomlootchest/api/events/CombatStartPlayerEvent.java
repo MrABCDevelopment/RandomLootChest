@@ -11,8 +11,8 @@ import java.util.UUID;
 @Getter
 public class CombatStartPlayerEvent extends Event {
 
-    private UUID uuid;
-    private static final HandlerList list = new HandlerList();
+    private final UUID uuid;
+    private @Getter static final HandlerList handlerList = new HandlerList();
 
     public CombatStartPlayerEvent(UUID uuid) {
         this.uuid = uuid;
@@ -24,6 +24,6 @@ public class CombatStartPlayerEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return list;
+        return handlerList;
     }
 }

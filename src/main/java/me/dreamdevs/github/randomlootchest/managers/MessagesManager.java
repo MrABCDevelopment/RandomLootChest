@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Getter
 public class MessagesManager {
@@ -24,8 +25,12 @@ public class MessagesManager {
         messages.clear();
         FileConfiguration config = plugin.getConfigManager().getConfig("messages.yml");
         ConfigurationSection section = config.getConfigurationSection("messages");
-        section.getKeys(false).forEach(s -> messages.put(s, ColourUtil.colorize(section.getString(s))));
-        Util.sendPluginMessage(messages.get("loaded-messages").replace("{MESSAGES}", Integer.toString(messages.size())));
+        section.getKeys(false).forEach(s -> messages.put(s, ColourUtil.colorize(Objects.requireNonNull(section.getString(s)))));
+        Util.sendPluginMessage(messages.get("loaded-messages").replaceAll("%AMOUNT%", Integer.toString(messages.size())));
+    }
+
+    public String getMessage(String key) {
+        return messages.get(key);
     }
 
     public void addMessage(String key, String message) {

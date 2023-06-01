@@ -2,8 +2,8 @@ package me.dreamdevs.github.randomlootchest.listeners;
 
 import lombok.Getter;
 import me.dreamdevs.github.randomlootchest.api.events.ClickInventoryEvent;
-import me.dreamdevs.github.randomlootchest.api.inventory.GItem;
-import me.dreamdevs.github.randomlootchest.api.inventory.GUI;
+import me.dreamdevs.github.randomlootchest.api.menu.Menu;
+import me.dreamdevs.github.randomlootchest.api.menu.MenuItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -18,38 +18,37 @@ import java.util.UUID;
 
 public class InventoryListener implements Listener {
 
-    public @Getter static HashMap<UUID, GUI> guis = new HashMap<>();
+    public @Getter static HashMap<UUID, Menu> menus = new HashMap<>();
 
     @EventHandler
     public void clickEvent(InventoryClickEvent event) {
         if(event.getClickedInventory() == null) return;
-        if(event.getClickedInventory().getHolder() instanceof GUI) {
-            GUI gui = guis.get(event.getWhoClicked().getUniqueId());
-            if(gui.isProtect()) {
+        if(event.getClickedInventory().getHolder() instanceof Menu) {
+            Menu menu = menus.get(event.getWhoClicked().getUniqueId());
+            if(menu.isProtect())
                 event.setResult(Event.Result.DENY);
-            }
             int slot = event.getRawSlot();
             Player player = (Player) event.getWhoClicked();
-            if (slot >= 0 && slot < gui.getSize() && slot < gui.getItemStacks().length) {
-                if (gui.getItemStacks()[slot] == null) return;
-                GItem gItem = gui.getItemStacks()[slot];
-                ClickInventoryEvent clickInventoryEvent = new ClickInventoryEvent(event, player, gui, slot, gItem, event.getClick());
+            if (slot >= 0 && slot < menu.getSize() && slot < menu.getMenuItems().length) {
+                if (menu.getMenuItems()[slot] == null) return;
+                MenuItem menuItem = menu.getMenuItems()[slot];
+                ClickInventoryEvent clickInventoryEvent = new ClickInventoryEvent(event, player, menu, slot, menuItem, event.getClick());
                 Bukkit.getPluginManager().callEvent(clickInventoryEvent);
-                gItem.execute(clickInventoryEvent);
+                menuItem.performAction(clickInventoryEvent);
             }
         }
     }
 
     @EventHandler
     public void closeEvent(InventoryCloseEvent event) {
-        if(event.getInventory().getHolder() instanceof GUI) {
-            guis.remove(event.getPlayer().getUniqueId());
+        if(event.getInventory().getHolder() instanceof Menu) {
+            menus.remove(event.getPlayer().getUniqueId());
         }
     }
 
     @EventHandler
     public void quitEvent(PlayerQuitEvent event) {
-        guis.remove(event.getPlayer().getUniqueId());
+        menus.remove(event.getPlayer().getUniqueId());
     }
 
 }

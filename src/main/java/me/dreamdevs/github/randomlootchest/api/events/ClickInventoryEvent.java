@@ -1,8 +1,8 @@
 package me.dreamdevs.github.randomlootchest.api.events;
 
 import lombok.Getter;
-import me.dreamdevs.github.randomlootchest.api.inventory.GItem;
-import me.dreamdevs.github.randomlootchest.api.inventory.GUI;
+import me.dreamdevs.github.randomlootchest.api.menu.Menu;
+import me.dreamdevs.github.randomlootchest.api.menu.MenuItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -12,27 +12,24 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 @Getter
 public class ClickInventoryEvent extends Event {
 
-    private static final HandlerList list = new HandlerList();
+    private @Getter static final HandlerList list = new HandlerList();
 
-    private InventoryClickEvent event;
-    private Player player;
-    private int slot;
-    private GUI gui;
-    private GItem gItem;
-    private ClickType clickType;
+    private final InventoryClickEvent event;
+    private final Player player;
+    private final int slot;
+    private final Menu menu;
+    private final MenuItem menuItem;
+    private final ClickType clickType;
 
-    public ClickInventoryEvent(InventoryClickEvent event, Player player, GUI gui, int slot, GItem gItem, ClickType clickType) {
+    public ClickInventoryEvent(InventoryClickEvent event, Player player, Menu menu, int slot, MenuItem menuItem, ClickType clickType) {
         this.event = event;
         this.player = player;
-        this.gui = gui;
+        this.menu = menu;
         this.slot = slot;
-        this.gItem = gItem;
+        this.menuItem = menuItem;
         this.clickType = clickType;
     }
 
-    public static HandlerList getHandlerList() {
-        return list;
-    }
     @Override
     public HandlerList getHandlers() {
         return list;

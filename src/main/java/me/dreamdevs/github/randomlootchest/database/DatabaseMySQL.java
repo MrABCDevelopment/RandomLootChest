@@ -49,7 +49,7 @@ public class DatabaseMySQL extends DatabaseConnector {
                     if(!RandomLootChestMain.getInstance().getDatabaseManager().getConnector().isAccount(uuid)) {
                         RandomLootChestMain.getInstance().getDatabaseManager().getConnector().insertData(uuid);
                     }
-                    HashMap<HashMap<UUID, Location>, AtomicInteger> playerMap = RandomLootChestMain.getInstance().getCooldownManager().getPlayerCooldowns(uuid);
+                    Map<HashMap<UUID, Location>, AtomicInteger> playerMap = RandomLootChestMain.getInstance().getCooldownManager().getPlayerCooldowns(uuid);
                     String line = "";
                     for (HashMap<UUID, Location> map1 : playerMap.keySet()) {
                         line = line+Util.getLocationString(map1.get(uuid)) + ";" + playerMap.get(map1).get()+"_";

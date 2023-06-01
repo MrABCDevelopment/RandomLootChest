@@ -3,6 +3,8 @@ package me.dreamdevs.github.randomlootchest.utils;
 import lombok.Getter;
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
 
+import java.util.Objects;
+
 @Getter
 public class Settings {
 
@@ -19,6 +21,7 @@ public class Settings {
     public static String databaseDatabase;
     public static int databasePort;
 
+    public static int randomRows;
     public static boolean combatEnabled;
     public static int combatTime;
     public static boolean openChestInCombat;
@@ -35,13 +38,14 @@ public class Settings {
         databaseDatabase = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getString("database.database");
         autoSaveTime = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getInt("database.auto-save-time");
         randomChests = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("random-chests");
-        wandItemDisplayName = ColourUtil.colorize(RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getString("wand-item.displayName"));
+        wandItemDisplayName = ColourUtil.colorize(Objects.requireNonNull(RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getString("wand-item.displayName")));
         wandItemPermissionToUse = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("wand-item.permission-to-use");
         updateChecker = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("update-checker");
         hologramsInfo = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("holograms-on-chests");
         soundChestAdd = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getString("chest-add-sound").toUpperCase();
         combatEnabled = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("combat.enable");
         combatTime = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getInt("combat.time");
+        randomRows = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getInt("random-chest-rows");
     }
 
 }

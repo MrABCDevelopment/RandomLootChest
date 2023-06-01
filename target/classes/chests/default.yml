@@ -13,6 +13,11 @@ Particles:
   Use: true
   Type: HEART
   Amount: 1
+
+# Here you put items from items.yml
+Contents-Items:
+  - example
+
 # Put all your items into this section!
 Contents:
   CommonSword:
@@ -22,6 +27,6 @@ Contents:
       - '&cWith custom colours!'
     Material: STONE_SWORD
     Enchantments:
-      - damage_all:5
-      - durability:3
+      DAMAGE_ALL: 5
+      DURABILITY: 3
     Chance: 0.5

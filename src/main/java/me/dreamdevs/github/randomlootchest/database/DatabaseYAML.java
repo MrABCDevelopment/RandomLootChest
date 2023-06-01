@@ -39,7 +39,7 @@ public class DatabaseYAML extends DatabaseConnector {
                     } catch (Exception e) {
                     }
                 }
-                HashMap<HashMap<UUID, Location>, AtomicInteger> playerMap = RandomLootChestMain.getInstance().getCooldownManager().getPlayerCooldowns(uuid);
+                Map<HashMap<UUID, Location>, AtomicInteger> playerMap = RandomLootChestMain.getInstance().getCooldownManager().getPlayerCooldowns(uuid);
                 ArrayList<String> strings = new ArrayList<>();
                 for(HashMap<UUID, Location> map1 : playerMap.keySet()) {
                     String line = Util.getLocationString(map1.get(uuid))+";"+playerMap.get(map1).get();

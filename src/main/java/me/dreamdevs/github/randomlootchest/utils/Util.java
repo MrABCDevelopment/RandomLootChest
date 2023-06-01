@@ -37,7 +37,7 @@ public class Util {
 
     public static String getLocationString(Location location) {
         if(location == null) return null;
-        return location.getBlockX()+":"+location.getBlockY()+":"+location.getBlockZ()+":"+location.getWorld().getName();
+        return location.getBlockX()+":"+location.getBlockY()+":"+location.getBlockZ()+":"+ Objects.requireNonNull(location.getWorld()).getName();
     }
 
     public static void sendPluginMessage(String message) {

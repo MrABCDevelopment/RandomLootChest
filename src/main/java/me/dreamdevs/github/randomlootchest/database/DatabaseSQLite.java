@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DatabaseSQLite extends DatabaseConnector {
 
     private File file;
-    private String URL = "jdbc:sqlite:"+file;
+    private final String URL = "jdbc:sqlite:"+file;
 
     @Override
     public void connect() {
@@ -63,7 +63,7 @@ public class DatabaseSQLite extends DatabaseConnector {
                     if(!RandomLootChestMain.getInstance().getDatabaseManager().getConnector().isAccount(uuid)) {
                         RandomLootChestMain.getInstance().getDatabaseManager().getConnector().insertData(uuid);
                     }
-                    HashMap<HashMap<UUID, Location>, AtomicInteger> playerMap = RandomLootChestMain.getInstance().getCooldownManager().getPlayerCooldowns(uuid);
+                    Map<HashMap<UUID, Location>, AtomicInteger> playerMap = RandomLootChestMain.getInstance().getCooldownManager().getPlayerCooldowns(uuid);
                     String line = "";
                     for (HashMap<UUID, Location> map1 : playerMap.keySet()) {
                         line = line+Util.getLocationString(map1.get(uuid)) + ";" + playerMap.get(map1).get()+"_";

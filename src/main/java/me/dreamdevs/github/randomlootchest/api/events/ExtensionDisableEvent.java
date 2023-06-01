@@ -6,9 +6,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class ExtensionDisableEvent extends Event {
+public final class ExtensionDisableEvent extends Event {
 
-    private Extension extension;
+    private final Extension extension;
     private static final HandlerList list = new HandlerList();
 
     public ExtensionDisableEvent(Extension extension) {

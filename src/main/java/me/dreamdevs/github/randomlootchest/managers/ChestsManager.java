@@ -6,7 +6,11 @@ import me.dreamdevs.github.randomlootchest.api.objects.RandomItem;
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.github.randomlootchest.api.objects.ChestGame;
 import me.dreamdevs.github.randomlootchest.utils.*;
+import net.Indyuce.mmoitems.MMOItems;
+import net.Indyuce.mmoitems.api.Type;
+import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +22,7 @@ import java.util.*;
 public class ChestsManager {
 
     private File chestsDirectory;
-    private Map<String, ChestGame> chests;
+    private final Map<String, ChestGame> chests;
     private static final String CONTENTS = "Contents";
 
     public ChestsManager(RandomLootChestMain plugin) {
@@ -44,8 +48,8 @@ public class ChestsManager {
             Arrays.stream(files).forEach(chestFile -> {
                 FileConfiguration config = YamlConfiguration.loadConfiguration(chestFile);
                 ChestGame chestGame = new ChestGame(chestFile.getName().substring(0, chestFile.getName().length()-4), true);
-                chestGame.setTitle(ColourUtil.colorize(config.getString("Title")));
-                chestGame.setTime(TimeUtil.convertStringToCooldown(config.getString("Cooldown")));
+                chestGame.setTitle(ColourUtil.colorize(Objects.requireNonNull(config.getString("Title"))));
+                chestGame.setTime(TimeUtil.convertStringToCooldown(Objects.requireNonNull(config.getString("Cooldown"))));
                 chestGame.setMaxItems(config.getInt("MaxItems"));
                 chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType"));
 
@@ -54,31 +58,40 @@ public class ChestsManager {
                     chestGame.getItems().add(randomItem);
                 });
 
+                if(config.getStringList(CONTENTS+"-MMOItems") != null) config.getStringList(CONTENTS+"-MMOItems").forEach(s -> {
+                    String[] strings = s.split(":");
+                    MMOItem mmoItem = MMOItems.plugin.getMMOItem(Type.get(strings[0]), strings[1]);
+
+                    RandomItem randomItem = new RandomItem(mmoItem.newBuilder().build(), Double.parseDouble(strings[2]));
+                    chestGame.getItems().add(randomItem);
+                });
+
                 for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
                     try {
                         ItemStack itemStack = null;
-                        String material = config.getString(CONTENTS+"."+content+".Material").toUpperCase();
+                        String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
                         String displayName =  config.getString(CONTENTS+"."+content+".DisplayName", null);
                         int amount = config.getInt(CONTENTS+"."+content+".Amount", 1);
                         List<String> lore = new ArrayList<>();
                         if(config.get(CONTENTS+"."+content+".DisplayLore") != null)
                             lore = config.getStringList(CONTENTS+"."+content+".DisplayLore");
-                        List<String> enchantments = new ArrayList<>();
-                        if(config.get(CONTENTS+"."+content+".Enchantments") != null)
-                            enchantments = config.getStringList(CONTENTS+"."+content+".Enchantments");
+
+                        Map<String, Integer> enchantments = new HashMap<>();
+                        if(config.get(CONTENTS+"."+content+".Enchantments") != null) {
+                            ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS+"."+content+".Enchantments");
+                            for(String key : enchantmentSection.getKeys(false))
+                                enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
+                        }
+
                         boolean unbreakable = config.getBoolean(CONTENTS+"."+content+".Unbreakable", false);
                         boolean glowing = config.getBoolean(CONTENTS+"."+content+".Glowing", false);
                         itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
 
                         if(material.contains("potion".toUpperCase())) {
-                            if(VersionUtil.isLegacy()) {
-                                itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
-                                        config.getString(CONTENTS+"." + content + ".PotionEffect"), config.getInt(CONTENTS+"." + content + ".Tier"));
-                            } else {
-                                itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
+                            itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
                                         config.getString(CONTENTS+"."+content+".PotionEffect"),
                                         config.getBoolean(CONTENTS+"."+content+".Extended"), config.getBoolean(CONTENTS+"."+content+".Upgraded"));
-                            }
+
                         }
                         RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
                         chestGame.getItems().add(randomItem);
@@ -95,7 +108,7 @@ public class ChestsManager {
     }
 
     public ChestGame getChestGameByRarity(String id) {
-        return chests.keySet().stream().filter(s -> s.equals(id)).map(s -> chests.get(s)).findFirst().orElse(null);
+        return chests.keySet().stream().filter(s -> s.equals(id)).map(chests::get).findFirst().orElse(null);
     }
 
     public ChestGame getChestGameByLocation(Location location) {
@@ -121,7 +134,7 @@ public class ChestsManager {
     }
 
     public ChestGame getRandomChest() {
-        ArrayList<ChestGame> chestGames = new ArrayList<ChestGame>(chests.values());
+        ArrayList<ChestGame> chestGames = new ArrayList<>(chests.values());
         int rN = Util.getRandom().nextInt(chests.size());
         return chestGames.get(rN);
     }

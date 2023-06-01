@@ -5,6 +5,9 @@ import me.dreamdevs.github.randomlootchest.api.commands.ArgumentCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SaveSubCommand implements ArgumentCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
@@ -26,5 +29,10 @@ public class SaveSubCommand implements ArgumentCommand {
     @Override
     public String getPermission() {
         return "randomlootchest.admin.save";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return new ArrayList<>();
     }
 }

@@ -12,9 +12,9 @@ import java.util.UUID;
 @Getter
 public class CooldownExpiredEvent extends Event {
 
-    private UUID uuid;
-    private Location location;
-    private static final HandlerList list = new HandlerList();
+    private final UUID uuid;
+    private final Location location;
+    private @Getter static final HandlerList handlerList = new HandlerList();
 
     public CooldownExpiredEvent(UUID uuid, Location location) {
         this.uuid = uuid;
@@ -27,6 +27,6 @@ public class CooldownExpiredEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return list;
+        return handlerList;
     }
 }

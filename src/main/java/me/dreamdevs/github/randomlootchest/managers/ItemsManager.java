@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ItemsManager {
 
@@ -17,10 +18,19 @@ public class ItemsManager {
 
     public ItemsManager() {
         items = new HashMap<>();
-        FileConfiguration config = RandomLootChestMain.getInstance().getConfigManager().getConfig("items.yml");
+        load(RandomLootChestMain.getInstance());
+    }
+
+    public void load(RandomLootChestMain plugin) {
+        items.clear();
+        FileConfiguration config = plugin.getConfigManager().getConfig("items.yml");
         ConfigurationSection section = config.getConfigurationSection("Items");
         section.getKeys(false).forEach(s -> {
-            ItemStack itemStack = ItemUtil.parsedItem(section.getString(s+".Material"), section.getInt(s+".Amount"), section.getString(s+".DisplayName"), section.getStringList(s+".DisplayLore"), section.getStringList(s+".Enchantments"), section.getBoolean(s+".Unbreakable"), section.getBoolean(s+".Glowing"));
+            Map<String, Integer> enchantments = new HashMap<>();
+            if(section.getConfigurationSection("Enchantments") != null)
+                for(String key : section.getConfigurationSection("Enchantments").getKeys(false))
+                    enchantments.put(key.toUpperCase(), section.getConfigurationSection("Enchantments").getInt(key));
+            ItemStack itemStack = ItemUtil.parsedItem(section.getString(s+".Material"), section.getInt(s+".Amount"), section.getString(s+".DisplayName"), section.getStringList(s+".DisplayLore"), enchantments, section.getBoolean(s+".Unbreakable"), section.getBoolean(s+".Glowing"));
             items.put(s, new RandomItem(itemStack, section.getDouble(s+".Chance")));
         });
 

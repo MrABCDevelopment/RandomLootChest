@@ -1,11 +1,46 @@
 messages:
-  loaded-messages: '&aLoaded {MESSAGES} messages!'
+  # Chest messages
+  chest-on-cooldown: '&cHey! You have to wait %TIME% until you open this chest!'
+  chest-place-on-map: '&aYou placed %TYPE% Chest &aat location: %LOCATION%'
+  chest-remove-from-map: '&aYou removed %TYPE% Chest &afrom map!'
+
+  # Menus
+  # Reloading menu
+  chest-menu-reload-title: 'Reload Menu'
+  chest-menu-reload-chests-reload-name: '&aReload Chests'
+  chest-menu-reload-config-reload-name: '&aReload config.yml'
+  chest-menu-reload-messages-reload-name: '&aReload messages.yml'
+  chest-menu-reload-items-reload-name: '&aReload items.yml'
+  chest-menu-reload-all-reload-name: '&aReload all configuration'
+
+  # Extensions menu
+  extensions-menu-title: 'Extensions Menu'
+
+  # Placing menu
+  placing-menu-title: 'Place Chest'
+
+  # Chests menu
+  chests-menu-title: 'Chests Menu'
+
+  # Combat messages
+  combat-info: '&cYou are in combat for %TIME%!'
+  combat-expired: '&aYou are no longer in combat!'
+
+  # Admin and console messages
+  loaded-messages: '&aLoaded %AMOUNT% messages'
   not-player: '&cConsole cannot perform this command!'
+  locations-saved: '&aSaved all chests locations!'
+
+  # Player messages
+  no-permission: '&cYou do not have permission to perform this command!'
+  no-argument: '&cThis argument does not exist!'
+  no-arguments: '&cThere are no arguments for this sub command!'
+
+  extensions-reload-config: '&aReloaded %EXTENSION_NAME% configuration file!'
+
   chest-command-correct-usage: '&cCorrect usage /randomlootchest <subcommand>'
   chest-command-reload: '&aReloaded all configuration files!'
-  locations-saved: '&aSaved all chests locations!'
-  add-chest: '&aAdded new chest: {CHEST}&a at location: {LOCATION}!'
-  remove-chest: '&cRemoved chest!'
-  gamechest-cooldown: 'Please wait {TIME} to open this chest!'
-  hologram-on-chest: '&cTime to open chest: {TIME}'
-  combat-cooldown: '&cYou cannot open any chest when you are in combat!'
+  chest-command-reload-messages: '&aReloaded messages!'
+  chest-command-reload-items: '&aReloaded items (items.yml)!'
+  chest-command-reload-chests: '&aReloaded all chests!'
+  chest-command-reload-config: '&aReloaded main configuration file (config.yml)!'

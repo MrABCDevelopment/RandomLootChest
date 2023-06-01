@@ -2,10 +2,13 @@ package me.dreamdevs.github.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.github.randomlootchest.api.commands.ArgumentCommand;
-import me.dreamdevs.github.randomlootchest.menus.ChestsInfoMenu;
+import me.dreamdevs.github.randomlootchest.api.menu.chests.ChestsMenu;
 import me.dreamdevs.github.randomlootchest.utils.ColourUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChestsSubCommand implements ArgumentCommand {
 
@@ -20,7 +23,7 @@ public class ChestsSubCommand implements ArgumentCommand {
             player.sendMessage(ColourUtil.colorize("&cCouldn't find any chest."));
             return false;
         }
-        new ChestsInfoMenu(player);
+        new ChestsMenu(player);
         return true;
     }
 
@@ -32,5 +35,10 @@ public class ChestsSubCommand implements ArgumentCommand {
     @Override
     public String getPermission() {
         return "randomlootchest.admin.chests";
+    }
+
+    @Override
+    public List<String> getArguments() {
+        return new ArrayList<>();
     }
 }

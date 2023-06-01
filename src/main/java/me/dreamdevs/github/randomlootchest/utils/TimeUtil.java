@@ -1,6 +1,9 @@
 package me.dreamdevs.github.randomlootchest.utils;
 
-public class TimeUtil {
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public final class TimeUtil {
 
     public static long convertStringToCooldown(String str) {
         long cooldownTime = 0;

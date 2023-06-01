@@ -1,10 +1,11 @@
 package me.dreamdevs.github.randomlootchest.managers;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.Map;
 import java.util.TreeMap;
 
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
@@ -38,7 +39,7 @@ public class ConfigManager {
 
     private final RandomLootChestMain plugin;
     private final File configFolder;
-    private final TreeMap<String, Configuration> configs = new TreeMap<String, Configuration>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, Configuration> configs = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     public ConfigManager(RandomLootChestMain plugin) {
         this.plugin = plugin;
@@ -62,7 +63,7 @@ public class ConfigManager {
                     InputStream in = plugin.getResource(filename);
                     if (in != null) {
                         try {
-                            OutputStream out = new FileOutputStream(configFile);
+                            OutputStream out = Files.newOutputStream(configFile.toPath());
                             byte[] buf = new byte[1024];
                             int len;
                             while ((len = in.read(buf)) > 0) {

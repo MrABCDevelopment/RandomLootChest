@@ -2,7 +2,6 @@ package me.dreamdevs.github.randomlootchest;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.dreamdevs.github.randomlootchest.api.HooksAPI;
 import me.dreamdevs.github.randomlootchest.commands.CommandHandler;
 import me.dreamdevs.github.randomlootchest.database.Database;
 import me.dreamdevs.github.randomlootchest.listeners.*;
@@ -50,7 +49,6 @@ public class RandomLootChestMain extends JavaPlugin {
         this.gameManager = new GameManager();
         this.combatManager = new CombatManager();
         this.commandHandler = new CommandHandler(this);
-        HooksAPI.hook(this);
 
         this.extensionManager = new ExtensionManager(this);
         this.extensionManager.loadExtensions();
@@ -67,11 +65,12 @@ public class RandomLootChestMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
-        if(Settings.combatEnabled)
+        if(Settings.combatEnabled) {
             getServer().getPluginManager().registerEvents(new CombatListener(), this);
+            new CombatTask();
+        }
 
         new LocationTask();
-        new CombatTask();
 
         new Metrics(this, 16175);
         if(Settings.updateChecker) {
@@ -96,6 +95,7 @@ public class RandomLootChestMain extends JavaPlugin {
     public void onDisable() {
         getExtensionManager().disableExtensions();
         if(Settings.useDatabase) {
+            databaseManager.saveData();
             databaseManager.disconnect();
         }
         getLocationManager().save();

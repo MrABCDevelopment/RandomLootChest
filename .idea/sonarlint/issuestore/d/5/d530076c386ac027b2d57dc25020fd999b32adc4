@@ -1,0 +1,7 @@
+
+\	java:S899 "BDo something with the "boolean" value returned by "createNewFile".(Á†ãùÿÿÿÿ
+>	java:S108!")Either remove or fill this block of code.(”ı¾
+O
+java:S1128":Remove this unused import 'net.Indyuce.mmoitems.MMOItems'.(Ó®¸H
+W
+java:S1128"ARemove this unused import 'net.Indyuce.mmoitems.api.MMOItemsAPI'.(¼ÂÉ

@@ -7,16 +7,14 @@ import me.dreamdevs.github.randomlootchest.api.extensions.Extension;
 import me.dreamdevs.github.randomlootchest.api.extensions.ExtensionDescription;
 import me.dreamdevs.github.randomlootchest.utils.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 
 import java.io.*;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipFile;
 
@@ -33,7 +31,7 @@ public class ExtensionManager {
     }
 
     public void loadExtensions() {
-        if(directory.listFiles().length == 0) return;
+        if(Objects.requireNonNull(directory.listFiles()).length == 0) return;
         File[] files = directory.listFiles((dir, name) -> name.endsWith(".jar"));
         for(File file : files) {
             try(ZipFile zipFile = new ZipFile(file)) {
@@ -54,6 +52,10 @@ public class ExtensionManager {
 
                 if(config.getString("author") != null)
                     extensionDescription.setExtensionAuthor(config.getString("author"));
+                if(config.getString("icon") != null)
+                    extensionDescription.setExtensionMaterial(Material.getMaterial(config.getString("icon")));
+                else
+                    extensionDescription.setExtensionMaterial(Material.PAPER);
 
                 ClassLoader l = URLClassLoader.newInstance(new URL[]{file.toURI().toURL()}, getClass().getClassLoader());
 
