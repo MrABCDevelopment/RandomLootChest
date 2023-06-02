@@ -8,7 +8,6 @@ MaxItems: 4
 MaxItemsInTheSameType: 1
 # Particles above the chests.
 # If you are using versions 1.9+, use this link: https://spigotdocs.okaeri.cloud/1.9.4/org/bukkit/Particle.html or newer docs
-# But if you are using versions 1.7-1.8.9, use this link: https://spigotdocs.okaeri.cloud/1.8.8/org/bukkit/Effect.html or older docs
 Particles:
   Use: true
   Type: HEART
@@ -17,6 +16,12 @@ Particles:
 # Here you put items from items.yml
 Contents-Items:
   - example
+
+# MMOItems support
+#Contents-MMOItems:
+# PATTERN: TYPE:ITEM_ID:CHANCE
+# Example:
+# - AXE:SILVER_AXE:0.4
 
 # Put all your items into this section!
 Contents:

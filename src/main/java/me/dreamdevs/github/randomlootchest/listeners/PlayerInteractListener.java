@@ -13,10 +13,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import java.util.stream.Collectors;
 
 public class PlayerInteractListener implements Listener {
 
@@ -30,6 +33,7 @@ public class PlayerInteractListener implements Listener {
     public void onInteractChest(PlayerInteractEvent event) {
         if(event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if(!plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getClickedBlock().getLocation()))) return;
+        if (event.getPlayer().getInventory().getItemInMainHand().equals(WandItem.WANDITEM)) return;
         if(event.getClickedBlock().getType() == Material.CHEST) {
             event.setCancelled(true);
 
@@ -77,7 +81,7 @@ public class PlayerInteractListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void removeBlockEvent(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getPlayer().getInventory().getItemInMainHand() == null) return;
@@ -86,12 +90,11 @@ public class PlayerInteractListener implements Listener {
         if(Settings.wandItemPermissionToUse && !event.getPlayer().hasPermission("wanditem.permission"))
             return;
         if (plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getClickedBlock().getLocation()))) {
-            Location location = event.getClickedBlock().getLocation();
-            ChestGame chestGame = RandomLootChestMain.getInstance().getChestsManager().getChestGameByLocation(location);
+            ChestGame chestGame = RandomLootChestMain.getInstance().getChestsManager().getChestGameByLocation(event.getClickedBlock().getLocation());
             event.setCancelled(true);
-            event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("chest-remove-from-map"));
+            event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("chest-remove-from-map").replaceAll("%TYPE%", chestGame.getTitle()));
             plugin.getLocationManager().removeLocation(event.getClickedBlock().getLocation());
-            ChestRemoveEvent chestRemoveEvent = new ChestRemoveEvent(event.getPlayer().getUniqueId(), chestGame, location);
+            ChestRemoveEvent chestRemoveEvent = new ChestRemoveEvent(event.getPlayer().getUniqueId(), chestGame, event.getClickedBlock().getLocation());
             Bukkit.getPluginManager().callEvent(chestRemoveEvent);
         }
     }

@@ -52,6 +52,9 @@ public class ChestsManager {
                 chestGame.setTime(TimeUtil.convertStringToCooldown(Objects.requireNonNull(config.getString("Cooldown"))));
                 chestGame.setMaxItems(config.getInt("MaxItems"));
                 chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType"));
+                chestGame.setParticleUse(config.getBoolean("Particles.Use", false));
+                chestGame.setParticleAmount(config.getInt("Particles.Amount", 1));
+                chestGame.setParticleType(config.getString("Particles.Type", "HEART"));
 
                 if(config.getStringList(CONTENTS+"-Items") != null) config.getStringList(CONTENTS+"-Items").forEach(s -> {
                     RandomItem randomItem = RandomLootChestMain.getInstance().getItemsManager().getItems().get(s);
@@ -112,7 +115,7 @@ public class ChestsManager {
     }
 
     public ChestGame getChestGameByLocation(Location location) {
-        return RandomLootChestMain.getInstance().getLocationManager().getLocations().keySet().stream().filter(s -> location == Util.getStringLocation(s)).map(this::getChestGameByRarity).findFirst().orElse(null);
+        return RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet().stream().filter(stringEntry -> stringEntry.getKey().equals(Util.getLocationString(location))).map(stringEntry -> RandomLootChestMain.getInstance().getChestsManager().getChestGameByRarity(stringEntry.getValue())).findAny().orElse(null);
     }
 
     public void registerChest(Class<? extends IChestGame> chestGameClass, boolean createFile) {

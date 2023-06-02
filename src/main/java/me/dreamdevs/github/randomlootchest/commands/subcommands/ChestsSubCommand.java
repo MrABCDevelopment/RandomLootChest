@@ -3,7 +3,6 @@ package me.dreamdevs.github.randomlootchest.commands.subcommands;
 import me.dreamdevs.github.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.github.randomlootchest.api.commands.ArgumentCommand;
 import me.dreamdevs.github.randomlootchest.api.menu.chests.ChestsMenu;
-import me.dreamdevs.github.randomlootchest.utils.ColourUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -20,7 +19,7 @@ public class ChestsSubCommand implements ArgumentCommand {
         }
         Player player = (Player) commandSender;
         if(RandomLootChestMain.getInstance().getChestsManager().getChests().isEmpty()) {
-            player.sendMessage(ColourUtil.colorize("&cCouldn't find any chest."));
+            player.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-chest"));
             return false;
         }
         new ChestsMenu(player);
@@ -29,7 +28,7 @@ public class ChestsSubCommand implements ArgumentCommand {
 
     @Override
     public String getHelpText() {
-        return "&6/randomlootchest chests - opens inventory with chests and their informations";
+        return "&6/randomlootchest chests - opens inventory with chests and their information";
     }
 
     @Override

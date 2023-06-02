@@ -35,6 +35,7 @@ messages:
   no-permission: '&cYou do not have permission to perform this command!'
   no-argument: '&cThis argument does not exist!'
   no-arguments: '&cThere are no arguments for this sub command!'
+  no-chest: "&cCouldn't find any chest"
 
   extensions-reload-config: '&aReloaded %EXTENSION_NAME% configuration file!'
 
