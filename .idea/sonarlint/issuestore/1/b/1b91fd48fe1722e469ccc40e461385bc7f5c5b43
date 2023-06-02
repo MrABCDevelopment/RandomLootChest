@@ -1,8 +1,0 @@
-
-R	java:S1077"=Method has 10 parameters, which is greater than 7 authorized.(ÑƒöÆ
-b
-java:S2259:"GA "NullPointerException" could be thrown; "itemStack" is nullable here.(•ÙêÃùÿÿÿÿ
-]
-java:S2259""GA "NullPointerException" could be thrown; "itemStack" is nullable here.(ÖõÜ
-L
-java:S1874."1Remove this use of "getByName"; it is deprecated.(†Üó¾úÿÿÿÿ

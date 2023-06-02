@@ -1,22 +1,0 @@
-
-7
-java:S1643E"Use a StringBuilder instead.(‡í„šşÿÿÿÿ
-f
-java:S2095†"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¸šÅü
-j
-java:S2095G"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Á•İôûÿÿÿÿ
-e
-java:S2095j"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Æú…Á
-j
-java:S2095T"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(©ãÕ»øÿÿÿÿ
-j
-java:S2095x"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÖÉÏ·şÿÿÿÿ
-b	java:S116"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âõ¼p
-=
-java:S1170"!Make this final field static too.(âõ¼p8İ¾¶á†1
-\	java:S899"BDo something with the "boolean" value returned by "createNewFile".(Ğ’Íùÿÿÿÿ
-J
-java:S2864D"4Iterate over the "entrySet" instead of the "keySet".(›ã‚
-S
-java:S1874W"8Remove this use of "getOfflinePlayer"; it is deprecated.( èÚÿÿÿÿÿ
->	java:S108n")Either remove or fill this block of code.(”ı¾
