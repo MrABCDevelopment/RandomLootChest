@@ -62,7 +62,6 @@ me\dreamdevs\github\randomlootchest\api\objects\WandItem.class
 me\dreamdevs\github\randomlootchest\listeners\CombatListener.class
 me\dreamdevs\github\randomlootchest\Metrics$1.class
 me\dreamdevs\github\randomlootchest\api\events\CombatEndPlayerEvent.class
-me\dreamdevs\github\randomlootchest\managers\PlaceholderAPIManager.class
 me\dreamdevs\github\randomlootchest\Metrics$SimplePie.class
 me\dreamdevs\github\randomlootchest\api\menu\chests\ChestGameMenuItem.class
 me\dreamdevs\github\randomlootchest\api\IChestGame.class

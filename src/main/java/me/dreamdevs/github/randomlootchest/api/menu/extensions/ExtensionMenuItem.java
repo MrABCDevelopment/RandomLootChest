@@ -19,6 +19,8 @@ public class ExtensionMenuItem extends MenuItem {
     public void performAction(ClickInventoryEvent event) {
         event.getPlayer().closeInventory();
         extension.reloadConfig();
+        extension.onExtensionDisable();
+        extension.onExtensionEnable();
         event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("extensions-reload-config").replaceAll("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
     }
 }

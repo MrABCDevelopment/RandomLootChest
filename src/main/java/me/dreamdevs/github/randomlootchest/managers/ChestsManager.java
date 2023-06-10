@@ -44,68 +44,66 @@ public class ChestsManager {
             plugin.saveResource("chests/default.yml", false);
         }
 
-        Optional.ofNullable(chestsDirectory.listFiles(((dir, name) -> name.endsWith(".yml")))).ifPresent(files -> {
-            Arrays.stream(files).forEach(chestFile -> {
-                FileConfiguration config = YamlConfiguration.loadConfiguration(chestFile);
-                ChestGame chestGame = new ChestGame(chestFile.getName().substring(0, chestFile.getName().length()-4), true);
-                chestGame.setTitle(ColourUtil.colorize(Objects.requireNonNull(config.getString("Title"))));
-                chestGame.setTime(TimeUtil.convertStringToCooldown(Objects.requireNonNull(config.getString("Cooldown"))));
-                chestGame.setMaxItems(config.getInt("MaxItems"));
-                chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType"));
-                chestGame.setParticleUse(config.getBoolean("Particles.Use", false));
-                chestGame.setParticleAmount(config.getInt("Particles.Amount", 1));
-                chestGame.setParticleType(config.getString("Particles.Type", "HEART"));
+        Optional.ofNullable(chestsDirectory.listFiles(((dir, name) -> name.endsWith(".yml")))).ifPresent(files -> Arrays.stream(files).forEach(chestFile -> {
+            FileConfiguration config = YamlConfiguration.loadConfiguration(chestFile);
+            ChestGame chestGame = new ChestGame(chestFile.getName().substring(0, chestFile.getName().length()-4), true);
+            chestGame.setTitle(ColourUtil.colorize(Objects.requireNonNull(config.getString("Title"))));
+            chestGame.setTime(TimeUtil.convertStringToCooldown(Objects.requireNonNull(config.getString("Cooldown"))));
+            chestGame.setMaxItems(config.getInt("MaxItems"));
+            chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType"));
+            chestGame.setParticleUse(config.getBoolean("Particles.Use", false));
+            chestGame.setParticleAmount(config.getInt("Particles.Amount", 1));
+            chestGame.setParticleType(config.getString("Particles.Type", "HEART"));
 
-                if(config.getStringList(CONTENTS+"-Items") != null) config.getStringList(CONTENTS+"-Items").forEach(s -> {
-                    RandomItem randomItem = RandomLootChestMain.getInstance().getItemsManager().getItems().get(s);
-                    chestGame.getItems().add(randomItem);
-                });
-
-                if(config.getStringList(CONTENTS+"-MMOItems") != null) config.getStringList(CONTENTS+"-MMOItems").forEach(s -> {
-                    String[] strings = s.split(":");
-                    MMOItem mmoItem = MMOItems.plugin.getMMOItem(Type.get(strings[0]), strings[1]);
-
-                    RandomItem randomItem = new RandomItem(mmoItem.newBuilder().build(), Double.parseDouble(strings[2]));
-                    chestGame.getItems().add(randomItem);
-                });
-
-                for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
-                    try {
-                        ItemStack itemStack = null;
-                        String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
-                        String displayName =  config.getString(CONTENTS+"."+content+".DisplayName", null);
-                        int amount = config.getInt(CONTENTS+"."+content+".Amount", 1);
-                        List<String> lore = new ArrayList<>();
-                        if(config.get(CONTENTS+"."+content+".DisplayLore") != null)
-                            lore = config.getStringList(CONTENTS+"."+content+".DisplayLore");
-
-                        Map<String, Integer> enchantments = new HashMap<>();
-                        if(config.get(CONTENTS+"."+content+".Enchantments") != null) {
-                            ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS+"."+content+".Enchantments");
-                            for(String key : enchantmentSection.getKeys(false))
-                                enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
-                        }
-
-                        boolean unbreakable = config.getBoolean(CONTENTS+"."+content+".Unbreakable", false);
-                        boolean glowing = config.getBoolean(CONTENTS+"."+content+".Glowing", false);
-                        itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
-
-                        if(material.contains("potion".toUpperCase())) {
-                            itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
-                                        config.getString(CONTENTS+"."+content+".PotionEffect"),
-                                        config.getBoolean(CONTENTS+"."+content+".Extended"), config.getBoolean(CONTENTS+"."+content+".Upgraded"));
-
-                        }
-                        RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
-                        chestGame.getItems().add(randomItem);
-                    } catch (NullPointerException e) {
-                        Util.sendPluginMessage("&cThere is an error with '"+content+"' in config.yml");
-                        continue;
-                    }
-                }
-                chests.put(chestGame.getId(), chestGame);
+            if(config.getStringList(CONTENTS+"-Items") != null) config.getStringList(CONTENTS+"-Items").forEach(s -> {
+                RandomItem randomItem = RandomLootChestMain.getInstance().getItemsManager().getItems().get(s);
+                chestGame.getItems().add(randomItem);
             });
-        });
+
+            if(config.getStringList(CONTENTS+"-MMOItems") != null) config.getStringList(CONTENTS+"-MMOItems").forEach(s -> {
+                String[] strings = s.split(":");
+                MMOItem mmoItem = MMOItems.plugin.getMMOItem(Type.get(strings[0]), strings[1]);
+
+                RandomItem randomItem = new RandomItem(mmoItem.newBuilder().build(), Double.parseDouble(strings[2]));
+                chestGame.getItems().add(randomItem);
+            });
+
+            for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
+                try {
+                    ItemStack itemStack = null;
+                    String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
+                    String displayName =  config.getString(CONTENTS+"."+content+".DisplayName", null);
+                    int amount = config.getInt(CONTENTS+"."+content+".Amount", 1);
+                    List<String> lore = new ArrayList<>();
+                    if(config.get(CONTENTS+"."+content+".DisplayLore") != null)
+                        lore = config.getStringList(CONTENTS+"."+content+".DisplayLore");
+
+                    Map<String, Integer> enchantments = new HashMap<>();
+                    if(config.get(CONTENTS+"."+content+".Enchantments") != null) {
+                        ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS+"."+content+".Enchantments");
+                        for(String key : enchantmentSection.getKeys(false))
+                            enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
+                    }
+
+                    boolean unbreakable = config.getBoolean(CONTENTS+"."+content+".Unbreakable", false);
+                    boolean glowing = config.getBoolean(CONTENTS+"."+content+".Glowing", false);
+                    itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
+
+                    if(material.contains("potion".toUpperCase())) {
+                        itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
+                                    config.getString(CONTENTS+"."+content+".PotionEffect"),
+                                    config.getBoolean(CONTENTS+"."+content+".Extended"), config.getBoolean(CONTENTS+"."+content+".Upgraded"));
+
+                    }
+                    RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
+                    chestGame.getItems().add(randomItem);
+                } catch (NullPointerException e) {
+                    Util.sendPluginMessage("&cThere is an error with '"+content+"' in config.yml");
+                    continue;
+                }
+            }
+            chests.put(chestGame.getId(), chestGame);
+        }));
 
         Util.sendPluginMessage("&a"+chests.size()+" chests loaded!");
     }

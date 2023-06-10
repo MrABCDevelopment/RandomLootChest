@@ -60,6 +60,15 @@ public class ReloadSubCommand implements ArgumentCommand {
                     commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-chests"));
                     return true;
                 }
+                if(args[1].equalsIgnoreCase("extensions")) {
+                    RandomLootChestMain.getInstance().getExtensionManager().getEnabledExtensions().forEach(extension -> {
+                        extension.reloadConfig();
+                        extension.onExtensionDisable();
+                        extension.onExtensionEnable();
+                        commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("extensions-reload-config").replaceAll("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
+                    });
+                    return true;
+                }
             }
         } else {
             Player player = (Player) commandSender;
@@ -85,6 +94,7 @@ public class ReloadSubCommand implements ArgumentCommand {
         list.add("items");
         list.add("config");
         list.add("chests");
+        list.add("extensions");
         return list;
     }
 }

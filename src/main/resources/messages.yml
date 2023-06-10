@@ -36,6 +36,7 @@ messages:
   no-argument: '&cThis argument does not exist!'
   no-arguments: '&cThere are no arguments for this sub command!'
   no-chest: "&cCouldn't find any chest"
+  no-extension: "&cCouldn't find extension with that name."
 
   extensions-reload-config: '&aReloaded %EXTENSION_NAME% configuration file!'
 

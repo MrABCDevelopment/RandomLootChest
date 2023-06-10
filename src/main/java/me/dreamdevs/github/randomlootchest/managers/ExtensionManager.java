@@ -53,7 +53,7 @@ public class ExtensionManager {
                 if(config.getString("author") != null)
                     extensionDescription.setExtensionAuthor(config.getString("author"));
                 if(config.getString("icon") != null)
-                    extensionDescription.setExtensionMaterial(Material.getMaterial(config.getString("icon")));
+                    extensionDescription.setExtensionMaterial(Material.getMaterial(Objects.requireNonNull(config.getString("icon"))));
                 else
                     extensionDescription.setExtensionMaterial(Material.PAPER);
 
@@ -72,7 +72,6 @@ public class ExtensionManager {
 
                 try {
                     extension.onExtensionEnable();
-                    extension.setState(Extension.State.ENABLED);
                     extensions.add(extension);
                     ExtensionEnableEvent event = new ExtensionEnableEvent(extension);
                     Bukkit.getPluginManager().callEvent(event);
@@ -81,6 +80,11 @@ public class ExtensionManager {
                     Util.sendPluginMessage("&cSomething strange has happened. Couldn't load the extension.");
                     Util.sendPluginMessage("&cError: "+ e.getMessage());
                     e.printStackTrace();
+                }
+
+                if(extension.isLoaded()) {
+                    extension.setState(Extension.State.ENABLED);
+                    Util.sendPluginMessage("&aExtension "+extension.getDescription().getExtensionName()+" v"+extension.getDescription().getExtensionVersion()+" enabled!");
                 }
             } catch (Exception e) {
                 Util.sendPluginMessage("&cSomething strange has happened. Couldn't load the extension.");
@@ -106,6 +110,10 @@ public class ExtensionManager {
 
     public List<Extension> getEnabledExtensions() {
         return extensions.stream().filter(Extension::isEnabled).collect(Collectors.toList());
+    }
+
+    public Extension getExtensionByName(String extensionName) {
+        return extensions.stream().filter(extension -> extension.getDescription().getExtensionName().equalsIgnoreCase(extensionName)).findFirst().orElse(null);
     }
 
     public void registerListener(Listener listener) {
