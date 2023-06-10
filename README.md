@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/GefxXTZ.png"/>
 </p>
 
-<p align="center"><b>RandomLootChest</b> is a Minecraft plugin that allows create custom chests, add them to worlds and all players can open them and take loots. This plugin is most compatible from 1.8 to 1.19.4 Minecraft versions.</p>
+<p align="center"><b>RandomLootChest</b> is a Minecraft plugin that allows create custom chests, add them to worlds and all players can open them and take loots. This plugin is most compatible from 1.8 to 1.20 Minecraft versions.</p>
 
 <p align="center"><b>If you are using legacy versions, you have to use older RandomLootChest version (older than 1.7.0, like 1.6.4)</b></p>
 
@@ -14,7 +14,7 @@
   <ul>
     <li><b>Plugin Supports: YAML, MySQL and SQLite databases</b></li>
     <li><b>Easy and clean configuration files</b></li>
-    <li><b>Versions 1.13-1.19.4 - all officially supported</b></li>
+    <li><b>Versions 1.13-1.20 - all officially supported</b></li>
     <li><b>MMOItems and PlaceholderAPI support</b></li>
     <li><b>Combat Blocker - prevent opening chests by players while they're in combat!</b></li>
     <li><b>Developer API</b></li>
