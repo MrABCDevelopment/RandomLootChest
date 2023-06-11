@@ -50,7 +50,7 @@ public class ChestsManager {
             chestGame.setTitle(ColourUtil.colorize(Objects.requireNonNull(config.getString("Title"))));
             chestGame.setTime(TimeUtil.convertStringToCooldown(Objects.requireNonNull(config.getString("Cooldown"))));
             chestGame.setMaxItems(config.getInt("MaxItems"));
-            chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType"));
+            chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType", 4));
             chestGame.setParticleUse(config.getBoolean("Particles.Use", false));
             chestGame.setParticleAmount(config.getInt("Particles.Amount", 1));
             chestGame.setParticleType(config.getString("Particles.Type", "HEART"));
@@ -93,8 +93,8 @@ public class ChestsManager {
                         itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
                                     config.getString(CONTENTS+"."+content+".PotionEffect"),
                                     config.getBoolean(CONTENTS+"."+content+".Extended"), config.getBoolean(CONTENTS+"."+content+".Upgraded"));
-
                     }
+
                     RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
                     chestGame.getItems().add(randomItem);
                 } catch (NullPointerException e) {
