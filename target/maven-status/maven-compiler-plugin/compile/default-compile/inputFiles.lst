@@ -5,6 +5,7 @@ D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\tasks\LocationTask.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\database\DatabaseConnector.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\utils\ItemUtil.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\BasicMenu.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\commands\subcommands\ReloadSubCommand.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\listeners\InventoryListener.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\GameManager.java
@@ -12,6 +13,7 @@ D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\ExtensionDisableEvent.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\reload\ItemsReloadMenuItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\ItemsManager.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\NextPageMenuItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\ChestsManager.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\tasks\CombatTask.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\MenuSize.java
@@ -35,7 +37,9 @@ D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\extensions\ExtensionsMenu.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\reload\ChestsReloadMenuItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\ExtensionManager.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\commands\subcommands\ItemsSubCommand.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\database\DatabaseSQLite.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\listeners\MythicMobsListener.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\ChestOpenEvent.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\MessagesManager.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\ChestRemoveEvent.java
@@ -51,6 +55,7 @@ D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\utils\Util.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\CombatManager.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\CombatStartPlayerEvent.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\ReturnPageMenuItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\extensions\ExtensionMenuItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\objects\WandItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\Menu.java
@@ -58,9 +63,11 @@ D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\PlayerInteractChestEvent.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\chests\ChestGameMenuItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\utils\Settings.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\items\ItemsMenu.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\commands\CommandHandler.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\objects\RandomItem.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\utils\TimeUtil.java
+D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\BookMenu.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\managers\PlaceholderAPIManager.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\events\ExtensionEnableEvent.java
 D:\GitHub\RandomLootChest\src\main\java\me\dreamdevs\github\randomlootchest\api\menu\reload\ChestReloadMenu.java

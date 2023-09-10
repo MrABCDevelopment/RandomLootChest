@@ -1,0 +1,19 @@
+name: RandomLootChest
+version: 1.8.0
+main: me.dreamdevs.randomlootchest.RandomLootChestMain
+author: MrABCDevelopment
+api-version: 1.13
+
+softdepend: [MMOItems, PlaceholderAPI, MythicMobs]
+
+commands:
+  randomlootchest:
+    aliases: [rlc, randomchest, chests]
+    permission: randomlootchest.admin
+    permission-message: You cannot use this command.
+    description: The main command of RandomLootChest plugin.
+
+permissions:
+  randomlootchest.admin:
+    default: op
+    description: This permission is required to use admin commands

@@ -1,10 +1,10 @@
 name: RandomLootChest
-version: 1.7.2
+version: 1.8.0
 main: me.dreamdevs.github.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
 api-version: 1.13
 
-softdepend: [MMOItems, PlaceholderAPI]
+softdepend: [MMOItems, PlaceholderAPI, MythicMobs]
 
 commands:
   randomlootchest:
