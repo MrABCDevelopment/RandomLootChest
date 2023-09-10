@@ -2,6 +2,7 @@ package me.dreamdevs.randomlootchest.api.extensions;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.dreamdevs.randomlootchest.api.RandomLootChestApi;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -26,7 +27,6 @@ public abstract class Extension {
     private File file;
     private Extension.State state;
     private final String configFileName = "config.yml";
-    private JavaPlugin plugin;
 
     protected Extension() {}
 
@@ -40,7 +40,7 @@ public abstract class Extension {
     }
 
     public void registerListener(Listener listener) {
-        Bukkit.getPluginManager().registerEvents(listener, plugin);
+        Bukkit.getPluginManager().registerEvents(listener, RandomLootChestApi.plugin);
     }
 
     public void saveConfig() {

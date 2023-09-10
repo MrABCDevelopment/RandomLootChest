@@ -18,6 +18,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class PlayerInteractListener implements Listener {
 
     private final RandomLootChestMain plugin;
@@ -54,16 +56,17 @@ public class PlayerInteractListener implements Listener {
 
         if (Settings.combatEnabled) {
             if (RandomLootChestMain.getInstance().getCombatManager().isInCombat(event.getPlayer())) {
-                    event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("combat-info")
-                            .replaceAll("%TIME%",
-                                    TimeUtil.formattedTime(plugin.getCooldownManager().getCooldownByLocation(event.getPlayer(),
-                                                    event.getClickedBlock().getLocation()))));
+                event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("combat-info")
+                        .replaceAll("%TIME%",
+                                TimeUtil.formattedTime(plugin.getCooldownManager().getCooldownByLocation(event.getPlayer(),
+                                event.getClickedBlock().getLocation()))));
                     return;
-                }
             }
+        }
 
-            IPlayerData playerData = plugin.getCooldownManager().getPlayerData(event.getPlayer());
+        IPlayerData playerData = plugin.getCooldownManager().getPlayerData(event.getPlayer());
 
+        if (Settings.personalCooldown) {
             if (playerData.hasCooldown(event.getClickedBlock().getLocation())) {
                 event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("chest-on-cooldown")
                         .replaceAll("%TIME%",
@@ -71,18 +74,35 @@ public class PlayerInteractListener implements Listener {
                                         event.getClickedBlock().getLocation()))));
                 return;
             }
+        } else {
+            if (RandomLootChestMain.getInstance().getCooldownManager().getCooldownForAllByLocation(event.getClickedBlock().getLocation()) > 0) {
+                event.getPlayer().sendMessage(plugin.getMessagesManager().getMessages().get("chest-on-cooldown")
+                        .replaceAll("%TIME%",
+                                TimeUtil.formattedTime(plugin.getCooldownManager().getCooldownForAllByLocation(event.getClickedBlock().getLocation()))));
 
-            if (Settings.randomChests) {
-                IChestGame chestGame = plugin.getChestsManager().getRandomChest();
-                plugin.getChestsManager().openChest(event.getPlayer(), chestGame.getId());
-                plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
                 return;
             }
+        }
 
-            String type = plugin.getLocationManager().getLocations().get(Util.getLocationString(event.getClickedBlock().getLocation()));
-            plugin.getChestsManager().openChest(event.getPlayer(), type);
-            plugin.getChestsManager().getCurrentlyOpened().put(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation());
+        if (Settings.randomChests) {
+            IChestGame chestGame = plugin.getChestsManager().getRandomChest();
+            plugin.getChestsManager().openChest(event.getPlayer(), chestGame.getId());
+            if (Settings.personalCooldown) {
+                plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
+            } else {
+                plugin.getCooldownManager().getLocations().put(event.getClickedBlock().getLocation(), new AtomicInteger((int) chestGame.getTime()));
+            }
+            return;
+        }
+
+        String type = plugin.getLocationManager().getLocations().get(Util.getLocationString(event.getClickedBlock().getLocation()));
+        plugin.getChestsManager().openChest(event.getPlayer(), type);
+
+        if (Settings.personalCooldown) {
             plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) plugin.getChestsManager().getChestGameByRarity(type).getTime(), true);
+        } else {
+            plugin.getCooldownManager().getLocations().put(event.getClickedBlock().getLocation(), new AtomicInteger((int) plugin.getChestsManager().getChestGameByRarity(type).getTime()));
+        }
     }
 
     @EventHandler

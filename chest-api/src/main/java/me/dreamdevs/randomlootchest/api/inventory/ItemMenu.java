@@ -117,7 +117,7 @@ public class ItemMenu {
 	}
 
 	public MenuItem getItem(int slot) {
-		return slot <= size.size ? items[slot] : null;
+		return slot >= 0 && slot <= size.size ? items[slot] : null;
 	}
 
 	public void onInventoryClick(InventoryClickEvent event)

@@ -27,6 +27,7 @@ public class Settings {
     public static boolean openChestInCombat;
     public static boolean hologramsInfo;
     public static String soundChestAdd;
+    public static boolean personalCooldown;
 
     public static void loadVars() {
         useDatabase = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("database.use");
@@ -46,6 +47,7 @@ public class Settings {
         combatEnabled = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("combat.enable");
         combatTime = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getInt("combat.time");
         randomRows = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getInt("random-chest-rows");
+        personalCooldown = RandomLootChestMain.getInstance().getConfigManager().getConfig("config.yml").getBoolean("personal-cooldown");
     }
 
 }

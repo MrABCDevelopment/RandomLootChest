@@ -14,8 +14,6 @@ me\dreamdevs\randomlootchest\listeners\PlayerListeners.class
 me\dreamdevs\randomlootchest\managers\tasks\LocationTask.class
 me\dreamdevs\randomlootchest\objects\WandItem.class
 me\dreamdevs\randomlootchest\UpdateChecker.class
-me\dreamdevs\randomlootchest\commands\subcommands\LocationsSubCommand.class
-me\dreamdevs\randomlootchest\commands\subcommands\ItemsSubCommand.class
 me\dreamdevs\randomlootchest\managers\ExtensionManager.class
 me\dreamdevs\randomlootchest\Metrics$JsonObjectBuilder.class
 me\dreamdevs\randomlootchest\commands\CommandHandler.class

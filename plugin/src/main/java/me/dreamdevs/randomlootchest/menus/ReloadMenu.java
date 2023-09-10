@@ -11,7 +11,6 @@ public class ReloadMenu extends ItemMenu {
 	public ReloadMenu() {
 		super(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-title"), Size.THREE_LINE);
 
-
 	}
 
 	private static class ReloadItem extends MenuItem {

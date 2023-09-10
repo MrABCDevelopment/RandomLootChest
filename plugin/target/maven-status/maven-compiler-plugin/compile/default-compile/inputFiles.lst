@@ -20,7 +20,6 @@ D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menu
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\utils\VersionUtil.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\CombatManager.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\ExtensionManager.java
-D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\ItemsSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\utils\Util.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\ConfigManager.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\database\Database.java
@@ -36,4 +35,3 @@ D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\mana
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menus\ReloadMenu.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\objects\ChestGame.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\RandomLootChestMain.java
-D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\LocationsSubCommand.java

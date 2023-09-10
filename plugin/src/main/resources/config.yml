@@ -4,8 +4,8 @@ update-checker: true
 # Opens random chest
 random-chests: false
 
-# How many rows will have all chests
-random-chest-rows: 3
+# Cooldown for everyone?
+personal-cooldown: true
 
 # Combat Section
 # Enable - if true, it is enabled, otherwise it is disabled
