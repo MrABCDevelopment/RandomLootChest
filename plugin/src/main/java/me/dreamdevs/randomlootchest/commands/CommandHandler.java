@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.permissions.Permission;
 import org.bukkit.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -18,18 +19,19 @@ public class CommandHandler implements TabExecutor {
 
     private final @Getter HashMap<String, Class<? extends ArgumentCommand>> arguments;
 
-    public CommandHandler(RandomLootChestMain plugin) {
+    public CommandHandler(@NotNull RandomLootChestMain plugin) {
         this.arguments = new HashMap<>();
         registerCommand("wand", WandSubCommand.class);
         registerCommand("reload", ReloadSubCommand.class);
         registerCommand("chests", ChestsSubCommand.class);
         registerCommand("extensions", ExtensionsSubCommand.class);
+        registerCommand("locations", LocationSubCommand.class);
         Objects.requireNonNull(plugin.getCommand("randomlootchest")).setExecutor(this);
         Objects.requireNonNull(plugin.getCommand("randomlootchest")).setTabCompleter(this);
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, String[] strings) {
         try {
             if(strings.length >= 1) {
                 if(arguments.containsKey(strings[0])) {
@@ -63,7 +65,7 @@ public class CommandHandler implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+    public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, String[] strings) {
         List<String> completions = new ArrayList<>();
         if(strings.length == 1) {
             StringUtil.copyPartialMatches(strings[0], arguments.keySet(), completions);
@@ -74,8 +76,8 @@ public class CommandHandler implements TabExecutor {
         } else return Collections.emptyList();
     }
 
-    private List<String> getArgumentsForSubcommand(String subcommand) {
-        List<String> listArguments = null;
+    private List<String> getArgumentsForSubcommand(@NotNull String subcommand) {
+        List<String> listArguments = new ArrayList<>();
         try {
             listArguments = arguments.get(subcommand).newInstance().getArguments();
             Collections.sort(listArguments);

@@ -2,6 +2,7 @@ package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
+import me.dreamdevs.randomlootchest.menus.ChestMenu;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -22,7 +23,7 @@ public class ChestsSubCommand implements ArgumentCommand {
             return false;
         }
 
-       // new ChestsMenu().open(player);
+        new ChestMenu().open(player);
         return true;
     }
 

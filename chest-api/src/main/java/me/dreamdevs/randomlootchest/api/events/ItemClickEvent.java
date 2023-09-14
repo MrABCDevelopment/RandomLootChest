@@ -48,7 +48,7 @@ public class ItemClickEvent
 		return update;
 	}
 
-	void setWillUpdate(boolean update) {
+	public void setWillUpdate(boolean update) {
 		this.update = update;
 		if (update) {
 			goBack = false;

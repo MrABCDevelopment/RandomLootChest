@@ -87,4 +87,14 @@ public class ChestGame implements IChestGame {
     public List<IRandomItem> getItemStacks() {
         return this.items;
     }
+
+    @Override
+    public void setParticle(Particle particle) {
+        this.particleType = particle;
+    }
+
+    @Override
+    public void setUseParticles(boolean useParticles) {
+        this.particleUse = useParticles;
+    }
 }

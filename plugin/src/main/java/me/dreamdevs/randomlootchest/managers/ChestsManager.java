@@ -1,8 +1,6 @@
 package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
-import me.dreamdevs.randomlootchest.api.inventory.ItemMenu;
-import me.dreamdevs.randomlootchest.api.inventory.buttons.FreeMenuItem;
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
 import me.dreamdevs.randomlootchest.objects.ChestGame;
@@ -115,6 +113,7 @@ public class ChestsManager {
                     continue;
                 }
             }
+
             chests.put(chestGame.getId(), chestGame);
             Util.sendPluginMessage("&aRegistered chest with ID: "+chestGame.getId());
             Util.sendPluginMessage("&aTotal Items in this chest: "+chestGame.getItemStacks().size());

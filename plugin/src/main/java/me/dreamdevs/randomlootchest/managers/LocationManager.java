@@ -35,7 +35,8 @@ public class LocationManager {
     }
 
     public void save() {
-        if(getLocations().isEmpty()) return;
+        if(getLocations().isEmpty())
+            return;
         ArrayList<String> arrayList = new ArrayList<>();
         for(Map.Entry<String, String> map : getLocations().entrySet()) {
             arrayList.add(map.getKey()+";"+map.getValue());

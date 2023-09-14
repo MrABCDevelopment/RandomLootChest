@@ -3,8 +3,6 @@ package me.dreamdevs.randomlootchest.api.inventory.handlers;
 import lombok.Getter;
 import me.dreamdevs.randomlootchest.api.inventory.ItemMenu;
 import me.dreamdevs.randomlootchest.api.inventory.ItemMenuHolder;
-import me.dreamdevs.randomlootchest.api.inventory.buttons.FreeMenuItem;
-import me.dreamdevs.randomlootchest.api.inventory.buttons.MenuItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,10 +27,6 @@ public class ItemMenuListener implements Listener {
 		if (event.getWhoClicked() instanceof Player && event.getInventory().getHolder() != null && event.getInventory().getHolder() instanceof ItemMenuHolder)
 		{
 			ItemMenu menu = ((ItemMenuHolder)event.getInventory().getHolder()).getMenu();
-			MenuItem item = menu.getItem(event.getRawSlot());
-			if (item == null || item instanceof FreeMenuItem) {
-				return;
-			}
 			event.setCancelled(true);
 			((ItemMenuHolder) event.getInventory().getHolder()).getMenu().onInventoryClick(event);
 		}

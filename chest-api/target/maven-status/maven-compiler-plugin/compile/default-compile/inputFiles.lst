@@ -8,7 +8,6 @@ D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\a
 D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\events\ChestAddEvent.java
 D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\events\PlayerInteractChestEvent.java
 D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\inventory\buttons\NextMenuItem.java
-D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\inventory\buttons\FreeMenuItem.java
 D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\events\CooldownSetEvent.java
 D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\extensions\ExtensionDescription.java
 D:\GitHub\RandomLootChest\chest-api\src\main\java\me\dreamdevs\randomlootchest\api\objects\IChestGame.java

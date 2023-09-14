@@ -62,8 +62,7 @@ public final class ConfigManager {
                     configFile.createNewFile();
                     InputStream in = plugin.getResource(filename);
                     if (in != null) {
-                        try {
-                            OutputStream out = Files.newOutputStream(configFile.toPath());
+                        try(OutputStream out = Files.newOutputStream(configFile.toPath())) {
                             byte[] buf = new byte[1024];
                             int len;
                             while ((len = in.read(buf)) > 0) {

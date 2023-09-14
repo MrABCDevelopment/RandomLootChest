@@ -29,4 +29,18 @@ public interface IChestGame {
 
     List<IRandomItem> getItemStacks();
 
+    void setTitle(String title);
+
+    void setTime(long time);
+
+    void setMaxItems(int maxItems);
+
+    void setMaxItemsInTheSameType(int maxItemsInTheSameType);
+
+    void setParticle(Particle particle);
+
+    void setUseParticles(boolean useParticles);
+
+    void setExp(double exp);
+
 }

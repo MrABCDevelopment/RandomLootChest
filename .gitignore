@@ -4,5 +4,5 @@ target/*
 todo/*
 todo
 
-/plugin/target
-/chest-api/target
+/plugin/target/*
+/chest-api/target/*

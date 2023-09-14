@@ -4,8 +4,6 @@ import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.events.ItemClickEvent;
 import me.dreamdevs.randomlootchest.api.inventory.BookItemMenu;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.MenuItem;
-import me.dreamdevs.randomlootchest.api.inventory.buttons.NextMenuItem;
-import me.dreamdevs.randomlootchest.api.inventory.buttons.ReturnMenuItem;
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.utils.Util;
 import org.bukkit.Location;
@@ -23,7 +21,11 @@ public class ChestPlaceMenu extends BookItemMenu {
 	}
 
 	private static List<MenuItem> buildItems(Location location) {
-		return RandomLootChestMain.getInstance().getChestsManager().getChests().values().stream().map(chestGame -> new PlaceChest(chestGame, location)).collect(Collectors.toList());
+		return RandomLootChestMain.getInstance().getChestsManager().getChests()
+				.values()
+				.stream()
+				.map(chestGame -> new PlaceChest(chestGame, location))
+				.collect(Collectors.toList());
 	}
 
 	private static class PlaceChest extends MenuItem {

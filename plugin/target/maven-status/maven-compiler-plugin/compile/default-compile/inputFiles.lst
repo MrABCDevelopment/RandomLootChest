@@ -1,6 +1,7 @@
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\tasks\CombatTask.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\CommandHandler.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\utils\Settings.java
+D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menus\ChestMenu.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menus\ExtensionMenu.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\WandSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\ItemsManager.java
@@ -12,6 +13,7 @@ D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\mana
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\CooldownManager.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\ReloadSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\tasks\LocationTask.java
+D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menus\ChestEditMenu.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\utils\ColourUtil.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\utils\TimeUtil.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\database\data\PlayerData.java
@@ -31,6 +33,7 @@ D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\list
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\ChestsSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\ExtensionsSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\utils\ItemUtil.java
+D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\LocationSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\MessagesManager.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menus\ReloadMenu.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\objects\ChestGame.java

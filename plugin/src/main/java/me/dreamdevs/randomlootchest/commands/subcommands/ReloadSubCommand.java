@@ -2,12 +2,13 @@ package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
+import me.dreamdevs.randomlootchest.menus.ReloadMenu;
 import me.dreamdevs.randomlootchest.objects.WandItem;
 import me.dreamdevs.randomlootchest.utils.Settings;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ReloadSubCommand implements ArgumentCommand {
@@ -71,7 +72,7 @@ public class ReloadSubCommand implements ArgumentCommand {
             }
         } else {
             Player player = (Player) commandSender;
-          //  new ChestReloadMenu(player);
+            new ReloadMenu().open(player);
         }
         return true;
     }
@@ -88,12 +89,6 @@ public class ReloadSubCommand implements ArgumentCommand {
 
     @Override
     public List<String> getArguments() {
-        List<String> list = new ArrayList<>();
-        list.add("messages");
-        list.add("items");
-        list.add("config");
-        list.add("chests");
-        list.add("extensions");
-        return list;
+        return Arrays.asList("messages", "items", "config", "chests", "extensions");
     }
 }

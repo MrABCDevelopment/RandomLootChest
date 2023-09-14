@@ -25,7 +25,6 @@ me\dreamdevs\randomlootchest\api\events\CooldownSetEvent.class
 me\dreamdevs\randomlootchest\api\extensions\Extension$State.class
 me\dreamdevs\randomlootchest\api\inventory\BookItemMenu.class
 me\dreamdevs\randomlootchest\api\RandomLootChestApi.class
-me\dreamdevs\randomlootchest\api\inventory\buttons\FreeMenuItem.class
 me\dreamdevs\randomlootchest\api\extensions\ExtensionDescription.class
 me\dreamdevs\randomlootchest\api\inventory\ItemMenu.class
 me\dreamdevs\randomlootchest\api\extensions\Extension.class
