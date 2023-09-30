@@ -7,7 +7,7 @@
     <groupId>me.DreamDevs.GitHub</groupId>
     <artifactId>RandomLootChest</artifactId>
     <packaging>pom</packaging>
-    <version>1.8.0</version>
+    <version>v1.8.0</version>
     <modules>
         <module>chest-api</module>
         <module>plugin</module>
