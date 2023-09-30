@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
 import me.dreamdevs.randomlootchest.api.extensions.Extension;
 import me.dreamdevs.randomlootchest.menus.ExtensionMenu;
@@ -20,19 +21,19 @@ public class ExtensionsSubCommand implements ArgumentCommand {
                     extension.reloadConfig();
                     extension.onExtensionDisable();
                     extension.onExtensionEnable();
-                    commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("extensions-reload-config").replaceAll("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
+                    commandSender.sendMessage(Language.GENERAL_EXTENSION_CONFIG_RELOADED.toString().replace("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
                 });
                 return true;
             }
             if(!getArguments().contains(args[1])) {
-                commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-extension"));
-                return true;
+                commandSender.sendMessage(Language.GENERAL_NO_EXTENSION.toString());
+                return false;
             }
             Extension extension = RandomLootChestMain.getInstance().getExtensionManager().getExtensionByName(args[1]);
             extension.reloadConfig();
             extension.onExtensionDisable();
             extension.onExtensionEnable();
-            commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("extensions-reload-config").replaceAll("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
+            commandSender.sendMessage(Language.GENERAL_EXTENSION_CONFIG_RELOADED.toString().replace("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
             return true;
         }
         Player player = (Player) commandSender;

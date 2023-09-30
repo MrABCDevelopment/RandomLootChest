@@ -3,16 +3,15 @@ package me.dreamdevs.randomlootchest.managers;
 import lombok.Getter;
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
+import me.dreamdevs.randomlootchest.hooks.MMOItemsHook;
+import me.dreamdevs.randomlootchest.hooks.MythicMobsHook;
 import me.dreamdevs.randomlootchest.objects.ChestGame;
 import me.dreamdevs.randomlootchest.objects.RandomItem;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.utils.ColourUtil;
+import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
 import me.dreamdevs.randomlootchest.utils.ItemUtil;
 import me.dreamdevs.randomlootchest.utils.TimeUtil;
-import me.dreamdevs.randomlootchest.utils.Util;
-import net.Indyuce.mmoitems.MMOItems;
-import net.Indyuce.mmoitems.api.Type;
-import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -33,7 +32,6 @@ public class ChestsManager {
     private File chestsDirectory;
     private final Map<String, IChestGame> chests;
     private static final String CONTENTS = "Contents";
-    private final Map<UUID, Location> currentlyOpened = new HashMap<>();
 
     public ChestsManager(RandomLootChestMain plugin) {
         chests = new HashMap<>();
@@ -49,16 +47,15 @@ public class ChestsManager {
     public void load(RandomLootChestMain plugin) {
         chests.clear();
         chestsDirectory = new File(plugin.getDataFolder(), "chests");
-        if(!chestsDirectory.exists() || !chestsDirectory.isDirectory()) {
-            chestsDirectory.mkdirs();
+        if((!chestsDirectory.exists() || !chestsDirectory.isDirectory()) && chestsDirectory.mkdirs()) {
             plugin.saveResource("chests/default.yml", false);
         }
 
         Optional.ofNullable(chestsDirectory.listFiles(((dir, name) -> name.endsWith(".yml")))).ifPresent(files -> Arrays.stream(files).forEach(chestFile -> {
             FileConfiguration config = YamlConfiguration.loadConfiguration(chestFile);
             ChestGame chestGame = new ChestGame(chestFile.getName().substring(0, chestFile.getName().length()-4));
-            chestGame.setTitle(ColourUtil.colorize(Objects.requireNonNull(config.getString("Title"))));
-            chestGame.setTime(TimeUtil.convertStringToCooldown(Objects.requireNonNull(config.getString("Cooldown"))));
+            chestGame.setTitle(ColourUtil.colorize((config.getString("Title", "Random Chest"))));
+            chestGame.setTime(TimeUtil.convertStringToCooldown(config.getString("Cooldown", "60s")));
             chestGame.setMaxItems(config.getInt("MaxItems"));
             chestGame.setMaxItemsInTheSameType(config.getInt("MaxItemsInTheSameType", 4));
             chestGame.setParticleUse(config.getBoolean("Particles.Use", false));
@@ -66,18 +63,26 @@ public class ChestsManager {
             chestGame.setParticleType(Particle.valueOf(config.getString("Particles.Type", "HEART")));
             chestGame.setExp(config.getDouble("Exp", 0));
 
-            if(config.getStringList(CONTENTS+"-Items") != null) config.getStringList(CONTENTS+"-Items").forEach(s -> {
-                RandomItem randomItem = RandomLootChestMain.getInstance().getItemsManager().getItems().get(s);
-                chestGame.getItemStacks().add(randomItem);
-            });
+            Optional.of(config.getStringList(CONTENTS+"-Items"))
+                    .ifPresent(strings -> strings.stream().map(String::new)
+                            .map(RandomLootChestMain.getInstance().getItemsManager().getItems()::get)
+                            .forEach(chestGame.getItemStacks()::add));
 
-            if(config.getStringList(CONTENTS+"-MMOItems") != null) config.getStringList(CONTENTS+"-MMOItems").forEach(s -> {
-                String[] strings = s.split(":");
-                MMOItem mmoItem = MMOItems.plugin.getMMOItem(Type.get(strings[0]), strings[1]);
+            Optional.of(config.getStringList(CONTENTS+"-MMOItems"))
+                    .ifPresent(strings -> strings.stream().map(String::new)
+                            .forEach(s -> {
+                                String[] split = s.split(":");
+                                RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]));
+                                chestGame.getItemStacks().add(randomItem);
+                            }));
 
-                RandomItem randomItem = new RandomItem(mmoItem.newBuilder().build(), Double.parseDouble(strings[2]));
-                chestGame.getItemStacks().add(randomItem);
-            });
+            Optional.of(config.getStringList(CONTENTS+"-MythicMobs"))
+                    .ifPresent(strings -> strings.stream().map(String::new)
+                            .forEach(s -> {
+                                String[] split = s.split(":");
+                                RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]));
+                                chestGame.getItemStacks().add(randomItem);
+                            }));
 
             for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
                 try {
@@ -109,8 +114,8 @@ public class ChestsManager {
                     RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
                     chestGame.getItemStacks().add(randomItem);
                 } catch (NullPointerException e) {
+                    // Continues and throws an information about wrong configured item.
                     Util.sendPluginMessage("&cThere is an error with '"+content+"' in config.yml");
-                    continue;
                 }
             }
 
@@ -123,15 +128,26 @@ public class ChestsManager {
     }
 
     public IChestGame getChestGameByRarity(@NotNull String id) {
-        return chests.keySet().stream().filter(s -> s.equals(id)).map(chests::get).findFirst().orElse(null);
+        return chests.keySet().stream()
+                .filter(s -> s.equals(id))
+                .map(chests::get)
+                .findFirst()
+                .orElse(null);
     }
 
     public IChestGame getChestGameByLocation(@NotNull Location location) {
-        return RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet().stream().filter(stringEntry -> stringEntry.getKey().equals(Util.getLocationString(location))).map(stringEntry -> RandomLootChestMain.getInstance().getChestsManager().getChestGameByRarity(stringEntry.getValue())).findAny().orElse(null);
+        return RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet().stream()
+                .filter(stringEntry -> stringEntry.getKey().equals(Util.getLocationString(location)))
+                .map(stringEntry -> RandomLootChestMain.getInstance().getChestsManager().getChestGameByRarity(stringEntry.getValue()))
+                .findAny()
+                .orElse(null);
     }
 
     public IChestGame getChestGameByTitle(@NotNull String title) {
-        return chests.values().stream().filter(chestGame -> chestGame.getTitle().equals(title)).findFirst().orElse(null);
+        return chests.values().stream()
+                .filter(chestGame -> chestGame.getTitle().equals(title))
+                .findFirst()
+                .orElse(null);
     }
 
     public IChestGame getRandomChest() {
@@ -151,29 +167,28 @@ public class ChestsManager {
 
         int counter = 0;
 
-        //for (int x = 0; x<27; x++) {
         for (IRandomItem randomItem : chestGame.getItemStacks()) {
             if (counter == chestGame.getMaxItems())
+                break;
+            if (!Util.chance(randomItem.getChance()))
                 continue;
-            if (Util.chance(randomItem.getChance())) {
-                int max = chestGame.getMaxItemsInTheSameType();
-                if (max > 0) {
-                    int i = 0;
-                    for (int y = 0; y < inventory.getSize(); y++) {
-                        if (inventory.getItem(y) != null
-                                && inventory.getItem(y).getType()
-                                == randomItem.getItemStack().getType() && i < max) {
-                            i++;
-                        }
+            int max = chestGame.getMaxItemsInTheSameType();
+            if (max > 0) {
+                int i = 0;
+                for (int y = 0; y < inventory.getSize(); y++) {
+                    if (inventory.getItem(y) != null
+                            && inventory.getItem(y).getType()
+                            == randomItem.getItemStack().getType() && i < max) {
+                        i++;
                     }
-                    if (i < max) {
-                        inventory.setItem(Util.randomSlot(27), randomItem.getItemStack());
-                        counter++;
-                    }
-                } else {
+                }
+                if (i < max) {
                     inventory.setItem(Util.randomSlot(27), randomItem.getItemStack());
                     counter++;
                 }
+            } else {
+                inventory.setItem(Util.randomSlot(27), randomItem.getItemStack());
+                counter++;
             }
         }
 

@@ -6,7 +6,7 @@ import me.dreamdevs.randomlootchest.api.events.ExtensionDisableEvent;
 import me.dreamdevs.randomlootchest.api.events.ExtensionEnableEvent;
 import me.dreamdevs.randomlootchest.api.extensions.Extension;
 import me.dreamdevs.randomlootchest.api.extensions.ExtensionDescription;
-import me.dreamdevs.randomlootchest.utils.Util;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -66,7 +66,7 @@ public class ExtensionManager {
                 Class<?> clazz = l.loadClass(mainClass);
                 classes.put(clazz, extensionDescription);
 
-                Extension extension = (Extension) clazz.newInstance();
+                Extension extension = (Extension) clazz.getConstructor().newInstance();
                 extension.setState(Extension.State.LOADED);
                 extension.setDescription(extensionDescription);
 

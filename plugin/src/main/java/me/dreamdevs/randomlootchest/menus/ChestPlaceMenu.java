@@ -1,11 +1,12 @@
 package me.dreamdevs.randomlootchest.menus;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.events.ItemClickEvent;
 import me.dreamdevs.randomlootchest.api.inventory.BookItemMenu;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.MenuItem;
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
-import me.dreamdevs.randomlootchest.utils.Util;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -16,8 +17,7 @@ import java.util.stream.Collectors;
 public class ChestPlaceMenu extends BookItemMenu {
 
 	public ChestPlaceMenu(Location location) {
-		super(RandomLootChestMain.getInstance().getMessagesManager().getMessage("placing-menu-title"),
-				buildItems(location), true, false);
+		super(Language.MENU_PLACE_CHEST_TITLE.toString(), buildItems(location), true, false);
 	}
 
 	private static List<MenuItem> buildItems(Location location) {
@@ -44,7 +44,7 @@ public class ChestPlaceMenu extends BookItemMenu {
 			event.getPlayer().closeInventory();
 			RandomLootChestMain.getInstance().getLocationManager().addLocation(chestGame.getId(), location);
 			RandomLootChestMain.getInstance().getLocationManager().save();
-			event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("chest-place-on-map")
+			event.getPlayer().sendMessage(Language.CHEST_PLACE_ON_MAP_MESSAGE.toString()
 					.replace("%TYPE%", chestGame.getTitle()).replace("%LOCATION%", Util.getLocationString(location)));
 		}
 	}

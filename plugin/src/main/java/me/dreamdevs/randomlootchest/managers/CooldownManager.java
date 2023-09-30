@@ -1,14 +1,14 @@
 package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
-import me.dreamdevs.randomlootchest.api.database.IPlayerData;
+import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.events.CooldownExpiredEvent;
 import me.dreamdevs.randomlootchest.api.events.CooldownSetEvent;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
-import me.dreamdevs.randomlootchest.utils.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -16,10 +16,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
 public class CooldownManager {
 
-    private @Getter final List<PlayerData> players;
-    private @Getter final Map<Location, AtomicInteger> locations;
+    private final List<PlayerData> players;
+    private final Map<Location, AtomicInteger> locations;
 
     public CooldownManager() {
         players = new ArrayList<>();
@@ -27,7 +28,7 @@ public class CooldownManager {
         onSecond();
     }
 
-    public IPlayerData getPlayerData(OfflinePlayer player) {
+    public PlayerData getPlayerData(OfflinePlayer player) {
         return players.stream().filter(playerData -> playerData.getPlayer().equals(player)).findFirst().orElse(null);
     }
 
@@ -40,10 +41,10 @@ public class CooldownManager {
     }
 
     public void setCooldown(OfflinePlayer player, Location location, int seconds, boolean fireEvent) {
-        IPlayerData playerData = getPlayerData(player);
+        PlayerData playerData = getPlayerData(player);
         if (playerData == null) {
             playerData = new PlayerData(player);
-            players.add((PlayerData) playerData);
+            players.add(playerData);
         }
         playerData.applyCooldown(location, seconds);
         if (fireEvent) {
@@ -54,7 +55,7 @@ public class CooldownManager {
 
     private void onSecond() {
         Bukkit.getScheduler().runTaskTimer(RandomLootChestMain.getInstance(), () -> {
-            if (Settings.personalCooldown) {
+            if (Config.USE_PERSONAL_COOLDOWN.toBoolean()) {
                 if (players.isEmpty()) {
                     // Nothing else will happen...
                     return;
@@ -78,6 +79,7 @@ public class CooldownManager {
                 locations.forEach((location, atomicInteger) -> {
                     int value = atomicInteger.decrementAndGet();
                     if (value <= 0) {
+                        location.getBlock().setType(Material.CHEST);
                         locations.remove(location);
                     }
                 });

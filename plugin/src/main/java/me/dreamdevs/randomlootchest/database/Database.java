@@ -1,10 +1,10 @@
 package me.dreamdevs.randomlootchest.database;
 
 import lombok.Getter;
+import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.utils.Settings;
-import me.dreamdevs.randomlootchest.utils.Util;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 
 public class Database {
@@ -15,7 +15,7 @@ public class Database {
         Util.sendPluginMessage("&aConnecting to database...");
         try {
             Class<? extends IDatabase> clazz = Class.forName("me.dreamdevs.randomlootchest.database.Database" + databaseType).asSubclass(IDatabase.class);
-            database = clazz.newInstance();
+            database = clazz.getConstructor().newInstance();
             database.connect();
             Util.sendPluginMessage("&aConnected to "+databaseType+" database.");
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class Database {
     }
 
     public void autoSaveData() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(RandomLootChestMain.getInstance(), this::saveData, 0L, 20L * Settings.autoSaveTime);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(RandomLootChestMain.getInstance(), this::saveData, 0L, 20L * Config.DATABASE_AUTO_SAVE_TIME.toInt());
     }
 
     public void saveData() {

@@ -4,7 +4,7 @@ import lombok.Setter;
 import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
-import me.dreamdevs.randomlootchest.utils.Util;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Particle;
 
 import java.io.File;

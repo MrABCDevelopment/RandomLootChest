@@ -1,57 +1,58 @@
 package me.dreamdevs.randomlootchest.menus;
 
+import me.dreamdevs.randomlootchest.api.Config;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.inventory.ItemMenu;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.ActionMenuItem;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.MenuItem;
 import me.dreamdevs.randomlootchest.objects.WandItem;
-import me.dreamdevs.randomlootchest.utils.Settings;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class ReloadMenu extends ItemMenu {
 
 	public ReloadMenu() {
-		super(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-title"), Size.THREE_LINE);
+		super(Language.MENU_CHEST_RELOAD_TITLE.toString(), Size.THREE_LINE);
 
 		// Setting up items, then add them into gui...
-		MenuItem reloadAllItem = new ActionMenuItem(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-all-reload-name"), event -> {
+		MenuItem reloadAllItem = new ActionMenuItem(Language.MENU_CHEST_RELOAD_ALL.toString(), event -> {
 			event.setWillClose(true);
-			RandomLootChestMain.getInstance().getConfigManager().reload("config.yml");
-			Settings.loadVars();
-			RandomLootChestMain.getInstance().getConfigManager().reload("items.yml");
+			Config.reloadFile();
+			RandomLootChestMain.getInstance().loadConfig();
+			RandomLootChestMain.getInstance().getItemsManager().save();
 			RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());
-			RandomLootChestMain.getInstance().getConfigManager().reload("messages.yml");
-			RandomLootChestMain.getInstance().getMessagesManager().load(RandomLootChestMain.getInstance());
+			Language.reloadLanguage();
+			RandomLootChestMain.getInstance().loadLanguage();
 			RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
-			event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("chest-command-reload"));
+			event.getPlayer().sendMessage(Language.COMMAND_RELOAD_FILES.toString());
 		}, new ItemStack(Material.BOOK));
 
-		MenuItem reloadMessagesItem = new ActionMenuItem(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-messages-reload-name"), event -> {
+		MenuItem reloadMessagesItem = new ActionMenuItem(Language.MENU_CHEST_RELOAD_MESSAGES.toString(), event -> {
 			event.setWillClose(true);
-			RandomLootChestMain.getInstance().getConfigManager().reload("messages.yml");
-			RandomLootChestMain.getInstance().getMessagesManager().load(RandomLootChestMain.getInstance());
-			event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-messages"));
+			Language.reloadLanguage();
+			RandomLootChestMain.getInstance().loadLanguage();
+			event.getPlayer().sendMessage(Language.COMMAND_RELOAD_MESSAGES.toString());
 		}, new ItemStack(Material.PAPER));
 
-		MenuItem reloadChestsItem = new ActionMenuItem(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-chests-reload-name"), event -> {
+		MenuItem reloadChestsItem = new ActionMenuItem(Language.MENU_CHEST_RELOAD_ALL_CHESTS.toString(), event -> {
 			event.setWillClose(true);
 			RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
-			event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-chests"));
+			event.getPlayer().sendMessage(Language.COMMAND_RELOAD_CHESTS.toString());
 		}, new ItemStack(Material.CHEST));
 
-		MenuItem reloadConfigItem = new ActionMenuItem(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-config-reload-name"), event -> {
+		MenuItem reloadConfigItem = new ActionMenuItem(Language.MENU_CHEST_RELOAD_CONFIG.toString(), event -> {
 			event.setWillClose(true);
-			RandomLootChestMain.getInstance().getConfigManager().reload("config.yml");
-			Settings.loadVars();
+			Config.reloadFile();
+			RandomLootChestMain.getInstance().loadConfig();
 			WandItem.loadVars();
-			event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-config"));
+			event.getPlayer().sendMessage(Language.COMMAND_RELOAD_CONFIG.toString());
 		}, new ItemStack(Material.REPEATER));
 
-		MenuItem reloadItemsItem = new ActionMenuItem(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-menu-reload-items-reload-name"), event -> {
-			RandomLootChestMain.getInstance().getConfigManager().reload("items.yml");
+		MenuItem reloadItemsItem = new ActionMenuItem(Language.MENU_CHEST_RELOAD_ITEMS.toString(), event -> {
+			RandomLootChestMain.getInstance().getItemsManager().save();
 			RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());
-			event.getPlayer().sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-items"));
+			event.getPlayer().sendMessage(Language.COMMAND_RELOAD_ITEMS.toString());
 		}, new ItemStack(Material.DIAMOND_SWORD));
 
 		setItem(11, reloadItemsItem);

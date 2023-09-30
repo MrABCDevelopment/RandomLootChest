@@ -4,16 +4,16 @@ import lombok.Getter;
 import me.dreamdevs.randomlootchest.api.database.IPlayerData;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
 public class PlayerData implements IPlayerData {
 
-    private @Getter final OfflinePlayer player;
-    private @Getter final Map<Location, AtomicInteger> cooldown;
+    private final OfflinePlayer player;
+    private final Map<Location, AtomicInteger> cooldown;
 
     public PlayerData(OfflinePlayer player) {
         this.player = player;

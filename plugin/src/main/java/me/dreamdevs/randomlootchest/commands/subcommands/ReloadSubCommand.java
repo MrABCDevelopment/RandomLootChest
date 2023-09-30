@@ -1,10 +1,11 @@
 package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Config;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
 import me.dreamdevs.randomlootchest.menus.ReloadMenu;
 import me.dreamdevs.randomlootchest.objects.WandItem;
-import me.dreamdevs.randomlootchest.utils.Settings;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -15,60 +16,58 @@ public class ReloadSubCommand implements ArgumentCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
         if(!(commandSender instanceof Player)) {
-            if(args.length > 2) {
-                commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-arguments"));
+            if (args.length > 2) {
+                commandSender.sendMessage(Language.GENERAL_NO_ARGUMENTS.toString());
                 return true;
             }
-            if(!getArguments().contains(args[1])) {
-                commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-argument"));
-                return true;
-            }
-            if(args.length == 1) {
-                RandomLootChestMain.getInstance().getConfigManager().reload("config.yml");
-                Settings.loadVars();
-                RandomLootChestMain.getInstance().getConfigManager().reload("messages.yml");
-                RandomLootChestMain.getInstance().getMessagesManager().load(RandomLootChestMain.getInstance());
+
+            if (args.length == 1) {
+                Config.reloadFile();
+                Language.reloadLanguage();
                 RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
                 RandomLootChestMain.getInstance().getLocationManager().save();
-                RandomLootChestMain.getInstance().getConfigManager().reload("items.yml");
+                RandomLootChestMain.getInstance().getItemsManager().save();
                 RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());
                 WandItem.loadVars();
-                commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("chest-command-reload"));
+                commandSender.sendMessage(Language.COMMAND_RELOAD_FILES.toString());
                 return true;
-            } else if(args.length == 2) {
-                if(args[1].equalsIgnoreCase("messages")) {
-                    RandomLootChestMain.getInstance().getConfigManager().reload("messages.yml");
-                    RandomLootChestMain.getInstance().getMessagesManager().load(RandomLootChestMain.getInstance());
-                    commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-messages"));
-                    return true;
-                }
-                if(args[1].equalsIgnoreCase("config")) {
-                    RandomLootChestMain.getInstance().getConfigManager().reload("config.yml");
-                    Settings.loadVars();
-                    WandItem.loadVars();
-                    commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-config"));
-                    return true;
-                }
-                if(args[1].equalsIgnoreCase("items")) {
-                    RandomLootChestMain.getInstance().getConfigManager().reload("items.yml");
-                    RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());
-                    commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-items"));
-                    return true;
-                }
-                if(args[1].equalsIgnoreCase("chests")) {
-                    RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
-                    commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("chest-command-reload-chests"));
-                    return true;
-                }
-                if(args[1].equalsIgnoreCase("extensions")) {
-                    RandomLootChestMain.getInstance().getExtensionManager().getEnabledExtensions().forEach(extension -> {
-                        extension.reloadConfig();
-                        extension.onExtensionDisable();
-                        extension.onExtensionEnable();
-                        commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("extensions-reload-config").replaceAll("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
-                    });
-                    return true;
-                }
+            }
+
+            if (!getArguments().contains(args[1])) {
+                commandSender.sendMessage(Language.GENERAL_NO_ARGUMENT.toString());
+                return true;
+            }
+
+            if(args[1].equalsIgnoreCase("messages")) {
+                Language.reloadLanguage();
+                commandSender.sendMessage(Language.COMMAND_RELOAD_MESSAGES.toString());
+                return true;
+            }
+            if(args[1].equalsIgnoreCase("config")) {
+                Config.reloadFile();
+                WandItem.loadVars();
+                commandSender.sendMessage(Language.COMMAND_RELOAD_CONFIG.toString());
+                return true;
+            }
+            if(args[1].equalsIgnoreCase("items")) {
+                RandomLootChestMain.getInstance().getItemsManager().save();
+                RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());
+                commandSender.sendMessage(Language.COMMAND_RELOAD_ITEMS.toString());
+                return true;
+            }
+            if(args[1].equalsIgnoreCase("chests")) {
+                RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
+                commandSender.sendMessage(Language.COMMAND_RELOAD_CHESTS.toString());
+                return true;
+            }
+            if(args[1].equalsIgnoreCase("extensions")) {
+                RandomLootChestMain.getInstance().getExtensionManager().getEnabledExtensions().forEach(extension -> {
+                    extension.reloadConfig();
+                    extension.onExtensionDisable();
+                    extension.onExtensionEnable();
+                    commandSender.sendMessage(Language.GENERAL_EXTENSION_CONFIG_RELOADED.toString().replace("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
+                });
+                return true;
             }
         } else {
             Player player = (Player) commandSender;

@@ -1,6 +1,6 @@
 package me.dreamdevs.randomlootchest.commands.subcommands;
 
-import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
 import me.dreamdevs.randomlootchest.objects.WandItem;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ public class WandSubCommand implements ArgumentCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
         if(!(commandSender instanceof Player)) {
-            commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("not-player"));
+            commandSender.sendMessage(Language.GENERAL_NO_PERMISSION.toString());
             return false;
         }
         Player player = (Player) commandSender;

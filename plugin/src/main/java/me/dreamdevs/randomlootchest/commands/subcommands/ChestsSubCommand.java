@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
 import me.dreamdevs.randomlootchest.menus.ChestMenu;
 import org.bukkit.command.CommandSender;
@@ -14,12 +15,12 @@ public class ChestsSubCommand implements ArgumentCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
         if(!(commandSender instanceof Player)) {
-            commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessages().get("not-player"));
+            commandSender.sendMessage(Language.GENERAL_NOT_PLAYER.toString());
             return false;
         }
         Player player = (Player) commandSender;
         if(RandomLootChestMain.getInstance().getChestsManager().getChests().isEmpty()) {
-            player.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-chest"));
+            player.sendMessage(Language.GENERAL_NO_CHEST.toString());
             return false;
         }
 

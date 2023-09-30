@@ -1,4 +1,4 @@
-package me.dreamdevs.randomlootchest.utils;
+package me.dreamdevs.randomlootchest.api.utils;
 
 import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.ChatColor;

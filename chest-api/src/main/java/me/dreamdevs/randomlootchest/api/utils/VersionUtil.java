@@ -1,4 +1,4 @@
-package me.dreamdevs.randomlootchest.utils;
+package me.dreamdevs.randomlootchest.api.utils;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;

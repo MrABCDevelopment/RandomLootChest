@@ -1,65 +1,98 @@
 package me.dreamdevs.randomlootchest.utils;
 
-import lombok.NonNull;
 import lombok.experimental.UtilityClass;
+import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
+import me.dreamdevs.randomlootchest.api.utils.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @UtilityClass
 public class ItemUtil {
 
     private final String parseError = "&cCannot parse item with type: %MATERIAL%";
 
-    public static ItemStack parsedBasicItem(@NonNull String material, int amount) {
+    public static ItemStack parsedBasicItem(String material, int amount) {
         try {
             return new ItemStack(Objects.requireNonNull(Material.getMaterial(material.toUpperCase())), amount);
         } catch (NullPointerException e) {
-            Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", material));
+            Util.sendPluginMessage(parseError.replace("%MATERIAL%", material));
             return null;
         }
     }
 
-    public static ItemStack parsedItem(String material, int amount, String displayName, List<String> lore, Map<String, Integer> enchantments, boolean unbreakable, boolean glowing) {
+    public static ItemStack parsedItem(@NotNull String material, int amount, String displayName, List<String> lore, Map<String, Integer> enchantments, boolean unbreakable, boolean glowing) {
         try {
-            ItemStack itemStack = parsedBasicItem(material, amount);
+            Optional<ItemStack> optionalItemStack = Optional.ofNullable(parsedBasicItem(material, amount));
+
+            if (optionalItemStack.isEmpty()) {
+                Util.sendPluginMessage(parseError.replace("%MATERIAL%", material));
+                return null;
+            }
+
+            ItemStack itemStack = optionalItemStack.get();
             ItemMeta itemMeta = itemStack.getItemMeta();
-            if(displayName != null)
-                itemMeta.setDisplayName(ColourUtil.colorize(displayName));
-            if(lore != null)
-                itemMeta.setLore(ColourUtil.colouredLore(lore));
-            itemMeta.setUnbreakable(unbreakable);
-            if(glowing) {
-                itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+            if (itemMeta == null) {
+                itemMeta = Bukkit.getItemFactory().getItemMeta(itemStack.getType());
             }
 
-            if (material.equalsIgnoreCase("ENCHANTED_BOOK")) {
-                EnchantmentStorageMeta storageMeta = (EnchantmentStorageMeta) itemMeta;
-                enchantments.forEach((key, value) -> storageMeta.addStoredEnchant(Enchantment.getByName(key), value, true));
-                itemStack.setItemMeta(storageMeta);
-            }
+            if (itemMeta != null) {
+                if (displayName != null) {
+                    setItemName(itemStack, displayName);
+                }
 
-            if (!material.equalsIgnoreCase("ENCHANTED_BOOK")) {
-                enchantments.forEach((key, value) -> itemStack.addUnsafeEnchantment(Enchantment.getByName(key), value));
-                itemStack.setItemMeta(itemMeta);
+                if (lore != null) {
+                    itemMeta.setLore(ColourUtil.colouredLore(lore));
+                }
+
+                itemMeta.setUnbreakable(unbreakable);
+                if (glowing) {
+                    itemMeta.addEnchant(Enchantment.LUCK, 1, true);
+                    itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                }
+
+                if (material.equalsIgnoreCase("ENCHANTED_BOOK")) {
+                    EnchantmentStorageMeta storageMeta = (EnchantmentStorageMeta) itemMeta;
+                    enchantments.forEach((key, value) -> storageMeta.addStoredEnchant(Enchantment.getByName(key), value, true));
+                    itemStack.setItemMeta(storageMeta);
+                }
+
+                if (!material.equalsIgnoreCase("ENCHANTED_BOOK")) {
+                    enchantments.forEach((key, value) -> itemStack.addUnsafeEnchantment(Enchantment.getByName(key), value));
+                    itemStack.setItemMeta(itemMeta);
+                }
             }
 
             return itemStack;
         } catch (Exception e) {
-            Util.sendPluginMessage(parseError.replaceAll("%MATERIAL%", material));
+            Util.sendPluginMessage(parseError.replace("%MATERIAL%", material));
             return null;
         }
+    }
+
+    public static ItemStack setItemName(@NotNull ItemStack itemStack, String displayName) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) {
+            itemMeta = Bukkit.getItemFactory().getItemMeta(itemStack.getType());
+        }
+        if (displayName != null && itemMeta != null) {
+            itemMeta.setDisplayName(ColourUtil.colorize(displayName));
+        }
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
     }
 
     public static ItemStack getPotion(String material, int amount, String displayName, List<String> lore, Map<String, Integer> enchantments, boolean unbreakable, boolean glowing, String potionType, boolean extended, boolean upgraded) {

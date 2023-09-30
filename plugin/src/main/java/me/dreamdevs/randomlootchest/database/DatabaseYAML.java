@@ -3,7 +3,7 @@ package me.dreamdevs.randomlootchest.database;
 import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
-import me.dreamdevs.randomlootchest.utils.Util;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class DatabaseYAML implements IDatabase {
 
@@ -38,16 +39,16 @@ public class DatabaseYAML implements IDatabase {
         if(Objects.requireNonNull(files).length == 0) {
             return;
         }
-        for(File file : files) {
-            YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-            UUID uuid = UUID.fromString(Objects.requireNonNull(config.getString("UUID")));
+
+        Stream.of(files).map(YamlConfiguration::loadConfiguration).forEach(yamlConfiguration -> {
+            UUID uuid = UUID.fromString(Objects.requireNonNull(yamlConfiguration.getString("UUID")));
             PlayerData playerData = new PlayerData(Bukkit.getOfflinePlayer(uuid));
-            for (String s : config.getStringList("ActiveCooldown")) {
+            for (String s : yamlConfiguration.getStringList("ActiveCooldown")) {
                 String[] strings = s.split(";");
                 playerData.applyCooldown(Util.getStringLocation(strings[0]), Integer.parseInt(strings[1]));
             }
             RandomLootChestMain.getInstance().getCooldownManager().getPlayers().add(playerData);
-        }
+        });
     }
 
     @Override

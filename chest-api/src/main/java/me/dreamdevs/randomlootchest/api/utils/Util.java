@@ -1,7 +1,8 @@
-package me.dreamdevs.randomlootchest.utils;
+package me.dreamdevs.randomlootchest.api.utils;
 
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;

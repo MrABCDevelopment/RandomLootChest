@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.utils;
 
 import lombok.experimental.UtilityClass;
+import me.dreamdevs.randomlootchest.api.Config;
 
 @UtilityClass
 public final class TimeUtil {
@@ -40,9 +41,15 @@ public final class TimeUtil {
         long sec = time % 60;
         long minutes = time % 3600 / 60;
         long hours = time % 86400 / 3600;
-        if(hours > 0) {
+        if (hours > 0) {
+            if (Config.USE_ROUNDED_COOLDOWN_FORMAT.toBoolean()) {
+                return hours+"h";
+            }
             return hours + "h " + minutes + "m " + sec + "s";
         } else if(hours == 0 && minutes > 0) {
+            if (Config.USE_ROUNDED_COOLDOWN_FORMAT.toBoolean()) {
+                return minutes+"m";
+            }
             return minutes + "m " + sec + "s";
         } else {
             return sec+"s";

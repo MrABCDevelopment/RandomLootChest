@@ -1,9 +1,10 @@
 package me.dreamdevs.randomlootchest.database;
 
+import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
-import me.dreamdevs.randomlootchest.utils.Util;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -110,11 +111,13 @@ public class DatabaseSQLite implements IDatabase {
     }
 
     private void createTable() {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS " +
-                "data(user TEXT PRIMARY KEY, activeCooldown varchar(400));")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `"
+                + Config.DATABASE_NAME.toString()+"`.`data` (`user` VARCHAR(16) NULL DEFAULT NULL , `activeCooldown` VARCHAR(400) NULL DEFAULT NULL , PRIMARY KEY (`user`))")) {
             preparedStatement.execute();
-        } catch (SQLException e) {
             Util.sendPluginMessage("&aCreated table for users and their active cooldowns!");
+        } catch (SQLException e) {
+            Util.sendPluginMessage("&cCould not created table for users!");
+            e.printStackTrace();
         }
     }
 

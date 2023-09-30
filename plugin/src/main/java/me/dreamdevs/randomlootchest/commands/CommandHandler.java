@@ -2,9 +2,10 @@ package me.dreamdevs.randomlootchest.commands;
 
 import lombok.Getter;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
 import me.dreamdevs.randomlootchest.commands.subcommands.*;
-import me.dreamdevs.randomlootchest.utils.ColourUtil;
+import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,6 +27,7 @@ public class CommandHandler implements TabExecutor {
         registerCommand("chests", ChestsSubCommand.class);
         registerCommand("extensions", ExtensionsSubCommand.class);
         registerCommand("locations", LocationSubCommand.class);
+        registerCommand("items", ItemsSubCommand.class);
         Objects.requireNonNull(plugin.getCommand("randomlootchest")).setExecutor(this);
         Objects.requireNonNull(plugin.getCommand("randomlootchest")).setTabCompleter(this);
     }
@@ -36,25 +38,26 @@ public class CommandHandler implements TabExecutor {
             if(strings.length >= 1) {
                 if(arguments.containsKey(strings[0])) {
                     Class<? extends ArgumentCommand> argumentCommand = arguments.get(strings[0]).asSubclass(ArgumentCommand.class);
-                    ArgumentCommand argument = argumentCommand.newInstance();
+                    ArgumentCommand argument = argumentCommand.getConstructor().newInstance();
                     if(commandSender.hasPermission(argument.getPermission())) {
                         if(strings.length > 1 && argument.getArguments().isEmpty()) {
-                            commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-arguments"));
+                            commandSender.sendMessage(Language.GENERAL_NO_ARGUMENTS.toString());
                             return true;
                         }
                         argument.execute(commandSender, strings);
+                        return true;
                     } else {
-                        commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-permission"));
+                        commandSender.sendMessage(Language.GENERAL_NO_PERMISSION.toString());
+                        return true;
                     }
-                    return true;
                 } else {
-                    commandSender.sendMessage(RandomLootChestMain.getInstance().getMessagesManager().getMessage("no-argument"));
+                    commandSender.sendMessage(Language.GENERAL_NO_ARGUMENT.toString());
                     return true;
                 }
             } else {
                 commandSender.sendMessage(ColourUtil.colorize("&aHelp for RandomLootChest:"));
                 for(Class<? extends ArgumentCommand> argumentCommand : arguments.values()) {
-                    commandSender.sendMessage(ColourUtil.colorize(argumentCommand.newInstance().getHelpText()));
+                    commandSender.sendMessage(ColourUtil.colorize(argumentCommand.getConstructor().newInstance().getHelpText()));
                 }
                 return true;
             }
@@ -79,7 +82,7 @@ public class CommandHandler implements TabExecutor {
     private List<String> getArgumentsForSubcommand(@NotNull String subcommand) {
         List<String> listArguments = new ArrayList<>();
         try {
-            listArguments = arguments.get(subcommand).newInstance().getArguments();
+            listArguments = arguments.get(subcommand).getConstructor().newInstance().getArguments();
             Collections.sort(listArguments);
         } catch (Exception e) {
 
@@ -90,8 +93,8 @@ public class CommandHandler implements TabExecutor {
     public void registerCommand(String command, Class<? extends ArgumentCommand> clazz) {
         arguments.put(command, clazz);
         try {
-            Bukkit.getPluginManager().addPermission(new Permission(clazz.newInstance().getPermission()));
-        } catch (InstantiationException | IllegalAccessException e) {
+            Bukkit.getPluginManager().addPermission(new Permission(clazz.getConstructor().newInstance().getPermission()));
+        } catch (Exception e) {
 
         }
     }
