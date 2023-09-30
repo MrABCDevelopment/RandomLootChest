@@ -117,9 +117,7 @@ public abstract class Extension {
                     try {
                         yamlConfiguration.load(inputStreamReader);
                         return yamlConfiguration;
-                    } catch (IOException | InvalidConfigurationException e) {
-
-                    }
+                    } catch (IOException | InvalidConfigurationException e) {}
                     return null;
                 }).orElse(null);
     }

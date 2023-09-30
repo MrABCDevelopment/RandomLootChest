@@ -38,21 +38,29 @@ public final class TimeUtil {
     }
 
     public static String formattedTime(long time) {
-        long sec = time % 60;
-        long minutes = time % 3600 / 60;
+        long days = time / 86400;
         long hours = time % 86400 / 3600;
+        long minutes = time % 3600 / 60;
+        long seconds = time % 60;
+
+        if (days > 0) {
+            if (Config.USE_ROUNDED_COOLDOWN_FORMAT.toBoolean()) {
+                return days+"d";
+            }
+            return days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+        }
         if (hours > 0) {
             if (Config.USE_ROUNDED_COOLDOWN_FORMAT.toBoolean()) {
                 return hours+"h";
             }
-            return hours + "h " + minutes + "m " + sec + "s";
+            return hours + "h " + minutes + "m " + seconds + "s";
         } else if(hours == 0 && minutes > 0) {
             if (Config.USE_ROUNDED_COOLDOWN_FORMAT.toBoolean()) {
                 return minutes+"m";
             }
-            return minutes + "m " + sec + "s";
+            return minutes + "m " + seconds + "s";
         } else {
-            return sec+"s";
+            return seconds+"s";
         }
     }
 

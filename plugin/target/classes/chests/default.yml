@@ -13,10 +13,6 @@ Particles:
   Type: HEART
   Amount: 1
 
-# PATTERN: ID
-SpawnMythicMobs:
-  - SkeletalKnight
-
 # Here you put items from items.yml
 Contents-Items:
   - example
@@ -26,6 +22,12 @@ Contents-Items:
 # PATTERN: TYPE:ITEM_ID:CHANCE
 # Example:
 # - AXE:SILVER_AXE:0.4
+
+# Same case in MythicMobs items
+#Contents-MythicMobs:
+# PATTERN: ITEM_ID:CHANCE
+# Example:
+# ID:0.5
 
 # Put all your items into this section!
 Contents:

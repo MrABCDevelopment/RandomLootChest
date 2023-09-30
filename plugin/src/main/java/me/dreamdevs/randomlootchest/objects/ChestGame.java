@@ -102,4 +102,5 @@ public class ChestGame implements IChestGame {
     public void setParticlesAmount(int amount) {
         this.particleAmount = amount;
     }
+
 }
