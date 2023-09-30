@@ -41,6 +41,8 @@ public interface IChestGame {
 
     void setUseParticles(boolean useParticles);
 
+    void setParticlesAmount(int amount);
+
     void setExp(double exp);
 
 }

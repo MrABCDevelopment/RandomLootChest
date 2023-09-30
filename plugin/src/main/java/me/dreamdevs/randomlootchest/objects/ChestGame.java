@@ -97,4 +97,9 @@ public class ChestGame implements IChestGame {
     public void setUseParticles(boolean useParticles) {
         this.particleUse = useParticles;
     }
+
+    @Override
+    public void setParticlesAmount(int amount) {
+        this.particleAmount = amount;
+    }
 }
