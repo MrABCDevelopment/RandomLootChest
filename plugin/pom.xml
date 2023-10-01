@@ -5,7 +5,7 @@
     <parent>
         <artifactId>RandomLootChest</artifactId>
         <groupId>me.DreamDevs.GitHub</groupId>
-        <version>v1.8.2</version>
+        <version>v1.8.2.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>me.DreamDevs.GitHub</groupId>
             <artifactId>chest-api</artifactId>
-            <version>v1.8.2</version>
+            <version>v1.8.2.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

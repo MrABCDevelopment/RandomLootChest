@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
+import me.dreamdevs.randomlootchest.api.events.ChestOpenEvent;
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
 import me.dreamdevs.randomlootchest.hooks.MMOItemsHook;
@@ -191,6 +192,9 @@ public class ChestsManager {
                 counter++;
             }
         }
+
+        ChestOpenEvent chestOpenEvent = new ChestOpenEvent(player, chestGame);
+        Bukkit.getPluginManager().callEvent(chestOpenEvent);
 
         player.openInventory(inventory);
         player.setExp((float) (player.getExp()+chestGame.getExp()));
