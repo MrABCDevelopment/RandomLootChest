@@ -3,6 +3,8 @@ package me.dreamdevs.randomlootchest.api;
 import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.util.Objects;
+
 public enum Language {
 
 	// Chest messages
@@ -53,8 +55,8 @@ public enum Language {
 
 	MENU_ITEMS_TITLE("Menu.Items.Title","Items Menu");
 
-	private String path;
-	private Object def;
+	private final String path;
+	private final Object def;
 	private static YamlConfiguration CONFIG;
 
 	/**
@@ -85,15 +87,7 @@ public enum Language {
 
 	@Override
 	public String toString() {
-		return ColourUtil.colorize(CONFIG.getString(getPath()));
-	}
-
-	public boolean toBoolean() {
-		return CONFIG.getBoolean(getPath());
-	}
-
-	public int toInt() {
-		return CONFIG.getInt(getPath());
+		return ColourUtil.colorize(Objects.requireNonNull(CONFIG.getString(getPath())));
 	}
 
 	/**

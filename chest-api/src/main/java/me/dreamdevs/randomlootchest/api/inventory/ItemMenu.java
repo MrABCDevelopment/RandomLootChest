@@ -120,8 +120,7 @@ public class ItemMenu {
 		return slot >= 0 && slot <= size.size ? items[slot] : null;
 	}
 
-	public void onInventoryClick(InventoryClickEvent event)
-	{
+	public void onInventoryClick(InventoryClickEvent event) {
 		if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT)
 		{
 			int slot = event.getRawSlot();
@@ -184,10 +183,8 @@ public class ItemMenu {
 	/**
 	 * Possible sizes of an {@link MenuItem}.
 	 */
-	public enum Size
-	{
-		ONE_LINE(9), TWO_LINE(18), THREE_LINE(27), FOUR_LINE(36), FIVE_LINE(45), SIX_LINE(
-			54);
+	public enum Size {
+		ONE_LINE(9), TWO_LINE(18), THREE_LINE(27), FOUR_LINE(36), FIVE_LINE(45), SIX_LINE(54);
 
 		private final int size;
 

@@ -43,7 +43,6 @@ public class LocationManager {
             arrayList.add(map.getKey()+";"+map.getValue());
         }
 
-
         locationsConfig.set("locations", arrayList);
         try {
             locationsConfig.save(FILENAME);

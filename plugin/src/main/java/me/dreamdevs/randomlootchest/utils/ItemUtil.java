@@ -51,7 +51,7 @@ public class ItemUtil {
 
             if (itemMeta != null) {
                 if (displayName != null) {
-                    setItemName(itemStack, displayName);
+                    itemMeta.setDisplayName(ColourUtil.colorize(displayName));
                 }
 
                 if (lore != null) {
@@ -81,18 +81,6 @@ public class ItemUtil {
             Util.sendPluginMessage(parseError.replace("%MATERIAL%", material));
             return null;
         }
-    }
-
-    public static ItemStack setItemName(@NotNull ItemStack itemStack, String displayName) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta == null) {
-            itemMeta = Bukkit.getItemFactory().getItemMeta(itemStack.getType());
-        }
-        if (displayName != null && itemMeta != null) {
-            itemMeta.setDisplayName(ColourUtil.colorize(displayName));
-        }
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
     }
 
     public static ItemStack getPotion(String material, int amount, String displayName, List<String> lore, Map<String, Integer> enchantments, boolean unbreakable, boolean glowing, String potionType, boolean extended, boolean upgraded) {
