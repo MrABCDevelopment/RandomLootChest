@@ -15,10 +15,10 @@ import java.util.List;
 public class ReloadSubCommand implements ArgumentCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        if(!(commandSender instanceof Player)) {
+        if(!(commandSender instanceof Player player)) {
             if (args.length > 2) {
                 commandSender.sendMessage(Language.GENERAL_NO_ARGUMENTS.toString());
-                return true;
+                return false;
             }
 
             if (args.length == 1) {
@@ -70,7 +70,6 @@ public class ReloadSubCommand implements ArgumentCommand {
                 return true;
             }
         } else {
-            Player player = (Player) commandSender;
             new ReloadMenu().open(player);
         }
         return true;

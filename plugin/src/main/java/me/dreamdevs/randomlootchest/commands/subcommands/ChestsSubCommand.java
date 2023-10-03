@@ -14,11 +14,10 @@ public class ChestsSubCommand implements ArgumentCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        if(!(commandSender instanceof Player)) {
+        if(!(commandSender instanceof Player player)) {
             commandSender.sendMessage(Language.GENERAL_NOT_PLAYER.toString());
             return false;
         }
-        Player player = (Player) commandSender;
         if(RandomLootChestMain.getInstance().getChestsManager().getChests().isEmpty()) {
             player.sendMessage(Language.GENERAL_NO_CHEST.toString());
             return false;

@@ -61,6 +61,18 @@ public class RandomLootChestMain extends JavaPlugin {
             this.saveResource("locations.yml", true);
         }
 
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderAPIHook().register();
+        }
+
+        if (getServer().getPluginManager().getPlugin("MMOItems") != null) {
+            new MMOItemsHook();
+        }
+
+        if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
+            new MythicMobsHook();
+        }
+
         this.itemsManager = new ItemsManager();
 
         this.cooldownManager = new CooldownManager();
@@ -87,18 +99,6 @@ public class RandomLootChestMain extends JavaPlugin {
         if (Config.USE_COMBAT_BLOCKER.toBoolean()) {
             getServer().getPluginManager().registerEvents(new CombatListener(), this);
             new CombatTask();
-        }
-
-        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new PlaceholderAPIHook().register();
-        }
-
-        if (getServer().getPluginManager().getPlugin("MMOItems") != null) {
-            new MMOItemsHook();
-        }
-
-        if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
-            new MythicMobsHook();
         }
 
         new LocationTask();

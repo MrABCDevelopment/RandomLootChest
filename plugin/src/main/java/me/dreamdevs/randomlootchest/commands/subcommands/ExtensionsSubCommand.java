@@ -15,7 +15,7 @@ public class ExtensionsSubCommand implements ArgumentCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        if(!(commandSender instanceof Player)) {
+        if(!(commandSender instanceof Player player)) {
             if(args[1].equalsIgnoreCase("all")) {
                 RandomLootChestMain.getInstance().getExtensionManager().getEnabledExtensions().forEach(extension -> {
                     extension.reloadConfig();
@@ -36,7 +36,6 @@ public class ExtensionsSubCommand implements ArgumentCommand {
             commandSender.sendMessage(Language.GENERAL_EXTENSION_CONFIG_RELOADED.toString().replace("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
             return true;
         }
-        Player player = (Player) commandSender;
         new ExtensionMenu().open(player);
         return true;
     }
