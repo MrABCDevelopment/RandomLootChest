@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -21,7 +22,7 @@ public class LocationManager {
     public LocationManager() {
         locations = new HashMap<>();
         locationsConfig = YamlConfiguration.loadConfiguration(RandomLootChestMain.getInstance().getLocationsFile());
-        for(String string : locationsConfig.getStringList("locations")) {
+        for (String string : locationsConfig.getStringList("locations")) {
             String[] splits = string.split(";");
             locations.put(splits[0], splits[1]);
         }
@@ -29,16 +30,18 @@ public class LocationManager {
 
     public void addLocation(@NotNull String type, @NotNull Location location) {
         locations.put(Util.getLocationString(location), type);
+        save();
     }
 
     public void removeLocation(@NotNull Location location) {
         locations.remove(Util.getLocationString(location));
+        save();
     }
 
     public void save() {
-        if(getLocations().isEmpty())
+        if (getLocations().isEmpty())
             return;
-        ArrayList<String> arrayList = new ArrayList<>();
+        List<String> arrayList = new ArrayList<>();
         for(Map.Entry<String, String> map : getLocations().entrySet()) {
             arrayList.add(map.getKey()+";"+map.getValue());
         }

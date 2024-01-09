@@ -5,12 +5,12 @@
     <parent>
         <artifactId>RandomLootChest</artifactId>
         <groupId>me.DreamDevs.GitHub</groupId>
-        <version>v1.8.2.2</version>
+        <version>v1.8.3.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>plugin</artifactId>
-    <version>v1.8.2.2</version>
+    <version>v1.8.3.0</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
@@ -67,9 +67,13 @@
             <artifactId>Mythic-Dist</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.TheSilentPro</groupId>
+            <artifactId>HeadDB</artifactId>
+        </dependency>
+        <dependency>
             <groupId>me.DreamDevs.GitHub</groupId>
             <artifactId>chest-api</artifactId>
-            <version>v1.8.2.2</version>
+            <version>v1.8.3.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

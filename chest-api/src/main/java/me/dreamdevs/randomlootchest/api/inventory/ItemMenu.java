@@ -121,41 +121,33 @@ public class ItemMenu {
 	}
 
 	public void onInventoryClick(InventoryClickEvent event) {
-		if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT)
-		{
+		if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT) {
 			int slot = event.getRawSlot();
-			if (slot >= 0 && slot < size.getSize() && items[slot] != null)
-			{
+			if (slot >= 0 && slot < size.getSize() && items[slot] != null) {
 				Player player = (Player) event.getWhoClicked();
 				ItemClickEvent itemClickEvent = new ItemClickEvent(player,event.getCurrentItem(),event.getClick());
 				items[slot].onItemClick(itemClickEvent);
 				if (itemClickEvent.willUpdate()) {
 					update(player);
 				}
-				else
-				{
+				else {
 					player.updateInventory();
-					if (itemClickEvent.willClose()
-							|| itemClickEvent.willGoBack()) {
+					if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
 						final String playerName = player.getName();
 						Bukkit.getScheduler().scheduleSyncDelayedTask(
-								RandomLootChestApi.plugin, (Runnable) () -> {
-									Player p = Bukkit
-											.getPlayerExact(playerName);
-									if (p != null)
-									{
+								RandomLootChestApi.plugin, () -> {
+									Player p = Bukkit.getPlayerExact(playerName);
+									if (p != null) {
 										p.closeInventory();
 									}
 								}, 1);
 					}
-					if (itemClickEvent.willGoBack() && hasParent())
-					{
+					if (itemClickEvent.willGoBack() && hasParent()) {
 						final String playerName = player.getName();
 						Bukkit.getScheduler().scheduleSyncDelayedTask(
-								RandomLootChestApi.plugin, (Runnable) () -> {
+								RandomLootChestApi.plugin, () -> {
 									Player p = Bukkit.getPlayerExact(playerName);
-									if (p != null)
-									{
+									if (p != null) {
 										parent.open(p);
 									}
 								}, 3);
@@ -193,30 +185,18 @@ public class ItemMenu {
 			this.size = size;
 		}
 
-		public static Size fit(int slots)
-		{
-			if (slots < 10)
-			{
+		public static Size fit(int slots) {
+			if (slots < 10) {
 				return ONE_LINE;
-			}
-			else if (slots < 19)
-			{
+			} else if (slots < 19) {
 				return TWO_LINE;
-			}
-			else if (slots < 28)
-			{
+			} else if (slots < 28) {
 				return THREE_LINE;
-			}
-			else if (slots < 37)
-			{
+			} else if (slots < 37) {
 				return FOUR_LINE;
-			}
-			else if (slots < 46)
-			{
+			} else if (slots < 46) {
 				return FIVE_LINE;
-			}
-			else
-			{
+			} else {
 				return SIX_LINE;
 			}
 		}

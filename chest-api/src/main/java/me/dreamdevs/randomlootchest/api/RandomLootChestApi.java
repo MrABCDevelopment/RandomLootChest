@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class RandomLootChestApi {
+public final class RandomLootChestApi {
 
 	public static JavaPlugin plugin;
 

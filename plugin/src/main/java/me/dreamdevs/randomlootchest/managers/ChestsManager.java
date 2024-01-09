@@ -22,7 +22,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import tsp.headdb.core.api.HeadAPI;
+import tsp.headdb.implementation.head.Head;
 
 import java.io.File;
 import java.util.*;
@@ -96,7 +99,7 @@ public class ChestsManager {
                         lore = config.getStringList(CONTENTS+"."+content+".DisplayLore");
 
                     Map<String, Integer> enchantments = new HashMap<>();
-                    if(config.get(CONTENTS+"."+content+".Enchantments") != null) {
+                    if (config.get(CONTENTS+"."+content+".Enchantments") != null) {
                         ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS+"."+content+".Enchantments");
                         for(String key : enchantmentSection.getKeys(false))
                             enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
@@ -106,10 +109,23 @@ public class ChestsManager {
                     boolean glowing = config.getBoolean(CONTENTS+"."+content+".Glowing", false);
                     itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
 
-                    if(material.contains("potion".toUpperCase())) {
+                    if (material.contains("potion".toUpperCase())) {
                         itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
                                     config.getString(CONTENTS+"."+content+".PotionEffect", "AWKWARD"),
                                     config.getBoolean(CONTENTS+"."+content+".Extended", false), config.getBoolean(CONTENTS+"."+content+".Upgraded", false));
+                    }
+
+                    if (material.contains("PLAYER_HEAD")) {
+                        String headName = config.getString(CONTENTS+"."+content+".HeadName");
+                        Optional<Head> headOptional = HeadAPI.getHeadByExactName(headName);
+                        if (headOptional.isEmpty()) {
+                            // DO NOTHING
+                            continue;
+                        }
+                        Head head = headOptional.get();
+                        ItemMeta copiedMeta = itemStack.getItemMeta();
+                        itemStack = headOptional.get().getItem(head.getUniqueId());
+                        itemStack.setItemMeta(copiedMeta);
                     }
 
                     RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));

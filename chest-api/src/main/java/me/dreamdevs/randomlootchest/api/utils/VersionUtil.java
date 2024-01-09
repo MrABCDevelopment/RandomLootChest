@@ -19,7 +19,7 @@ public class VersionUtil {
                 Util.sendPluginMessage("&aSome features from newer versions doesn't work on this version.");
                 Util.sendPluginMessage("&aBut everything works fine! ;D");
             }
-            case "v1_16_R1", "v1_16_R2", "v1_16_R3", "v1_17_R1", "v1_18_R1", "v1_18_R2", "v1_19_R1", "v1_19_R2", "v1_19_R3", "v1_20_R1" ->
+            case "v1_16_R1", "v1_16_R2", "v1_16_R3", "v1_17_R1", "v1_18_R1", "v1_18_R2", "v1_19_R1", "v1_19_R2", "v1_19_R3", "v1_20_R1", "v1_20_R2" ->
                     Util.sendPluginMessage("&aThis version enabled all features!");
             default -> {
                 Util.sendPluginMessage("&cUnknown and unsupported minecraft version, but");

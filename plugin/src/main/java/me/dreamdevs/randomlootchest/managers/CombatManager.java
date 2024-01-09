@@ -23,8 +23,8 @@ public class CombatManager {
         Bukkit.getPluginManager().callEvent(new CombatStartPlayerEvent(player.getUniqueId()));
     }
 
-    public void removeCombat(Player player) {
-        combatTimers.remove(player.getUniqueId());
+    public void removeCombat(UUID uuid) {
+        combatTimers.remove(uuid);
     }
 
     public boolean isInCombat(Player player) {

@@ -35,9 +35,9 @@ public class ExtensionManager {
 
     public void loadExtensions() {
         File[] files = directory.listFiles((dir, name) -> name.endsWith(".jar"));
-        if(Objects.requireNonNull(files).length == 0)
+        if (Objects.requireNonNull(files).length == 0)
             return;
-        for(File file : files) {
+        for (File file : files) {
             try(ZipFile zipFile = new ZipFile(file)) {
                 String mainClass = null;
                 InputStream is = zipFile.getInputStream(zipFile.getEntry("extension.yml"));
@@ -117,7 +117,10 @@ public class ExtensionManager {
     }
 
     public Extension getExtensionByName(String extensionName) {
-        return extensions.stream().filter(extension -> extension.getDescription().getExtensionName().equalsIgnoreCase(extensionName)).findFirst().orElse(null);
+        return extensions.stream()
+                .filter(extension -> extension.getDescription().getExtensionName().equalsIgnoreCase(extensionName))
+                .findFirst()
+                .orElse(null);
     }
 
     public void registerListener(Listener listener) {

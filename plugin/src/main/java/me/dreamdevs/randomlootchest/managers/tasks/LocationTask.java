@@ -32,8 +32,9 @@ public class LocationTask extends BukkitRunnable {
                 continue;
             }
 
-            location.getWorld().spawnParticle(chestGame.getParticle(), location.add(0.5,0.7,0.5), chestGame.getParticleAmount());
-
+            if (location.getChunk().isLoaded()) {
+                location.getWorld().spawnParticle(chestGame.getParticle(), location.add(0.5, 0.7, 0.5), chestGame.getParticleAmount());
+            }
         }
     }
 }

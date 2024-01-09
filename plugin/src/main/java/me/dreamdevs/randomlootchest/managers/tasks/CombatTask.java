@@ -27,12 +27,17 @@ public class CombatTask extends BukkitRunnable {
         for(Map.Entry<UUID, AtomicInteger> map : RandomLootChestMain.getInstance().getCombatManager().getCombatTimers().entrySet()) {
             int value = RandomLootChestMain.getInstance().getCombatManager().getCombatTimers().get(map.getKey()).decrementAndGet();
             Player player = Bukkit.getPlayer(map.getKey());
-            assert player != null;
+
+            if (player == null) {
+                RandomLootChestMain.getInstance().getCombatManager().removeCombat(map.getKey());
+                continue;
+            }
+
             if (player.isOnline()) {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Language.GENERAL_COMBAT_MESSAGE.toString().replace("%TIME%", TimeUtil.formattedTime(value))));
             }
             if (value <= 0) {
-                RandomLootChestMain.getInstance().getCombatManager().removeCombat(player);
+                RandomLootChestMain.getInstance().getCombatManager().removeCombat(player.getUniqueId());
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Language.GENERAL_COMBAT_EXPIRED.toString()));
                 CombatEndPlayerEvent event = new CombatEndPlayerEvent(player.getUniqueId());
                 Bukkit.getPluginManager().callEvent(event);
