@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.managers.tasks;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.events.CombatEndPlayerEvent;
 import me.dreamdevs.randomlootchest.utils.TimeUtil;
@@ -33,12 +34,14 @@ public class CombatTask extends BukkitRunnable {
                 continue;
             }
 
-            if (player.isOnline()) {
+            if (player.isOnline() && Config.USE_COMBAT_ACTION_BAR.toBoolean()) {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Language.GENERAL_COMBAT_MESSAGE.toString().replace("%TIME%", TimeUtil.formattedTime(value))));
             }
             if (value <= 0) {
                 RandomLootChestMain.getInstance().getCombatManager().removeCombat(player.getUniqueId());
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Language.GENERAL_COMBAT_EXPIRED.toString()));
+                if (Config.USE_COMBAT_ACTION_BAR.toBoolean()) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Language.GENERAL_COMBAT_EXPIRED.toString()));
+                }
                 CombatEndPlayerEvent event = new CombatEndPlayerEvent(player.getUniqueId());
                 Bukkit.getPluginManager().callEvent(event);
             }

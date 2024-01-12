@@ -15,6 +15,7 @@ public enum Config {
 
 	// Combat settings
 	USE_COMBAT_BLOCKER("GeneralSettings.Use-Combat-Blocker", true),
+	USE_COMBAT_ACTION_BAR("GeneralSettings.Use-Combat-Action-Bar", true),
 	COMBAT_BLOCKER_TIMER("GeneralSettings.Combat-Blocker-Timer", 20),
 
 	// Database section

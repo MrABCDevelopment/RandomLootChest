@@ -16,7 +16,7 @@ public class BookItemMenu {
 
 	private final Map<Integer, BookPage> pages;
 	private final List<NumerableMenuItem> realItems;
-	private @Getter MenuItem[] optionsItem;
+	private final @Getter MenuItem[] optionsItem;
 	private final BookItemMenu.BookPage mainPage;
 
 	public BookItemMenu(String title, List<MenuItem> icons, MenuItem[] optionsItem, boolean showPage, boolean fitSize, NextMenuItem nextButton, ReturnMenuItem backButton) {
@@ -134,6 +134,8 @@ public class BookItemMenu {
 	}
 
 	private static class NumerableMenuItem extends MenuItem {
+
+		@Getter
 		private final int page;
 		private final MenuItem original;
 
@@ -141,10 +143,6 @@ public class BookItemMenu {
 			super(item.getDisplayName(), item.getIcon(), item.getLore().toArray(String[]::new));
 			this.page = page;
 			this.original = item;
-		}
-
-		public int getPage() {
-			return this.page;
 		}
 
 		@Override

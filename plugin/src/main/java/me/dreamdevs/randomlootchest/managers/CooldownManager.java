@@ -25,6 +25,7 @@ public class CooldownManager {
     public CooldownManager() {
         players = new ArrayList<>();
         locations = new ConcurrentHashMap<>();
+
         onSecond();
     }
 
@@ -55,6 +56,7 @@ public class CooldownManager {
 
     private void onSecond() {
         Bukkit.getScheduler().runTaskTimer(RandomLootChestMain.getInstance(), () -> {
+
             if (Config.USE_PERSONAL_COOLDOWN.toBoolean()) {
                 if (players.isEmpty()) {
                     // Nothing else will happen...
@@ -79,8 +81,10 @@ public class CooldownManager {
                 locations.forEach((location, atomicInteger) -> {
                     int value = atomicInteger.decrementAndGet();
                     if (value <= 0) {
-                        location.getBlock().setType(Material.CHEST);
-                        locations.remove(location);
+                        if (location.getChunk().isLoaded()) {
+                            location.getBlock().setType(Material.CHEST);
+                            locations.remove(location);
+                        }
                     }
                 });
             }
