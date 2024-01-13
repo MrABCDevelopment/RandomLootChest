@@ -47,7 +47,7 @@ public class ItemsManager {
                         itemsSection.getInt(string+".Amount",1), itemsSection.getString(string+".DisplayName"),
                         itemsSection.getStringList(string+".DisplayLore"), enchantments,
                         itemsSection.getBoolean(string+".Unbreakable", false), itemsSection.getBoolean(string+".Glowing",false));
-                items.put(string, new RandomItem(itemStack, section.get().getDouble(string+".Chance")));
+                items.put(string, new RandomItem(itemStack, section.get().getDouble(string+".Chance"), section.get().getBoolean(string+".RandomAmount", false)));
             }));
         }
 
