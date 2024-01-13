@@ -76,7 +76,7 @@ public class ChestsManager {
                     .ifPresent(strings -> strings.stream().map(String::new)
                             .forEach(s -> {
                                 String[] split = s.split(":");
-                                RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]));
+                                RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]), config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
                                 chestGame.getItemStacks().add(randomItem);
                             }));
 
@@ -84,7 +84,7 @@ public class ChestsManager {
                     .ifPresent(strings -> strings.stream().map(String::new)
                             .forEach(s -> {
                                 String[] split = s.split(":");
-                                RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]));
+                                RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]), config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
                                 chestGame.getItemStacks().add(randomItem);
                             }));
 
@@ -128,7 +128,8 @@ public class ChestsManager {
                         itemStack.setItemMeta(copiedMeta);
                     }
 
-                    RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"));
+                    RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"), config.getBoolean(CONTENTS+"."+content+".RandomAmount", false));
+
                     chestGame.getItemStacks().add(randomItem);
                 } catch (NullPointerException e) {
                     // Continues and throws an information about wrong configured item.
@@ -185,26 +186,32 @@ public class ChestsManager {
         int counter = 0;
 
         for (IRandomItem randomItem : chestGame.getItemStacks()) {
+            ItemStack itemStack = randomItem.getItemStack();
+
+            if (randomItem.isRandomDropAmount())
+                itemStack.setAmount(Util.randomSlot(64));
+
             if (counter == chestGame.getMaxItems())
                 break;
             if (!Util.chance(randomItem.getChance()))
                 continue;
             int max = chestGame.getMaxItemsInTheSameType();
             if (max > 0) {
+
                 int i = 0;
                 for (int y = 0; y < inventory.getSize(); y++) {
                     if (inventory.getItem(y) != null
                             && inventory.getItem(y).getType()
-                            == randomItem.getItemStack().getType() && i < max) {
+                            == itemStack.getType() && i < max) {
                         i++;
                     }
                 }
                 if (i < max) {
-                    inventory.setItem(Util.randomSlot(27), randomItem.getItemStack());
+                    inventory.setItem(Util.randomSlot(27), itemStack);
                     counter++;
                 }
             } else {
-                inventory.setItem(Util.randomSlot(27), randomItem.getItemStack());
+                inventory.setItem(Util.randomSlot(27), itemStack);
                 counter++;
             }
         }

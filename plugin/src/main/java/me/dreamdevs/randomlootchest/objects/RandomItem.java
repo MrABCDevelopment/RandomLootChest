@@ -12,6 +12,7 @@ public class RandomItem implements IRandomItem {
 
     private ItemStack itemStack;
     private double chance;
+    private boolean randomDropAmount;
 
     @Override
     public ItemStack getItemStack() {
@@ -21,6 +22,11 @@ public class RandomItem implements IRandomItem {
     @Override
     public double getChance() {
         return this.chance;
+    }
+
+    @Override
+    public boolean isRandomDropAmount() {
+        return randomDropAmount;
     }
 
     public String getDisplayName() {

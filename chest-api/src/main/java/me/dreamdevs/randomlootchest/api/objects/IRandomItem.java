@@ -8,4 +8,6 @@ public interface IRandomItem {
 
     double getChance();
 
+    boolean isRandomDropAmount();
+
 }

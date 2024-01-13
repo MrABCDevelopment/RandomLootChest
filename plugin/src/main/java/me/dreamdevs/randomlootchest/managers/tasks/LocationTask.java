@@ -2,12 +2,8 @@ package me.dreamdevs.randomlootchest.managers.tasks;
 
 import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.api.utils.Util;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Map;
 
 public class LocationTask extends BukkitRunnable {
 
@@ -17,24 +13,12 @@ public class LocationTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        for (Map.Entry<String, String> map : RandomLootChestMain.getInstance().getLocationManager().getLocations().entrySet()) {
-            IChestGame chestGame = RandomLootChestMain.getInstance().getChestsManager().getChestGameByRarity(map.getValue());
-            if(chestGame == null || !chestGame.useParticles()) {
-                continue;
-            }
+        RandomLootChestMain.getInstance().getLocationManager().getChestsLocations().forEach(location -> {
+            IChestGame chestGame = RandomLootChestMain.getInstance().getChestsManager().getChestGameByLocation(location);
 
-            Location location = Util.getStringLocation(map.getKey());
-            if (location == null || location.getWorld() == null) {
-                continue;
-            }
-
-            if (location.getBlock().getType() != Material.CHEST) {
-                continue;
-            }
-
-            if (location.getChunk().isLoaded()) {
+            if(chestGame.useParticles() && location.getBlock().getType() == Material.CHEST && location.getChunk().isLoaded()) {
                 location.getWorld().spawnParticle(chestGame.getParticle(), location.add(0.5, 0.7, 0.5), chestGame.getParticleAmount());
             }
-        }
+        });
     }
 }

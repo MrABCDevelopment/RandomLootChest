@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 public class LocationManager {
@@ -53,6 +54,10 @@ public class LocationManager {
         } catch (Exception e) {
             Util.sendPluginMessage("&cSomething went wrong while saving and loading locations.yml");
         }
+    }
+
+    public List<Location> getChestsLocations() {
+        return getLocations().values().stream().map(Util::getStringLocation).collect(Collectors.toList());
     }
 
 }
