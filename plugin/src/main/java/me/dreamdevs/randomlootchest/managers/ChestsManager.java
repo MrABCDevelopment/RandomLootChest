@@ -88,6 +88,13 @@ public class ChestsManager {
                                 chestGame.getItemStacks().add(randomItem);
                             }));
 
+            if (config.getConfigurationSection(CONTENTS) == null) {
+                chests.put(chestGame.getId(), chestGame);
+                Util.sendPluginMessage("&aRegistered chest with ID: "+chestGame.getId());
+                Util.sendPluginMessage("&aTotal Items in this chest: "+chestGame.getItemStacks().size());
+                return;
+            }
+
             for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
                 try {
                     ItemStack itemStack;

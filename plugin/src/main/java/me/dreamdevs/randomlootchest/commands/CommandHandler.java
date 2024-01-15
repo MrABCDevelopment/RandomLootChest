@@ -40,8 +40,8 @@ public class CommandHandler implements TabExecutor {
             if(strings.length >= 1) {
                 if(arguments.containsKey(strings[0])) {
                     ArgumentCommand argumentCommand = arguments.get(strings[0]);
-                    if(commandSender.hasPermission(argumentCommand.getPermission())) {
-                        if(strings.length > 1 && argumentCommand.getArguments().isEmpty() && argumentCommand.hasArguments()) {
+                    if (commandSender.hasPermission(argumentCommand.getPermission())) {
+                        if(strings.length > 1 && !argumentCommand.getArguments().contains(strings[1]) && argumentCommand.hasArguments()) {
                             commandSender.sendMessage(Language.GENERAL_NO_ARGUMENTS.toString());
                             return true;
                         }

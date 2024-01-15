@@ -59,7 +59,7 @@ public enum Config {
 		try {
 			CONFIG.load("config.yml");
 		} catch (IOException | InvalidConfigurationException e) {
-			throw new RuntimeException(e);
+
 		}
 	}
 

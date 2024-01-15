@@ -18,7 +18,6 @@ public class ReloadMenu extends ItemMenu {
 		// Setting up items, then add them into gui...
 		MenuItem reloadAllItem = new ActionMenuItem(Language.MENU_CHEST_RELOAD_ALL.toString(), event -> {
 			event.setWillClose(true);
-			Config.reloadFile();
 			RandomLootChestMain.getInstance().loadConfig();
 			RandomLootChestMain.getInstance().getItemsManager().save();
 			RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());

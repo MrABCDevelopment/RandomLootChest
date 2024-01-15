@@ -22,7 +22,8 @@ public class ReloadSubCommand implements ArgumentCommand {
             }
 
             if (args.length == 1) {
-                Config.reloadFile();
+                RandomLootChestMain.getInstance().loadConfig();
+                //Config.reloadFile();
                 Language.reloadLanguage();
                 RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
                 RandomLootChestMain.getInstance().getLocationManager().save();
