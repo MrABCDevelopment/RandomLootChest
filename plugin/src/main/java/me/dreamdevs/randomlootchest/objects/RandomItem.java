@@ -14,6 +14,12 @@ public class RandomItem implements IRandomItem {
     private double chance;
     private boolean randomDropAmount;
 
+    public RandomItem(ItemStack itemStack, double chance) {
+        this.itemStack = itemStack;
+        this.chance = chance;
+        this.randomDropAmount = false;
+    }
+
     @Override
     public ItemStack getItemStack() {
         return this.itemStack;

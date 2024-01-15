@@ -90,7 +90,7 @@ public class ChestsManager {
 
             for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
                 try {
-                    ItemStack itemStack = null;
+                    ItemStack itemStack;
                     String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
                     String displayName =  config.getString(CONTENTS+"."+content+".DisplayName", null);
                     int amount = config.getInt(CONTENTS+"."+content+".Amount", 1);

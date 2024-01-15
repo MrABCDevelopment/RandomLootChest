@@ -24,6 +24,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.stream.Stream;
 
 @Getter
@@ -103,7 +105,9 @@ public class RandomLootChestMain extends JavaPlugin {
 
         new LocationTask();
 
-        new Metrics(this, 16175);
+        Metrics metrics = new Metrics(this, 16175);
+        metrics.addCustomChart(new Metrics.SimplePie("servers_using_extensions", () -> String.valueOf(getExtensionManager().getEnabledExtensions().size())));
+
         if (Config.USE_UPDATE_CHECKER.toBoolean()) {
             Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> new UpdateChecker(RandomLootChestMain.getInstance(), 100851).getVersion(version -> {
                 if (getDescription().getVersion().equals(version)) {

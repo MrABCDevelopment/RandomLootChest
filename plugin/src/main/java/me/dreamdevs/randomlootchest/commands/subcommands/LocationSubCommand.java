@@ -36,7 +36,7 @@ public class LocationSubCommand implements ArgumentCommand {
 					.filter(location -> location.getBlock().getType() != Material.AIR &&
 										location.getBlock().getType() != Material.CHEST)
 					.forEach(location -> RandomLootChestMain.getInstance().getLocationManager().removeLocation(location));
-			commandSender.sendMessage(ColourUtil.colorize("&aAll non-chest locations are removed from locations!"));
+			commandSender.sendMessage(ColourUtil.colorize("&aAll non-chest locations were removed from locations!"));
 			return true;
 		}
 		return true;
