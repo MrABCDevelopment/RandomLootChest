@@ -38,6 +38,11 @@ public class ChestsSubCommand implements ArgumentCommand {
     }
 
     @Override
+    public boolean hasArguments() {
+        return false;
+    }
+
+    @Override
     public List<String> getArguments() {
         return new ArrayList<>();
     }

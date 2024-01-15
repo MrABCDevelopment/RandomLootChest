@@ -99,6 +99,11 @@ public class ItemsSubCommand implements ArgumentCommand {
     }
 
     @Override
+    public boolean hasArguments() {
+        return true;
+    }
+
+    @Override
     public List<String> getArguments() {
         return Arrays.asList("add", "remove");
     }

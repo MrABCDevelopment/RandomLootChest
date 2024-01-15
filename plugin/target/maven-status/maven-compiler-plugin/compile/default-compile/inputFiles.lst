@@ -22,6 +22,7 @@ D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\mana
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\managers\ExtensionManager.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\database\DatabaseMySQL.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\hooks\PlaceholderAPIHook.java
+D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\CreateChestSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\commands\subcommands\ItemsSubCommand.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\menus\ItemsMenu.java
 D:\GitHub\RandomLootChest\plugin\src\main\java\me\dreamdevs\randomlootchest\database\Database.java

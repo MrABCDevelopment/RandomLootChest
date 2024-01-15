@@ -142,6 +142,7 @@ public class PlayerInteractListener implements Listener {
             event.setCancelled(true);
             event.getPlayer().sendMessage(Language.CHEST_REMOVE_FROM_MAP_MESSAGE.toString().replace("%TYPE%", chestGame.getTitle()));
             plugin.getLocationManager().removeLocation(event.getClickedBlock().getLocation());
+            plugin.getLocationManager().save();
             ChestRemoveEvent chestRemoveEvent = new ChestRemoveEvent(event.getPlayer().getUniqueId(), chestGame, event.getClickedBlock().getLocation());
             Bukkit.getPluginManager().callEvent(chestRemoveEvent);
         }

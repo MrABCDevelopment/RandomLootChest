@@ -103,4 +103,15 @@ public class ChestGame implements IChestGame {
         this.particleAmount = amount;
     }
 
+    public void setupDefaultValues() {
+        this.title = "Default Title";
+        this.time = 30L;
+        this.maxItems = 4;
+        this.maxItemsInTheSameType = 1;
+        this.particleType = Particle.FIREWORKS_SPARK;
+        this.particleAmount = 1;
+        this.particleUse = true;
+        this.exp = 1;
+    }
+
 }

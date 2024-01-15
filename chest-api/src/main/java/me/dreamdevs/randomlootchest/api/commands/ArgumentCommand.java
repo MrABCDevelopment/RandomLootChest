@@ -12,6 +12,8 @@ public interface ArgumentCommand {
 
     String getPermission();
 
+    boolean hasArguments();
+
     List<String> getArguments();
 
 }

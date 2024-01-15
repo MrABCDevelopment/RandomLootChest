@@ -86,6 +86,11 @@ public class ReloadSubCommand implements ArgumentCommand {
     }
 
     @Override
+    public boolean hasArguments() {
+        return true;
+    }
+
+    @Override
     public List<String> getArguments() {
         return Arrays.asList("messages", "items", "config", "chests", "extensions");
     }

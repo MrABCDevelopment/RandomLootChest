@@ -7,10 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -31,12 +28,10 @@ public class LocationManager {
 
     public void addLocation(@NotNull String type, @NotNull Location location) {
         locations.put(Util.getLocationString(location), type);
-        save();
     }
 
     public void removeLocation(@NotNull Location location) {
         locations.remove(Util.getLocationString(location));
-        save();
     }
 
     public void save() {
@@ -48,16 +43,17 @@ public class LocationManager {
         }
 
         locationsConfig.set("locations", arrayList);
+
         try {
-            locationsConfig.save(FILENAME);
-            locationsConfig.load(FILENAME);
+            locationsConfig.save(RandomLootChestMain.getInstance().getLocationsFile());
+            locationsConfig.load(RandomLootChestMain.getInstance().getLocationsFile());
         } catch (Exception e) {
             Util.sendPluginMessage("&cSomething went wrong while saving and loading locations.yml");
         }
     }
 
     public List<Location> getChestsLocations() {
-        return getLocations().values().stream().map(Util::getStringLocation).collect(Collectors.toList());
+        return getLocations().keySet().stream().map(Util::getStringLocation).collect(Collectors.toList());
     }
 
 }

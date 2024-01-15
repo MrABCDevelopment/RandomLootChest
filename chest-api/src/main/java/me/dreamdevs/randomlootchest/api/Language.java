@@ -12,6 +12,10 @@ public enum Language {
 	CHEST_PLACE_ON_MAP_MESSAGE("ChestMessages.Place-On-Map-Message","&aYou placed %TYPE% Chest &aat location: %LOCATION%"),
 	CHEST_REMOVE_FROM_MAP_MESSAGE("ChestMessages.Remove-From-Map-Message","&aYou removed %TYPE% Chest &afrom map!"),
 
+	CHEST_NO_ID_MESSAGE("ChestMessages.No-Id-Message", "&cPlease type an ID!"),
+	CHEST_EXISTS_MESSAGE("ChestMessages.Current-Exists-Message","&cChest with this Id exists!"),
+	CHEST_CREATED_MESSAGE("ChestMessages.Created-Chest-Message","&aPerfect! You created new chest!"),
+
 	// General messages like combat messages, commands information
 	GENERAL_COMBAT_MESSAGE("GeneralMessages.Combat-Message","&cYou are in combat for %TIME%!"),
 	GENERAL_COMBAT_EXPIRED("GeneralMessages.Combat-Expired","&aYou are no longer in combat!"),

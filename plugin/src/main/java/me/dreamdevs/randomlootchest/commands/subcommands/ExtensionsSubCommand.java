@@ -51,6 +51,11 @@ public class ExtensionsSubCommand implements ArgumentCommand {
     }
 
     @Override
+    public boolean hasArguments() {
+        return true;
+    }
+
+    @Override
     public List<String> getArguments() {
         List<String> extensions = new ArrayList<>();
         extensions.add("all");

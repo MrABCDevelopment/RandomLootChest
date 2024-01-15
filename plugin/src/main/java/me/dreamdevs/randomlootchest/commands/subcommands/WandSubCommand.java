@@ -32,6 +32,11 @@ public class WandSubCommand implements ArgumentCommand {
     }
 
     @Override
+    public boolean hasArguments() {
+        return false;
+    }
+
+    @Override
     public List<String> getArguments() {
         return Collections.emptyList();
     }

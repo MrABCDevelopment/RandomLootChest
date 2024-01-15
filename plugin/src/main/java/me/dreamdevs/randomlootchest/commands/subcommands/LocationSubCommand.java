@@ -53,6 +53,11 @@ public class LocationSubCommand implements ArgumentCommand {
 	}
 
 	@Override
+	public boolean hasArguments() {
+		return true;
+	}
+
+	@Override
 	public List<String> getArguments() {
 		return Arrays.asList("clear", "fix");
 	}

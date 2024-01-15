@@ -4,6 +4,7 @@ me\dreamdevs\randomlootchest\managers\CooldownManager.class
 me\dreamdevs\randomlootchest\listeners\CombatListener.class
 me\dreamdevs\randomlootchest\objects\ChestGame.class
 me\dreamdevs\randomlootchest\database\DatabaseSQLite.class
+me\dreamdevs\randomlootchest\commands\subcommands\CreateChestSubCommand.class
 me\dreamdevs\randomlootchest\menus\ReloadMenu.class
 me\dreamdevs\randomlootchest\managers\ItemsManager.class
 me\dreamdevs\randomlootchest\menus\ChestPlaceMenu.class

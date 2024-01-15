@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
+import me.dreamdevs.randomlootchest.api.utils.Util;
 import me.dreamdevs.randomlootchest.commands.subcommands.*;
 import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
 import org.bukkit.Bukkit;
@@ -18,16 +19,17 @@ import java.util.*;
 
 public class CommandHandler implements TabExecutor {
 
-    private final @Getter HashMap<String, Class<? extends ArgumentCommand>> arguments;
+    private final @Getter Map<String, ArgumentCommand> arguments;
 
     public CommandHandler(@NotNull RandomLootChestMain plugin) {
-        this.arguments = new HashMap<>();
+        this.arguments = new LinkedHashMap<>();
         registerCommand("wand", WandSubCommand.class);
         registerCommand("reload", ReloadSubCommand.class);
         registerCommand("chests", ChestsSubCommand.class);
         registerCommand("extensions", ExtensionsSubCommand.class);
         registerCommand("locations", LocationSubCommand.class);
         registerCommand("items", ItemsSubCommand.class);
+        registerCommand("create", CreateChestSubCommand.class);
         Objects.requireNonNull(plugin.getCommand("randomlootchest")).setExecutor(this);
         Objects.requireNonNull(plugin.getCommand("randomlootchest")).setTabCompleter(this);
     }
@@ -37,14 +39,13 @@ public class CommandHandler implements TabExecutor {
         try {
             if(strings.length >= 1) {
                 if(arguments.containsKey(strings[0])) {
-                    Class<? extends ArgumentCommand> argumentCommand = arguments.get(strings[0]).asSubclass(ArgumentCommand.class);
-                    ArgumentCommand argument = argumentCommand.getConstructor().newInstance();
-                    if(commandSender.hasPermission(argument.getPermission())) {
-                        if(strings.length > 1 && argument.getArguments().isEmpty()) {
+                    ArgumentCommand argumentCommand = arguments.get(strings[0]);
+                    if(commandSender.hasPermission(argumentCommand.getPermission())) {
+                        if(strings.length > 1 && argumentCommand.getArguments().isEmpty() && argumentCommand.hasArguments()) {
                             commandSender.sendMessage(Language.GENERAL_NO_ARGUMENTS.toString());
                             return true;
                         }
-                        argument.execute(commandSender, strings);
+                        argumentCommand.execute(commandSender, strings);
                         return true;
                     } else {
                         commandSender.sendMessage(Language.GENERAL_NO_PERMISSION.toString());
@@ -56,13 +57,14 @@ public class CommandHandler implements TabExecutor {
                 }
             } else {
                 commandSender.sendMessage(ColourUtil.colorize("&aHelp for RandomLootChest:"));
-                for(Class<? extends ArgumentCommand> argumentCommand : arguments.values()) {
-                    commandSender.sendMessage(ColourUtil.colorize(argumentCommand.getConstructor().newInstance().getHelpText()));
+                for(ArgumentCommand argumentCommand : arguments.values()) {
+                    commandSender.sendMessage(ColourUtil.colorize(argumentCommand.getHelpText()));
                 }
                 return true;
             }
-        } catch (Exception e) {
-
+        } catch (Exception exception) {
+            commandSender.sendMessage(ColourUtil.colorize("&cSomething went wrong! Contact with developer! Look at the console!"));
+            Util.sendPluginMessage("&cException message: "+exception.getMessage());
         }
         return true;
     }
@@ -80,22 +82,23 @@ public class CommandHandler implements TabExecutor {
     }
 
     private List<String> getArgumentsForSubcommand(@NotNull String subcommand) {
-        List<String> listArguments = new ArrayList<>();
-        try {
-            listArguments = arguments.get(subcommand).getConstructor().newInstance().getArguments();
-            Collections.sort(listArguments);
-        } catch (Exception e) {
-
+        if (arguments.get(subcommand) == null) {
+            return Collections.emptyList();
         }
+
+        List<String> listArguments = arguments.get(subcommand).getArguments();
+
+        Collections.sort(listArguments);
         return listArguments;
     }
 
     public void registerCommand(String command, Class<? extends ArgumentCommand> clazz) {
-        arguments.put(command, clazz);
         try {
-            Bukkit.getPluginManager().addPermission(new Permission(clazz.getConstructor().newInstance().getPermission()));
+            ArgumentCommand argumentCommand = clazz.getConstructor().newInstance();
+            arguments.put(command, argumentCommand);
+            Bukkit.getPluginManager().addPermission(new Permission(argumentCommand.getPermission()));
         } catch (Exception e) {
-
+            Util.sendPluginMessage("&cSomething went wrong while registering argument '"+command+"'!");
         }
     }
 
