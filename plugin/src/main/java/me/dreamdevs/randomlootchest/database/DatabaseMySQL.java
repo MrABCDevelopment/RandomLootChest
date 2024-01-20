@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 
-import java.io.File;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;

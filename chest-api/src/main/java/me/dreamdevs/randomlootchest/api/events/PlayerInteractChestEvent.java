@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.api.events;
 
 import lombok.Getter;
+import me.dreamdevs.randomlootchest.api.database.IPlayerData;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -31,4 +32,5 @@ public class PlayerInteractChestEvent extends Event implements Cancellable {
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+
 }

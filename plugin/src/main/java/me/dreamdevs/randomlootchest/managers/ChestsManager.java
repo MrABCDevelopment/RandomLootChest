@@ -92,61 +92,62 @@ public class ChestsManager {
                 chests.put(chestGame.getId(), chestGame);
                 Util.sendPluginMessage("&aRegistered chest with ID: "+chestGame.getId());
                 Util.sendPluginMessage("&aTotal Items in this chest: "+chestGame.getItemStacks().size());
-                return;
-            }
+            } else {
 
-            for(String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
-                try {
-                    ItemStack itemStack;
-                    String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
-                    String displayName =  config.getString(CONTENTS+"."+content+".DisplayName", null);
-                    int amount = config.getInt(CONTENTS+"."+content+".Amount", 1);
-                    List<String> lore = new ArrayList<>();
-                    if(config.get(CONTENTS+"."+content+".DisplayLore") != null)
-                        lore = config.getStringList(CONTENTS+"."+content+".DisplayLore");
+                for (String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
+                    try {
+                        ItemStack itemStack;
+                        String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
+                        String displayName = config.getString(CONTENTS + "." + content + ".DisplayName", null);
+                        int amount = config.getInt(CONTENTS + "." + content + ".Amount", 1);
+                        List<String> lore = new ArrayList<>();
+                        if (config.get(CONTENTS + "." + content + ".DisplayLore") != null)
+                            lore = config.getStringList(CONTENTS + "." + content + ".DisplayLore");
 
-                    Map<String, Integer> enchantments = new HashMap<>();
-                    if (config.get(CONTENTS+"."+content+".Enchantments") != null) {
-                        ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS+"."+content+".Enchantments");
-                        for(String key : enchantmentSection.getKeys(false))
-                            enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
-                    }
-
-                    boolean unbreakable = config.getBoolean(CONTENTS+"."+content+".Unbreakable", false);
-                    boolean glowing = config.getBoolean(CONTENTS+"."+content+".Glowing", false);
-                    itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
-
-                    if (material.contains("potion".toUpperCase())) {
-                        itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
-                                    config.getString(CONTENTS+"."+content+".PotionEffect", "AWKWARD"),
-                                    config.getBoolean(CONTENTS+"."+content+".Extended", false), config.getBoolean(CONTENTS+"."+content+".Upgraded", false));
-                    }
-
-                    if (material.contains("PLAYER_HEAD")) {
-                        String headName = config.getString(CONTENTS+"."+content+".HeadName");
-                        Optional<Head> headOptional = HeadAPI.getHeadByExactName(headName);
-                        if (headOptional.isEmpty()) {
-                            // DO NOTHING
-                            continue;
+                        Map<String, Integer> enchantments = new HashMap<>();
+                        if (config.get(CONTENTS + "." + content + ".Enchantments") != null) {
+                            ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS + "." + content + ".Enchantments");
+                            for (String key : enchantmentSection.getKeys(false))
+                                enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
                         }
-                        Head head = headOptional.get();
-                        ItemMeta copiedMeta = itemStack.getItemMeta();
-                        itemStack = headOptional.get().getItem(head.getUniqueId());
-                        itemStack.setItemMeta(copiedMeta);
+
+                        boolean unbreakable = config.getBoolean(CONTENTS + "." + content + ".Unbreakable", false);
+                        boolean glowing = config.getBoolean(CONTENTS + "." + content + ".Glowing", false);
+                        itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
+
+                        if (material.contains("potion".toUpperCase())) {
+                            itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
+                                    config.getString(CONTENTS + "." + content + ".PotionEffect", "AWKWARD"),
+                                    config.getBoolean(CONTENTS + "." + content + ".Extended", false), config.getBoolean(CONTENTS + "." + content + ".Upgraded", false));
+                        }
+
+                        if (material.contains("PLAYER_HEAD")) {
+                            String headName = config.getString(CONTENTS + "." + content + ".HeadName");
+                            Optional<Head> headOptional = HeadAPI.getHeadByExactName(headName);
+                            if (headOptional.isEmpty()) {
+                                // DO NOTHING
+                                continue;
+                            }
+                            Head head = headOptional.get();
+                            ItemMeta copiedMeta = itemStack.getItemMeta();
+                            itemStack = headOptional.get().getItem(head.getUniqueId());
+                            itemStack.setItemMeta(copiedMeta);
+                        }
+
+                        RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS + "." + content + ".Chance"), config.getBoolean(CONTENTS + "." + content + ".RandomAmount", false));
+
+                        chestGame.getItemStacks().add(randomItem);
+                    } catch (NullPointerException e) {
+                        // Continues and throws an information about wrong configured item.
+                        Util.sendPluginMessage("&cThere is an error with '" + content + "' in config.yml");
                     }
-
-                    RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS+"."+content+".Chance"), config.getBoolean(CONTENTS+"."+content+".RandomAmount", false));
-
-                    chestGame.getItemStacks().add(randomItem);
-                } catch (NullPointerException e) {
-                    // Continues and throws an information about wrong configured item.
-                    Util.sendPluginMessage("&cThere is an error with '"+content+"' in config.yml");
                 }
-            }
 
-            chests.put(chestGame.getId(), chestGame);
-            Util.sendPluginMessage("&aRegistered chest with ID: "+chestGame.getId());
-            Util.sendPluginMessage("&aTotal Items in this chest: "+chestGame.getItemStacks().size());
+                chests.put(chestGame.getId(), chestGame);
+                Util.sendPluginMessage("&aRegistered chest with ID: " + chestGame.getId());
+                Util.sendPluginMessage("&aTotal Items in this chest: " + chestGame.getItemStacks().size());
+
+            }
         }));
 
         Util.sendPluginMessage("&a"+chests.size()+" chests loaded!");
@@ -176,9 +177,7 @@ public class ChestsManager {
     }
 
     public IChestGame getRandomChest() {
-        ArrayList<IChestGame> chestGames = new ArrayList<>(chests.values());
-        int rN = Util.getRandom().nextInt(chests.size());
-        return chestGames.get(rN);
+        return chests.values().stream().findAny().orElse(null);
     }
 
     /**
