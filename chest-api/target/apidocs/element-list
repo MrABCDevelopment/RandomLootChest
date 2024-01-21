@@ -1,0 +1,10 @@
+me.dreamdevs.randomlootchest.api
+me.dreamdevs.randomlootchest.api.commands
+me.dreamdevs.randomlootchest.api.database
+me.dreamdevs.randomlootchest.api.events
+me.dreamdevs.randomlootchest.api.extensions
+me.dreamdevs.randomlootchest.api.inventory
+me.dreamdevs.randomlootchest.api.inventory.buttons
+me.dreamdevs.randomlootchest.api.inventory.handlers
+me.dreamdevs.randomlootchest.api.objects
+me.dreamdevs.randomlootchest.api.utils
