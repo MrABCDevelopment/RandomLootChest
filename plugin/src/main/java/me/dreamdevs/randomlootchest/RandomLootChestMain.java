@@ -24,8 +24,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.stream.Stream;
 
 @Getter
@@ -82,7 +80,6 @@ public class RandomLootChestMain extends JavaPlugin {
         this.chestsManager = new ChestsManager(this);
         this.combatManager = new CombatManager();
         this.commandHandler = new CommandHandler(this);
-
         this.extensionManager = new ExtensionManager(this);
         this.extensionManager.loadExtensions();
 
