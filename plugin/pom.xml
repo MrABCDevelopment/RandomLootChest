@@ -73,9 +73,8 @@
             <artifactId>HeadDB</artifactId>
         </dependency>
         <dependency>
-            <groupId>me.DreamDevs.GitHub</groupId>
-            <artifactId>chest-api</artifactId>
-            <type>pom</type>
+            <groupId>com.github.MrABCDevelopment</groupId>
+            <artifactId>RandomLootChest</artifactId>
             <version>v1.8.4.1</version>
             <scope>compile</scope>
         </dependency>
