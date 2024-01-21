@@ -75,6 +75,7 @@
         <dependency>
             <groupId>me.DreamDevs.GitHub</groupId>
             <artifactId>chest-api</artifactId>
+            <type>pom</type>
             <version>v1.8.4.1</version>
             <scope>compile</scope>
         </dependency>
