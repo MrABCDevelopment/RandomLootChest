@@ -76,7 +76,9 @@ public class ChestsManager {
                     .ifPresent(strings -> strings.stream().map(String::new)
                             .forEach(s -> {
                                 String[] split = s.split(":");
-                                RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]), config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
+                                RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]));
+                                if (split.length == 4 && split[3] != null)
+                                    randomItem.setRandomDropAmount(config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
                                 chestGame.getItemStacks().add(randomItem);
                             }));
 
@@ -84,16 +86,13 @@ public class ChestsManager {
                     .ifPresent(strings -> strings.stream().map(String::new)
                             .forEach(s -> {
                                 String[] split = s.split(":");
-                                RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]), config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
+                                RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]));
+                                if (split.length == 4 && split[3] != null)
+                                    randomItem.setRandomDropAmount(config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
                                 chestGame.getItemStacks().add(randomItem);
                             }));
 
-            if (config.getConfigurationSection(CONTENTS) == null) {
-                chests.put(chestGame.getId(), chestGame);
-                Util.sendPluginMessage("&aRegistered chest with ID: "+chestGame.getId());
-                Util.sendPluginMessage("&aTotal Items in this chest: "+chestGame.getItemStacks().size());
-            } else {
-
+            if (config.getConfigurationSection(CONTENTS) != null) {
                 for (String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
                     try {
                         ItemStack itemStack;
@@ -143,11 +142,10 @@ public class ChestsManager {
                     }
                 }
 
-                chests.put(chestGame.getId(), chestGame);
-                Util.sendPluginMessage("&aRegistered chest with ID: " + chestGame.getId());
-                Util.sendPluginMessage("&aTotal Items in this chest: " + chestGame.getItemStacks().size());
-
             }
+            chests.put(chestGame.getId(), chestGame);
+            Util.sendPluginMessage("&aRegistered chest with ID: "+chestGame.getId());
+            Util.sendPluginMessage("&aTotal Items in this chest: "+chestGame.getItemStacks().size());
         }));
 
         Util.sendPluginMessage("&a"+chests.size()+" chests loaded!");

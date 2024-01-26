@@ -35,6 +35,10 @@ public class RandomItem implements IRandomItem {
         return randomDropAmount;
     }
 
+    public void setRandomDropAmount(boolean randomDropAmount) {
+        this.randomDropAmount = randomDropAmount;
+    }
+
     public String getDisplayName() {
         return (itemStack.hasItemMeta() && itemStack.getItemMeta() != null && itemStack.getItemMeta().hasDisplayName())
                 ? itemStack.getItemMeta().getDisplayName() : itemStack.getType().name();

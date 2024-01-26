@@ -86,7 +86,7 @@ public class ItemMenu {
 	}
 
 	public void open(Player player) {
-		if (!ItemMenuListener.getInstance().isRegistered(RandomLootChestApi.plugin)) {
+		if (!ItemMenuListener.getInstance().isRegistered(RandomLootChestApi.getApi())) {
 			ItemMenuListener.getInstance().register(RandomLootChestApi.plugin);
 		}
 		inventory = Bukkit.createInventory(new ItemMenuHolder(this,
