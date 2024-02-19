@@ -72,7 +72,6 @@ public class ItemUtil {
 
                 if (!material.equalsIgnoreCase("ENCHANTED_BOOK")) {
                     enchantments.forEach((key, value) -> itemStack.addUnsafeEnchantment(Enchantment.getByName(key), value));
-                    itemStack.setItemMeta(itemMeta);
                 }
 
             }

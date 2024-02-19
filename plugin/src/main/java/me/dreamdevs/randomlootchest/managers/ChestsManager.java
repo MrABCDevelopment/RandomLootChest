@@ -201,7 +201,6 @@ public class ChestsManager {
                 continue;
             int max = chestGame.getMaxItemsInTheSameType();
             if (max > 0) {
-
                 int i = 0;
                 for (int y = 0; y < inventory.getSize(); y++) {
                     if (inventory.getItem(y) != null
