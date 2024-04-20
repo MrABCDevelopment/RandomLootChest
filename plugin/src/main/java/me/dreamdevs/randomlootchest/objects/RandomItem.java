@@ -1,7 +1,7 @@
 package me.dreamdevs.randomlootchest.objects;
 
 import lombok.AllArgsConstructor;
-import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
+import me.dreamdevs.randomlootchest.api.object.IRandomItem;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;

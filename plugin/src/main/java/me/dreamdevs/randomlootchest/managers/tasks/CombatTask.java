@@ -3,7 +3,7 @@ package me.dreamdevs.randomlootchest.managers.tasks;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.events.CombatEndPlayerEvent;
+import me.dreamdevs.randomlootchest.api.event.player.PlayerCombatEndEvent;
 import me.dreamdevs.randomlootchest.utils.TimeUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -42,7 +42,7 @@ public class CombatTask extends BukkitRunnable {
                 if (Config.USE_COMBAT_ACTION_BAR.toBoolean()) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Language.GENERAL_COMBAT_EXPIRED.toString()));
                 }
-                CombatEndPlayerEvent event = new CombatEndPlayerEvent(player.getUniqueId());
+                PlayerCombatEndEvent event = new PlayerCombatEndEvent(player.getUniqueId());
                 Bukkit.getPluginManager().callEvent(event);
             }
         }

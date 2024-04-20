@@ -1,14 +1,14 @@
 package me.dreamdevs.randomlootchest.objects;
 
 import lombok.Setter;
-import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.object.IRandomItem;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.Particle;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Setter
@@ -28,7 +28,7 @@ public class ChestGame implements IChestGame {
 
     public ChestGame(String id) {
         this.id = id;
-        this.items = new ArrayList<>();
+        this.items = new LinkedList<>();
         chestFile = new File(RandomLootChestMain.getInstance().getDataFolder(), "chests/"+id+".yml");
         Util.tryCreateFile(chestFile);
     }

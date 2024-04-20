@@ -3,7 +3,7 @@ package me.dreamdevs.randomlootchest.commands.subcommands;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
+import me.dreamdevs.randomlootchest.api.command.ArgumentCommand;
 import me.dreamdevs.randomlootchest.menus.ReloadMenu;
 import me.dreamdevs.randomlootchest.objects.WandItem;
 import org.bukkit.command.CommandSender;
@@ -23,7 +23,6 @@ public class ReloadSubCommand implements ArgumentCommand {
 
             if (args.length == 1) {
                 RandomLootChestMain.getInstance().loadConfig();
-                //Config.reloadFile();
                 Language.reloadLanguage();
                 RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
                 RandomLootChestMain.getInstance().getLocationManager().save();
@@ -39,35 +38,36 @@ public class ReloadSubCommand implements ArgumentCommand {
                 return true;
             }
 
-            if(args[1].equalsIgnoreCase("messages")) {
+            if (args[1].equalsIgnoreCase("messages")) {
                 Language.reloadLanguage();
                 commandSender.sendMessage(Language.COMMAND_RELOAD_MESSAGES.toString());
                 return true;
             }
-            if(args[1].equalsIgnoreCase("config")) {
+            if (args[1].equalsIgnoreCase("config")) {
                 Config.reloadFile();
                 WandItem.loadVars();
                 commandSender.sendMessage(Language.COMMAND_RELOAD_CONFIG.toString());
                 return true;
             }
-            if(args[1].equalsIgnoreCase("items")) {
+            if (args[1].equalsIgnoreCase("items")) {
                 RandomLootChestMain.getInstance().getItemsManager().save();
                 RandomLootChestMain.getInstance().getItemsManager().load(RandomLootChestMain.getInstance());
                 commandSender.sendMessage(Language.COMMAND_RELOAD_ITEMS.toString());
                 return true;
             }
-            if(args[1].equalsIgnoreCase("chests")) {
+            if (args[1].equalsIgnoreCase("chests")) {
                 RandomLootChestMain.getInstance().getChestsManager().load(RandomLootChestMain.getInstance());
                 commandSender.sendMessage(Language.COMMAND_RELOAD_CHESTS.toString());
                 return true;
             }
-            if(args[1].equalsIgnoreCase("extensions")) {
+            if (args[1].equalsIgnoreCase("extensions")) {
                 RandomLootChestMain.getInstance().getExtensionManager().getEnabledExtensions().forEach(extension -> {
                     extension.reloadConfig();
                     extension.onExtensionDisable();
                     extension.onExtensionEnable();
                     commandSender.sendMessage(Language.GENERAL_EXTENSION_CONFIG_RELOADED.toString().replace("%EXTENSION_NAME%", extension.getDescription().getExtensionName()));
                 });
+
                 return true;
             }
         } else {

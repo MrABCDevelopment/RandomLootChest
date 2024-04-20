@@ -1,7 +1,7 @@
 package me.dreamdevs.randomlootchest.managers.tasks;
 
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
 import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 

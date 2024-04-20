@@ -1,6 +1,6 @@
 package me.dreamdevs.randomlootchest.hooks;
 
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.api.Type;
 import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.Bukkit;
 
 public class Database {

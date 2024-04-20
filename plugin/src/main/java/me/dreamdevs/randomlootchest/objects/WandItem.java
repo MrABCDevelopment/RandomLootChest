@@ -1,7 +1,7 @@
 package me.dreamdevs.randomlootchest.objects;
 
 import me.dreamdevs.randomlootchest.api.Config;
-import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
+import me.dreamdevs.randomlootchest.api.util.ColourUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

@@ -1,18 +1,18 @@
 package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
-import me.dreamdevs.randomlootchest.api.events.ChestOpenEvent;
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
-import me.dreamdevs.randomlootchest.api.objects.IRandomItem;
+import me.dreamdevs.randomlootchest.api.event.player.PlayerOpenChestEvent;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
+import me.dreamdevs.randomlootchest.api.object.IRandomItem;
+import me.dreamdevs.randomlootchest.api.util.ColourUtil;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.hooks.MMOItemsHook;
 import me.dreamdevs.randomlootchest.hooks.MythicMobsHook;
 import me.dreamdevs.randomlootchest.objects.ChestGame;
 import me.dreamdevs.randomlootchest.objects.RandomItem;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
 import me.dreamdevs.randomlootchest.utils.ItemUtil;
 import me.dreamdevs.randomlootchest.utils.TimeUtil;
-import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -39,6 +39,7 @@ public class ChestsManager {
 
     public ChestsManager(RandomLootChestMain plugin) {
         chests = new HashMap<>();
+
         load(plugin);
     }
 
@@ -95,7 +96,7 @@ public class ChestsManager {
             if (config.getConfigurationSection(CONTENTS) != null) {
                 for (String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
                     try {
-                        ItemStack itemStack;
+                        ItemStack itemStack = null;
                         String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
                         String displayName = config.getString(CONTENTS + "." + content + ".DisplayName", null);
                         int amount = config.getInt(CONTENTS + "." + content + ".Amount", 1);
@@ -122,6 +123,7 @@ public class ChestsManager {
 
                         if (material.contains("PLAYER_HEAD")) {
                             String headName = config.getString(CONTENTS + "." + content + ".HeadName");
+
                             Optional<Head> headOptional = HeadAPI.getHeadByExactName(headName);
                             if (headOptional.isEmpty()) {
                                 // DO NOTHING
@@ -193,7 +195,7 @@ public class ChestsManager {
             ItemStack itemStack = randomItem.getItemStack();
 
             if (randomItem.isRandomDropAmount())
-                itemStack.setAmount(Util.randomSlot(64));
+                itemStack.setAmount(Util.randomSlot(randomItem.getItemStack().getMaxStackSize()));
 
             if (counter == chestGame.getMaxItems())
                 break;
@@ -204,7 +206,7 @@ public class ChestsManager {
                 int i = 0;
                 for (int y = 0; y < inventory.getSize(); y++) {
                     if (inventory.getItem(y) != null
-                            && inventory.getItem(y).getType()
+                            && Objects.requireNonNull(inventory.getItem(y)).getType()
                             == itemStack.getType() && i < max) {
                         i++;
                     }
@@ -219,12 +221,11 @@ public class ChestsManager {
             }
         }
 
-        ChestOpenEvent chestOpenEvent = new ChestOpenEvent(player, chestGame);
+        PlayerOpenChestEvent chestOpenEvent = new PlayerOpenChestEvent(player, chestGame, inventory.getContents());
         Bukkit.getPluginManager().callEvent(chestOpenEvent);
 
         player.openInventory(inventory);
         player.setExp((float) (player.getExp()+chestGame.getExp()));
     }
-
 
 }

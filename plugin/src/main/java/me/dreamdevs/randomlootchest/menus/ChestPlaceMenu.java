@@ -2,11 +2,11 @@ package me.dreamdevs.randomlootchest.menus;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.events.ItemClickEvent;
+import me.dreamdevs.randomlootchest.api.event.inventory.ItemClickEvent;
 import me.dreamdevs.randomlootchest.api.inventory.BookItemMenu;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.MenuItem;
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

@@ -2,8 +2,8 @@ package me.dreamdevs.randomlootchest.database;
 
 import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
-import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -42,7 +42,7 @@ public class DatabaseYAML implements IDatabase {
 
         Stream.of(files).map(YamlConfiguration::loadConfiguration).forEach(yamlConfiguration -> {
             UUID uuid = UUID.fromString(Objects.requireNonNull(yamlConfiguration.getString("UUID")));
-            PlayerData playerData = new PlayerData(Bukkit.getOfflinePlayer(uuid));
+            PlayerData playerData = new PlayerData(uuid);
             for (String s : yamlConfiguration.getStringList("ActiveCooldown")) {
                 String[] strings = s.split(";");
                 playerData.applyCooldown(Util.getStringLocation(strings[0]), Integer.parseInt(strings[1]));

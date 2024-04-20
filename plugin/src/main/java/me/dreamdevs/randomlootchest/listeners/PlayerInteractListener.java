@@ -3,14 +3,15 @@ package me.dreamdevs.randomlootchest.listeners;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.database.IPlayerData;
-import me.dreamdevs.randomlootchest.api.events.ChestRemoveEvent;
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
-import me.dreamdevs.randomlootchest.api.events.PlayerInteractChestEvent;
+import me.dreamdevs.randomlootchest.api.event.chest.ChestDisappearEvent;
+import me.dreamdevs.randomlootchest.api.event.player.PlayerDestroyChestEvent;
+import me.dreamdevs.randomlootchest.api.event.player.PlayerInteractChestEvent;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.menus.ChestPlaceMenu;
 import me.dreamdevs.randomlootchest.objects.WandItem;
 import me.dreamdevs.randomlootchest.utils.TimeUtil;
-import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -49,7 +50,7 @@ public class PlayerInteractListener implements Listener {
         event.setCancelled(true);
 
         PlayerInteractChestEvent playerInteractChestEvent = new PlayerInteractChestEvent(event.getPlayer(),
-                event.getClickedBlock().getLocation(), false);
+                event.getClickedBlock().getLocation());
         Bukkit.getPluginManager().callEvent(playerInteractChestEvent);
 
         // Maybe something will cancel this event, so...
@@ -65,7 +66,7 @@ public class PlayerInteractListener implements Listener {
                     return;
         }
 
-        IPlayerData playerData = plugin.getCooldownManager().getPlayerData(event.getPlayer());
+        IPlayerData playerData = plugin.getCooldownManager().getPlayerData(event.getPlayer().getUniqueId());
 
         if (Config.USE_PERSONAL_COOLDOWN.toBoolean()) {
             if (playerData.hasCooldown(event.getClickedBlock().getLocation())) {
@@ -97,13 +98,18 @@ public class PlayerInteractListener implements Listener {
         }
 
         String type = plugin.getLocationManager().getLocations().get(Util.getLocationString(event.getClickedBlock().getLocation()));
+        IChestGame chestGame = plugin.getChestsManager().getChestGameByRarity(type);
+
         plugin.getChestsManager().openChest(event.getPlayer(), type);
 
         if (Config.USE_PERSONAL_COOLDOWN.toBoolean()) {
-            plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) plugin.getChestsManager().getChestGameByRarity(type).getTime(), true);
+            plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
         } else {
+            ChestDisappearEvent chestDisappearEvent = new ChestDisappearEvent(chestGame, event.getClickedBlock().getLocation());
+            Bukkit.getPluginManager().callEvent(chestDisappearEvent);
+
             event.getClickedBlock().setType(Material.AIR);
-            plugin.getCooldownManager().getLocations().put(event.getClickedBlock().getLocation(), new AtomicInteger((int) plugin.getChestsManager().getChestGameByRarity(type).getTime()));
+            plugin.getCooldownManager().getLocations().put(event.getClickedBlock().getLocation(), new AtomicInteger((int) chestGame.getTime()));
         }
     }
 
@@ -143,7 +149,7 @@ public class PlayerInteractListener implements Listener {
             event.getPlayer().sendMessage(Language.CHEST_REMOVE_FROM_MAP_MESSAGE.toString().replace("%TYPE%", chestGame.getTitle()));
             plugin.getLocationManager().removeLocation(event.getClickedBlock().getLocation());
             plugin.getLocationManager().save();
-            ChestRemoveEvent chestRemoveEvent = new ChestRemoveEvent(event.getPlayer().getUniqueId(), chestGame, event.getClickedBlock().getLocation());
+            PlayerDestroyChestEvent chestRemoveEvent = new PlayerDestroyChestEvent(event.getPlayer().getUniqueId(), chestGame, event.getClickedBlock().getLocation());
             Bukkit.getPluginManager().callEvent(chestRemoveEvent);
         }
     }

@@ -14,8 +14,8 @@ Particles:
   Amount: 1
 
 # Here you put items from items.yml
-Contents-Items:
-  - example
+#Contents-Items:
+#  - example
 
 # MMOItems support
 #Contents-MMOItems:

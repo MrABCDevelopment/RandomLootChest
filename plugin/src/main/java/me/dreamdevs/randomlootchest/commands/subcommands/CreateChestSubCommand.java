@@ -2,14 +2,12 @@ package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
+import me.dreamdevs.randomlootchest.api.command.ArgumentCommand;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
 import me.dreamdevs.randomlootchest.objects.ChestGame;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 public class CreateChestSubCommand implements ArgumentCommand {
@@ -59,8 +57,4 @@ public class CreateChestSubCommand implements ArgumentCommand {
 		return false;
 	}
 
-	@Override
-	public List<String> getArguments() {
-		return Collections.emptyList();
-	}
 }

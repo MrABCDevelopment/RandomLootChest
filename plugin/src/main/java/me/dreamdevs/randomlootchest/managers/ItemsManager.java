@@ -2,9 +2,9 @@ package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.objects.RandomItem;
 import me.dreamdevs.randomlootchest.utils.ItemUtil;
-import me.dreamdevs.randomlootchest.api.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,16 +15,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class ItemsManager {
 
     private YamlConfiguration config;
-    private final @Getter HashMap<String, RandomItem> items;
+    private final @Getter Map<String, RandomItem> items;
 
     public ItemsManager() {
-        items = new HashMap<>();
+        items = new LinkedHashMap<>();
         load(RandomLootChestMain.getInstance());
     }
 

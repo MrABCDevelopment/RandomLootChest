@@ -5,6 +5,8 @@ import lombok.Setter;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.RandomLootChestApi;
+import me.dreamdevs.randomlootchest.api.util.Util;
+import me.dreamdevs.randomlootchest.api.util.VersionUtil;
 import me.dreamdevs.randomlootchest.commands.CommandHandler;
 import me.dreamdevs.randomlootchest.hooks.*;
 import me.dreamdevs.randomlootchest.listeners.PlayerListeners;
@@ -15,8 +17,6 @@ import me.dreamdevs.randomlootchest.listeners.PlayerInteractListener;
 import me.dreamdevs.randomlootchest.managers.*;
 import me.dreamdevs.randomlootchest.managers.tasks.CombatTask;
 import me.dreamdevs.randomlootchest.managers.tasks.LocationTask;
-import me.dreamdevs.randomlootchest.api.utils.Util;
-import me.dreamdevs.randomlootchest.api.utils.VersionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -61,20 +61,7 @@ public class RandomLootChestMain extends JavaPlugin {
             this.saveResource("locations.yml", true);
         }
 
-        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new PlaceholderAPIHook().register();
-        }
-
-        if (getServer().getPluginManager().getPlugin("MMOItems") != null) {
-            new MMOItemsHook();
-        }
-
-        if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
-            new MythicMobsHook();
-        }
-
         this.itemsManager = new ItemsManager();
-
         this.cooldownManager = new CooldownManager();
         this.locationManager = new LocationManager();
         this.chestsManager = new ChestsManager(this);

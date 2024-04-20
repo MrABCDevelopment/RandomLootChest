@@ -2,7 +2,7 @@ package me.dreamdevs.randomlootchest.menus;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.events.ItemClickEvent;
+import me.dreamdevs.randomlootchest.api.event.inventory.ItemClickEvent;
 import me.dreamdevs.randomlootchest.api.inventory.BookItemMenu;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.MenuItem;
 import me.dreamdevs.randomlootchest.objects.RandomItem;

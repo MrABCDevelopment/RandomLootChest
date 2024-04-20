@@ -16,9 +16,9 @@ public class CombatListener implements Listener {
     public void combatEvent(EntityDamageByEntityEvent event) {
         if(event.isCancelled()) return;
         if(event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK) return;
-        if(event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
-            RandomLootChestMain.getInstance().getCombatManager().applyCombat(Objects.requireNonNull(((Player) event.getDamager()).getPlayer()), Config.COMBAT_BLOCKER_TIMER.toInt());
-            RandomLootChestMain.getInstance().getCombatManager().applyCombat(Objects.requireNonNull(((Player) event.getEntity()).getPlayer()), Config.COMBAT_BLOCKER_TIMER.toInt());
+        if(event.getEntity() instanceof Player player && event.getDamager() instanceof Player attacker) {
+            RandomLootChestMain.getInstance().getCombatManager().applyCombat(Objects.requireNonNull(attacker), Config.COMBAT_BLOCKER_TIMER.toInt());
+            RandomLootChestMain.getInstance().getCombatManager().applyCombat(Objects.requireNonNull(player), Config.COMBAT_BLOCKER_TIMER.toInt());
         }
     }
 

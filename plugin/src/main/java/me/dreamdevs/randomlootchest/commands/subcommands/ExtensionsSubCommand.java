@@ -2,8 +2,8 @@ package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
-import me.dreamdevs.randomlootchest.api.extensions.Extension;
+import me.dreamdevs.randomlootchest.api.command.ArgumentCommand;
+import me.dreamdevs.randomlootchest.api.extension.Extension;
 import me.dreamdevs.randomlootchest.menus.ExtensionMenu;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

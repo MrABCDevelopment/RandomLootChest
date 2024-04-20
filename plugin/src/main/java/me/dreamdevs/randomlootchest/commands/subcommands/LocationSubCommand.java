@@ -2,9 +2,9 @@ package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
-import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.command.ArgumentCommand;
+import me.dreamdevs.randomlootchest.api.util.ColourUtil;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 

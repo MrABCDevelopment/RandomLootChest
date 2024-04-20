@@ -2,8 +2,8 @@ package me.dreamdevs.randomlootchest.menus;
 
 import me.dreamdevs.randomlootchest.api.inventory.ItemMenu;
 import me.dreamdevs.randomlootchest.api.inventory.buttons.ActionMenuItem;
-import me.dreamdevs.randomlootchest.api.objects.IChestGame;
-import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
+import me.dreamdevs.randomlootchest.api.util.ColourUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

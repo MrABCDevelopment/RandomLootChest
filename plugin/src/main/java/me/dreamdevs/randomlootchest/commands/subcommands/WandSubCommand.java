@@ -1,13 +1,10 @@
 package me.dreamdevs.randomlootchest.commands.subcommands;
 
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.commands.ArgumentCommand;
+import me.dreamdevs.randomlootchest.api.command.ArgumentCommand;
 import me.dreamdevs.randomlootchest.objects.WandItem;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.Collections;
-import java.util.List;
 
 public class WandSubCommand implements ArgumentCommand {
 
@@ -36,8 +33,4 @@ public class WandSubCommand implements ArgumentCommand {
         return false;
     }
 
-    @Override
-    public List<String> getArguments() {
-        return Collections.emptyList();
-    }
 }

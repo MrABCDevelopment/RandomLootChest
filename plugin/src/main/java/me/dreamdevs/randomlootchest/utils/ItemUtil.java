@@ -1,8 +1,8 @@
 package me.dreamdevs.randomlootchest.utils;
 
 import lombok.experimental.UtilityClass;
-import me.dreamdevs.randomlootchest.api.utils.ColourUtil;
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.util.ColourUtil;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -75,7 +75,6 @@ public class ItemUtil {
                 }
 
             }
-
             return itemStack;
         } catch (Exception e) {
             Util.sendPluginMessage(parseError.replace("%MATERIAL%", material));

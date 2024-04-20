@@ -1,7 +1,7 @@
 package me.dreamdevs.randomlootchest.hooks;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
-import me.dreamdevs.randomlootchest.api.utils.Util;
+import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.inventory.ItemStack;
 
 public class MythicMobsHook {

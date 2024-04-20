@@ -1,7 +1,7 @@
 package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
-import me.dreamdevs.randomlootchest.api.events.CombatStartPlayerEvent;
+import me.dreamdevs.randomlootchest.api.event.player.PlayerCombatStartEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -20,7 +20,7 @@ public class CombatManager {
 
     public void applyCombat(Player player, int time) {
         combatTimers.put(player.getUniqueId(), new AtomicInteger(time));
-        Bukkit.getPluginManager().callEvent(new CombatStartPlayerEvent(player.getUniqueId()));
+        Bukkit.getPluginManager().callEvent(new PlayerCombatStartEvent(player.getUniqueId()));
     }
 
     public void removeCombat(UUID uuid) {
