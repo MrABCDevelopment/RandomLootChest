@@ -7,7 +7,7 @@
     <groupId>me.DreamDevs.GitHub</groupId>
     <artifactId>RandomLootChest</artifactId>
     <packaging>pom</packaging>
-    <version>v1.8.5.0</version>
+    <version>v1.8.5.1-BETA</version>
     <modules>
         <module>plugin</module>
     </modules>
@@ -146,7 +146,7 @@
             <dependency>
                 <groupId>com.github.TheSilentPro</groupId>
                 <artifactId>HeadDB</artifactId>
-                <version>5.0.0-rc.10</version>
+                <version>5.0.0-rc.11</version>
                 <scope>provided</scope>
             </dependency>
         </dependencies>
