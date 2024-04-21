@@ -1,0 +1,101 @@
+@options
+@packages
+-classpath
+'C:/Users/franc/.m2/repository/org/spigotmc/spigot-api/1.16.5-R0.1-SNAPSHOT/spigot-api-1.16.5-R0.1-SNAPSHOT.jar;C:/Users/franc/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar;C:/Users/franc/.m2/repository/com/google/guava/guava/21.0/guava-21.0.jar;C:/Users/franc/.m2/repository/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar;C:/Users/franc/.m2/repository/net/md-5/bungeecord-chat/1.16-R0.4/bungeecord-chat-1.16-R0.4.jar;C:/Users/franc/.m2/repository/org/yaml/snakeyaml/1.27/snakeyaml-1.27.jar;C:/Users/franc/.m2/repository/org/projectlombok/lombok/1.18.20/lombok-1.18.20.jar;C:/Users/franc/.m2/repository/org/jetbrains/annotations/22.0.0/annotations-22.0.0.jar;C:/Users/franc/.m2/repository/org/bstats/bstats-bukkit/3.0.0/bstats-bukkit-3.0.0.jar;C:/Users/franc/.m2/repository/org/bstats/bstats-base/3.0.0/bstats-base-3.0.0.jar;C:/Users/franc/.m2/repository/net/Indyuce/MMOItems-API/6.9.5-SNAPSHOT/MMOItems-API-6.9.5-SNAPSHOT.jar;C:/Users/franc/.m2/repository/io/lumine/MythicLib-dist/1.6.2-SNAPSHOT/MythicLib-dist-1.6.2-SNAPSHOT.jar;C:/Users/franc/.m2/repository/me/clip/placeholderapi/2.11.5/placeholderapi-2.11.5.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-platform-bukkit/4.3.1/adventure-platform-bukkit-4.3.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-platform-api/4.3.1/adventure-platform-api-4.3.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-api/4.13.1/adventure-api-4.13.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-key/4.13.1/adventure-key-4.13.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-text-serializer-bungeecord/4.3.1/adventure-text-serializer-bungeecord-4.3.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-text-serializer-legacy/4.13.1/adventure-text-serializer-legacy-4.13.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-nbt/4.13.1/adventure-nbt-4.13.1.jar;C:/Users/franc/.m2/repository/net/kyori/examination-api/1.3.0/examination-api-1.3.0.jar;C:/Users/franc/.m2/repository/net/kyori/examination-string/1.3.0/examination-string-1.3.0.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-text-serializer-gson/4.13.1/adventure-text-serializer-gson-4.13.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-text-serializer-gson-legacy-impl/4.13.1/adventure-text-serializer-gson-legacy-impl-4.13.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-platform-facet/4.3.1/adventure-platform-facet-4.3.1.jar;C:/Users/franc/.m2/repository/net/kyori/adventure-platform-viaversion/4.3.1/adventure-platform-viaversion-4.3.1.jar;C:/Users/franc/.m2/repository/io/lumine/Mythic-Dist/5.3.5/Mythic-Dist-5.3.5.jar;C:/Users/franc/.m2/repository/com/github/TheSilentPro/HeadDB/5.0.0-rc.11/HeadDB-5.0.0-rc.11.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'16'
+-sourcepath
+'D:/GitHub/RandomLootChest/plugin/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/GitHub/RandomLootChest/plugin/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'plugin v1.8.5.1-BETA API'
+-use
+-version
+-windowtitle
+'plugin v1.8.5.1-BETA API'
+me.dreamdevs.randomlootchest.api.command
+me.dreamdevs.randomlootchest.api
+me.dreamdevs.randomlootchest.api.database
+me.dreamdevs.randomlootchest.api.event.chest
+me.dreamdevs.randomlootchest.api.event.extension
+me.dreamdevs.randomlootchest.api.event
+me.dreamdevs.randomlootchest.api.event.inventory
+me.dreamdevs.randomlootchest.api.event.player
+me.dreamdevs.randomlootchest.api.extension
+me.dreamdevs.randomlootchest.api.inventory
+me.dreamdevs.randomlootchest.api.inventory.buttons
+me.dreamdevs.randomlootchest.api.inventory.handlers
+me.dreamdevs.randomlootchest.api.object
+me.dreamdevs.randomlootchest.api.util
+me.dreamdevs.randomlootchest.commands
+me.dreamdevs.randomlootchest.commands.subcommands
+me.dreamdevs.randomlootchest.database.data
+me.dreamdevs.randomlootchest.database
+me.dreamdevs.randomlootchest.hooks
+me.dreamdevs.randomlootchest.listeners
+me.dreamdevs.randomlootchest.managers
+me.dreamdevs.randomlootchest.managers.tasks
+me.dreamdevs.randomlootchest.menus
+me.dreamdevs.randomlootchest
+me.dreamdevs.randomlootchest.objects
+me.dreamdevs.randomlootchest.utils
+C:\Users\franc\.m2\repository\org\spigotmc\spigot-api\1.16.5-R0.1-SNAPSHOT\spigot-api-1.16.5-R0.1-SNAPSHOT.jar = 1661510597637
+C:\Users\franc\.m2\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar = 1661510610077
+C:\Users\franc\.m2\repository\com\google\guava\guava\21.0\guava-21.0.jar = 1661510614202
+C:\Users\franc\.m2\repository\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar = 1661510612053
+C:\Users\franc\.m2\repository\net\md-5\bungeecord-chat\1.16-R0.4\bungeecord-chat-1.16-R0.4.jar = 1661510608941
+C:\Users\franc\.m2\repository\org\yaml\snakeyaml\1.27\snakeyaml-1.27.jar = 1661510610038
+C:\Users\franc\.m2\repository\org\projectlombok\lombok\1.18.20\lombok-1.18.20.jar = 1661510613104
+C:\Users\franc\.m2\repository\org\jetbrains\annotations\22.0.0\annotations-22.0.0.jar = 1661510615175
+C:\Users\franc\.m2\repository\org\bstats\bstats-bukkit\3.0.0\bstats-bukkit-3.0.0.jar = 1661510613340
+C:\Users\franc\.m2\repository\org\bstats\bstats-base\3.0.0\bstats-base-3.0.0.jar = 1661510613447
+C:\Users\franc\.m2\repository\net\Indyuce\MMOItems-API\6.9.5-SNAPSHOT\MMOItems-API-6.9.5-SNAPSHOT.jar = 1708379608997
+C:\Users\franc\.m2\repository\io\lumine\MythicLib-dist\1.6.2-SNAPSHOT\MythicLib-dist-1.6.2-SNAPSHOT.jar = 1713639415504
+C:\Users\franc\.m2\repository\me\clip\placeholderapi\2.11.5\placeholderapi-2.11.5.jar = 1703708460603
+C:\Users\franc\.m2\repository\net\kyori\adventure-platform-bukkit\4.3.1\adventure-platform-bukkit-4.3.1.jar = 1703642202118
+C:\Users\franc\.m2\repository\net\kyori\adventure-platform-api\4.3.1\adventure-platform-api-4.3.1.jar = 1703642202732
+C:\Users\franc\.m2\repository\net\kyori\adventure-api\4.13.1\adventure-api-4.13.1.jar = 1682172284990
+C:\Users\franc\.m2\repository\net\kyori\adventure-key\4.13.1\adventure-key-4.13.1.jar = 1682172284264
+C:\Users\franc\.m2\repository\net\kyori\adventure-text-serializer-bungeecord\4.3.1\adventure-text-serializer-bungeecord-4.3.1.jar = 1703642202309
+C:\Users\franc\.m2\repository\net\kyori\adventure-text-serializer-legacy\4.13.1\adventure-text-serializer-legacy-4.13.1.jar = 1682172284663
+C:\Users\franc\.m2\repository\net\kyori\adventure-nbt\4.13.1\adventure-nbt-4.13.1.jar = 1703642202659
+C:\Users\franc\.m2\repository\net\kyori\examination-api\1.3.0\examination-api-1.3.0.jar = 1661510616603
+C:\Users\franc\.m2\repository\net\kyori\examination-string\1.3.0\examination-string-1.3.0.jar = 1661510616822
+C:\Users\franc\.m2\repository\net\kyori\adventure-text-serializer-gson\4.13.1\adventure-text-serializer-gson-4.13.1.jar = 1682172284565
+C:\Users\franc\.m2\repository\net\kyori\adventure-text-serializer-gson-legacy-impl\4.13.1\adventure-text-serializer-gson-legacy-impl-4.13.1.jar = 1703642202540
+C:\Users\franc\.m2\repository\net\kyori\adventure-platform-facet\4.3.1\adventure-platform-facet-4.3.1.jar = 1703642202806
+C:\Users\franc\.m2\repository\net\kyori\adventure-platform-viaversion\4.3.1\adventure-platform-viaversion-4.3.1.jar = 1703642202943
+C:\Users\franc\.m2\repository\io\lumine\Mythic-Dist\5.3.5\Mythic-Dist-5.3.5.jar = 1694860530636
+C:\Users\franc\.m2\repository\com\github\TheSilentPro\HeadDB\5.0.0-rc.11\HeadDB-5.0.0-rc.11.jar = 1713696423468
+D:\GitHub\RandomLootChest\plugin\src\main\java = 1705860123566
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\allclasses-index.html = 1713701247893
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\allpackages-index.html = 1713701247895
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\constant-values.html = 1713701247387
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\copy.svg = 1713701247943
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\element-list = 1713701247252
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\help-doc.html = 1713701247940
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\index-all.html = 1713701247932
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\index.html = 1713701247873
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\member-search-index.js = 1713701247909
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\module-search-index.js = 1713701247903
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\overview-summary.html = 1713701247937
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\overview-tree.html = 1713701247869
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\package-search-index.js = 1713701247904
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\script.js = 1713701247942
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\search-page.js = 1713701247946
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\search.html = 1713701247933
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\search.js = 1713701247945
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\stylesheet.css = 1713701247941
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\tag-search-index.js = 1713701247913
+D:\GitHub\RandomLootChest\plugin\target\site\apidocs\type-search-index.js = 1713701247908
