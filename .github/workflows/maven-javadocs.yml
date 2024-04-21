@@ -22,18 +22,18 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build Javadocs
-      run: |
-        echo "Building javadocs with gradle"
-        mvn javadoc:jar
-        echo "Moving to javadocs directory:"
-        mkdir build/ && mkdir build/docs/ && mkdir build/docs/javadoc/
-        cd build/docs/javadoc/
-        echo "Creating .nojekyll to have Github pages deploy html as is:"
-        touch .nojekyll
+ #   - name: Build Javadocs
+ #     run: |
+ 3       echo "Building javadocs with gradle"
+ #       mvn javadoc:jar
+ #       echo "Moving to javadocs directory:"
+ #       mkdir build/ && mkdir build/docs/ && mkdir build/docs/javadoc/
+ #       cd build/docs/javadoc/
+ #       echo "Creating .nojekyll to have Github pages deploy html as is:"
+ #       touch .nojekyll
 
-    - name: Deploy
-      uses: MrABCDevelopment/github-pages-deploy-action@4.2.0
-      with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: build/docs/javadoc/ # The folder the action should deploy.
+  #  - name: Deploy
+  #    uses: MrABCDevelopment/github-pages-deploy-action@4.2.0
+  #    with:
+  #      branch: gh-pages # The branch the action should deploy to.
+ #       folder: build/docs/javadoc/ # The folder the action should deploy.
