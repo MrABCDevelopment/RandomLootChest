@@ -57,7 +57,7 @@ public class ItemsSubCommand implements ArgumentCommand {
                     return true;
                 }
 
-                RandomItem randomItem = new RandomItem(player.getInventory().getItemInMainHand(), chance, false);
+                RandomItem randomItem = new RandomItem(() -> player.getInventory().getItemInMainHand().clone(), chance, false);
                 RandomLootChestMain.getInstance().getItemsManager().getItems().put(id, randomItem);
                 RandomLootChestMain.getInstance().getItemsManager().save();
                 player.sendMessage(Language.ITEMS_ADDED_ITEM.toString());

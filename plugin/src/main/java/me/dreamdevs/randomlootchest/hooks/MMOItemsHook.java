@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import java.util.concurrent.Callable;
 
 public class MMOItemsHook {
 
@@ -18,9 +19,10 @@ public class MMOItemsHook {
 		Util.sendPluginMessage("&aHooked into MMOItems!");
 	}
 
-	public ItemStack getItemStack(@NotNull String type, @NotNull String itemId) {
+	public Callable<ItemStack> getItemStack(@NotNull String type, @NotNull String itemId) {
 		MMOItem mmoItem = MMOItems.plugin.getMMOItem(Type.get(type), itemId);
-		return Optional.ofNullable(mmoItem).map(mmoItem1 -> mmoItem1.newBuilder().build()).orElse(null);
+		if (mmoItem == null)
+			return () -> null;
+		return () -> mmoItem.newBuilder().build();
 	}
-
 }

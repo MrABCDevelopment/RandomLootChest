@@ -29,6 +29,7 @@ import tsp.headdb.implementation.head.Head;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.Callable;
 
 @Getter
 public class ChestsManager {
@@ -135,7 +136,12 @@ public class ChestsManager {
                             itemStack.setItemMeta(copiedMeta);
                         }
 
-                        RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS + "." + content + ".Chance"), config.getBoolean(CONTENTS + "." + content + ".RandomAmount", false));
+                        ItemStack finalItemStack = itemStack;
+                        Callable<ItemStack> callable = () -> null;
+                        if (finalItemStack != null) {
+                            callable = finalItemStack::clone;
+                        }
+                        RandomItem randomItem = new RandomItem(callable, config.getDouble(CONTENTS + "." + content + ".Chance"), config.getBoolean(CONTENTS + "." + content + ".RandomAmount", false));
 
                         chestGame.getItemStacks().add(randomItem);
                     } catch (NullPointerException e) {
