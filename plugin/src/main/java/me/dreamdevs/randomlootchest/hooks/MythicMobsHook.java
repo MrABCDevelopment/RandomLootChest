@@ -4,6 +4,8 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import me.dreamdevs.randomlootchest.api.util.Util;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.concurrent.Callable;
+
 public class MythicMobsHook {
 
 	public static MythicMobsHook INSTANCE;
@@ -16,8 +18,8 @@ public class MythicMobsHook {
 		Util.sendPluginMessage("&aHooked into MythicMobs!");
 	}
 
-	public ItemStack getItemStack(String id) {
-		return mythicBukkit.getItemManager().getItemStack(id);
+	public Callable<ItemStack> getItemStack(String id) {
+		return () -> mythicBukkit.getItemManager().getItemStack(id);
 	}
 
 }

@@ -6,15 +6,16 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 @AllArgsConstructor
 public class RandomItem implements IRandomItem {
 
-    private ItemStack itemStack;
+    private Callable<ItemStack> itemStack;
     private double chance;
     private boolean randomDropAmount;
 
-    public RandomItem(ItemStack itemStack, double chance) {
+    public RandomItem(Callable<ItemStack> itemStack, double chance) {
         this.itemStack = itemStack;
         this.chance = chance;
         this.randomDropAmount = false;
@@ -22,7 +23,11 @@ public class RandomItem implements IRandomItem {
 
     @Override
     public ItemStack getItemStack() {
-        return this.itemStack;
+        try {
+            return this.itemStack.call();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -40,11 +45,13 @@ public class RandomItem implements IRandomItem {
     }
 
     public String getDisplayName() {
+        var itemStack = getItemStack();
         return (itemStack.hasItemMeta() && itemStack.getItemMeta() != null && itemStack.getItemMeta().hasDisplayName())
                 ? itemStack.getItemMeta().getDisplayName() : itemStack.getType().name();
     }
 
     public List<String> getLore() {
+        var itemStack = getItemStack();
         return (itemStack.hasItemMeta() && itemStack.getItemMeta() != null && itemStack.getItemMeta().hasLore())
                 ? itemStack.getItemMeta().getLore() : new ArrayList<>();
     }
