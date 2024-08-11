@@ -1,0 +1,15 @@
+# Chest's title - nothing special, since mc 1.16 you can use hex colours!
+Title: '&9Items'
+# There is cooldown format, where you can put seconds, minutes, days, etc.
+# Correct way to set cooldown is for example 60s, 1m, 1h, 5h 30m, etc.
+Cooldown: 5m
+# Max items in the chest
+MaxItems: 2
+# Max items in the same type in the chest is useful, when you have several items in the same type (20 gold ingots, 15 gold ingots, etc.)
+MaxItemsInTheSameType: 1
+
+# Here you put items from items.yml
+Contents-Items:
+  - example
+  - magicstone
+  - healpotion

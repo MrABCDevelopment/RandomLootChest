@@ -3,13 +3,13 @@ package me.dreamdevs.randomlootchest.managers;
 import lombok.Getter;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
+import me.dreamdevs.randomlootchest.api.event.chest.ChestAppearEvent;
 import me.dreamdevs.randomlootchest.api.event.player.PlayerCooldownExpiredEvent;
 import me.dreamdevs.randomlootchest.api.event.player.PlayerCooldownSetEvent;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -41,15 +41,15 @@ public class CooldownManager {
         return locations.getOrDefault(location, new AtomicInteger(0)).get();
     }
 
-    public void setCooldown(OfflinePlayer player, Location location, int seconds, boolean fireEvent) {
-        PlayerData playerData = getPlayerData(player.getUniqueId());
+    public void setCooldown(UUID uuid, Location location, int seconds, boolean fireEvent) {
+        PlayerData playerData = getPlayerData(uuid);
         if (playerData == null) {
-            playerData = new PlayerData(player.getUniqueId());
+            playerData = new PlayerData(uuid);
             players.add(playerData);
         }
         playerData.applyCooldown(location, seconds);
         if (fireEvent) {
-            PlayerCooldownSetEvent rlcCooldownSetEvent = new PlayerCooldownSetEvent(player.getUniqueId(), location, seconds);
+            PlayerCooldownSetEvent rlcCooldownSetEvent = new PlayerCooldownSetEvent(uuid, location, seconds);
             Bukkit.getPluginManager().callEvent(rlcCooldownSetEvent);
         }
     }
@@ -67,7 +67,7 @@ public class CooldownManager {
                         int value = playerData.getCooldown().get(location).decrementAndGet();
                         if (value <= 0) {
                             playerData.getCooldown().remove(location);
-                            PlayerCooldownExpiredEvent cooldownExpiredEvent = new PlayerCooldownExpiredEvent(playerData.getPlayer().getUniqueId(), location);
+                            PlayerCooldownExpiredEvent cooldownExpiredEvent = new PlayerCooldownExpiredEvent(playerData.getUuid(), location);
                             Bukkit.getPluginManager().callEvent(cooldownExpiredEvent);
                         }
                     }
@@ -80,11 +80,11 @@ public class CooldownManager {
 
                 locations.forEach((location, atomicInteger) -> {
                     int value = atomicInteger.decrementAndGet();
-                    if (value <= 0) {
-                        if (location.getChunk().isLoaded()) {
-                            location.getBlock().setType(Material.CHEST);
-                            locations.remove(location);
-                        }
+                    if (value <= 0 && location.getChunk().isLoaded()) {
+                        location.getBlock().setType(Material.CHEST);
+                        locations.remove(location);
+
+                        Bukkit.getPluginManager().callEvent(new ChestAppearEvent(RandomLootChestMain.getInstance().getChestsManager().getChestGameByLocation(location), location));
                     }
                 });
             }

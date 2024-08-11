@@ -52,9 +52,4 @@ public class CreateChestSubCommand implements ArgumentCommand {
 		return "randomlootchest.admin.create";
 	}
 
-	@Override
-	public boolean hasArguments() {
-		return false;
-	}
-
 }

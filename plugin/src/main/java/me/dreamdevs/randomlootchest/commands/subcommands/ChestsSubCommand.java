@@ -34,9 +34,4 @@ public class ChestsSubCommand implements ArgumentCommand {
         return "randomlootchest.admin.chests";
     }
 
-    @Override
-    public boolean hasArguments() {
-        return false;
-    }
-
 }

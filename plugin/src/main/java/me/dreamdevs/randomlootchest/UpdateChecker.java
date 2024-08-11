@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class UpdateChecker {
+public final class UpdateChecker {
 
     private final JavaPlugin plugin;
     private final int resourceId;

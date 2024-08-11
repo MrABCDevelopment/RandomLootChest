@@ -4,7 +4,6 @@ import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -54,13 +53,13 @@ public class DatabaseYAML implements IDatabase {
     @Override
     public void saveData() {
         RandomLootChestMain.getInstance().getCooldownManager().getPlayers().forEach(playerData -> {
-            File dataFile = new File(directory,playerData.getPlayer().getUniqueId() + ".yml");
+            File dataFile = new File(directory,playerData.getUuid() + ".yml");
             Util.tryCreateFile(dataFile);
             Map<Location, AtomicInteger> map = playerData.getCooldown();
             List<String> list = new ArrayList<>();
             map.forEach((key, value) -> list.add(Util.getLocationString(key)+";"+value.get()));
             YamlConfiguration config = YamlConfiguration.loadConfiguration(dataFile);
-            config.set("UUID", playerData.getPlayer().getUniqueId().toString());
+            config.set("UUID", playerData.getUuid().toString());
             config.set("ActiveCooldown", list);
             try {
                 config.save(dataFile);

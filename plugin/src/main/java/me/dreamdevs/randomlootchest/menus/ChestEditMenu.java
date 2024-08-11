@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class ChestEditMenu extends ItemMenu {
 
+	private static final String AMOUNT_PLACEHOLDER = "%AMOUNT%";
+
 	public ChestEditMenu(IChestGame chestGame) {
 		super(chestGame.getTitle(), Size.THREE_LINE);
 
@@ -24,8 +26,8 @@ public class ChestEditMenu extends ItemMenu {
 			new ChestEditMenu(chestGame).open(event.getPlayer());
 		}, new ItemStack(Material.CARROT), ColourUtil.colouredLore("&eLeft-click to add 1 second", "&eRight-click to remove 1 second").toArray(String[]::new)));
 
-		setItem(11, new ActionMenuItem(ColourUtil.colorize("&aMax Items: %AMOUNT%")
-				.replace("%AMOUNT", String.valueOf(chestGame.getMaxItems())), event -> {
+		setItem(11, new ActionMenuItem(ColourUtil.colorize("&aMax Items: "+AMOUNT_PLACEHOLDER)
+				.replace(AMOUNT_PLACEHOLDER, String.valueOf(chestGame.getMaxItems())), event -> {
 
 			if (event.getClicktype().isLeftClick()) {
 				chestGame.setMaxItems(chestGame.getMaxItems()+1);
@@ -36,8 +38,8 @@ public class ChestEditMenu extends ItemMenu {
 			new ChestEditMenu(chestGame).open(event.getPlayer());
 		}, new ItemStack(Material.STICK), ColourUtil.colouredLore("&eLeft-click to add 1 item", "&eRight-click to remove 1 item").toArray(String[]::new)));
 
-		setItem(12, new ActionMenuItem(ColourUtil.colorize("&aMax Items In The Same Type: %AMOUNT%")
-				.replace("%AMOUNT", String.valueOf(chestGame.getMaxItemsInTheSameType())), event -> {
+		setItem(12, new ActionMenuItem(ColourUtil.colorize("&aMax Items In The Same Type: "+AMOUNT_PLACEHOLDER)
+				.replace(AMOUNT_PLACEHOLDER, String.valueOf(chestGame.getMaxItemsInTheSameType())), event -> {
 
 			if (event.getClicktype().isLeftClick()) {
 				chestGame.setMaxItemsInTheSameType(chestGame.getMaxItemsInTheSameType()+1);
@@ -48,8 +50,8 @@ public class ChestEditMenu extends ItemMenu {
 			new ChestEditMenu(chestGame).open(event.getPlayer());
 		}, new ItemStack(Material.LEATHER), ColourUtil.colouredLore("&eLeft-click to add 1 item", "&eRight-click to remove 1 item").toArray(String[]::new)));
 
-		setItem(13, new ActionMenuItem(ColourUtil.colorize("&aExp: %AMOUNT%")
-				.replace("%AMOUNT", String.valueOf(chestGame.getExp())), event -> {
+		setItem(13, new ActionMenuItem(ColourUtil.colorize("&aExp: "+AMOUNT_PLACEHOLDER)
+				.replace(AMOUNT_PLACEHOLDER, String.valueOf(chestGame.getExp())), event -> {
 
 			if (event.getClicktype().isLeftClick()) {
 				chestGame.setExp(chestGame.getExp()+1);
@@ -68,8 +70,8 @@ public class ChestEditMenu extends ItemMenu {
 			new ChestEditMenu(chestGame).open(event.getPlayer());
 		}, new ItemStack(Material.HEART_OF_THE_SEA), ColourUtil.colouredLore("&eClick to change status.").toArray(String[]::new)));
 
-		setItem(15, new ActionMenuItem(ColourUtil.colorize("&aParticles Amount: %AMOUNT%")
-				.replace("%AMOUNT", String.valueOf(chestGame.getParticleAmount())), event -> {
+		setItem(15, new ActionMenuItem(ColourUtil.colorize("&aParticles Amount: "+AMOUNT_PLACEHOLDER)
+				.replace(AMOUNT_PLACEHOLDER, String.valueOf(chestGame.getParticleAmount())), event -> {
 
 			if (event.getClicktype().isLeftClick()) {
 				chestGame.setParticlesAmount(chestGame.getParticleAmount()+1);

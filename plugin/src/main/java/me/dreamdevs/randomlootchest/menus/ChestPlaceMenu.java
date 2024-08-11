@@ -45,7 +45,8 @@ public class ChestPlaceMenu extends BookItemMenu {
 			RandomLootChestMain.getInstance().getLocationManager().addLocation(chestGame.getId(), location);
 			RandomLootChestMain.getInstance().getLocationManager().save();
 			event.getPlayer().sendMessage(Language.CHEST_PLACE_ON_MAP_MESSAGE.toString()
-					.replace("%TYPE%", chestGame.getTitle()).replace("%LOCATION%", Util.getLocationString(location)));
+					.replace("%TYPE%", chestGame.getTitle())
+					.replace("%LOCATION%", Util.getLocationString(location)));
 		}
 	}
 

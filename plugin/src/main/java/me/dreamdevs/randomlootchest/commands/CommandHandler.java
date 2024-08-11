@@ -99,6 +99,7 @@ public class CommandHandler implements TabExecutor {
             Bukkit.getPluginManager().addPermission(new Permission(argumentCommand.getPermission()));
         } catch (Exception e) {
             Util.sendPluginMessage("&cSomething went wrong while registering argument '"+command+"'!");
+            Util.sendPluginMessage("&cException message: "+e.getMessage());
         }
     }
 

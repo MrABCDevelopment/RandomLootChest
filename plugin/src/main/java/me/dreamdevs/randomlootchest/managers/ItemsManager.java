@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class ItemsManager {
+public final class ItemsManager {
 
     private YamlConfiguration config;
     private final @Getter Map<String, RandomItem> items;

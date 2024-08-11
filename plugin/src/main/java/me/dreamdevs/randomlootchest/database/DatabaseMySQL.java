@@ -5,14 +5,12 @@ import me.dreamdevs.randomlootchest.api.database.IDatabase;
 import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.database.data.PlayerData;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 
 import java.sql.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DatabaseMySQL implements IDatabase {
@@ -41,16 +39,17 @@ public class DatabaseMySQL implements IDatabase {
 				Util.sendPluginMessage("&aDisconnected from the MySQL database...");
 			}
 		} catch (SQLException e) {
-
+			Util.sendPluginMessage("&cCouldn't close connection!");
+			Util.sendPluginMessage("&cException message: "+e.getMessage());
 		}
 	}
 
 	@Override
 	public void loadData() {
-		try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM data")) {
+		try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM data")) {
 			ResultSet rs = preparedStatement.executeQuery();
-			while(rs.next()) {
-				OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(rs.getString("user"));
+			while (rs.next()) {
+				UUID uuid = UUID.fromString(rs.getString("UserUuid"));
 				String string = rs.getString("activeCooldown");
 				if (string.isEmpty() || string.isBlank()) {
 					continue;
@@ -58,15 +57,14 @@ public class DatabaseMySQL implements IDatabase {
 				String[] splits = string.split("_");
 				for(String s : splits) {
 					String[] c = s.split(";");
-					Util.sendPluginMessage(Arrays.toString(c));
-					RandomLootChestMain.getInstance().getCooldownManager().setCooldown(offlinePlayer,
+					RandomLootChestMain.getInstance().getCooldownManager().setCooldown(uuid,
 							Util.getStringLocation(c[0]), Integer.parseInt(c[1]), false);
 				}
 			}
 			Util.sendPluginMessage("&aLoaded users data!");
 		} catch (SQLException e) {
 			Util.sendPluginMessage("&cSomething went wrong while loading users data!");
-			e.printStackTrace();
+			Util.sendPluginMessage("&cException message: "+e.getMessage());
 		}
 	}
 
@@ -74,30 +72,32 @@ public class DatabaseMySQL implements IDatabase {
 	public void saveData() {
 		List<PlayerData> players = RandomLootChestMain.getInstance().getCooldownManager().getPlayers();
 		players.forEach(playerData -> {
-			if (!exists(playerData.getPlayer())) {
+			if (!exists(playerData.getUuid())) {
 				// Insert player to database
-				try (PreparedStatement ps = connection.prepareStatement("INSERT INTO data(user, activeCooldown) VALUES(?,?);")) {
-					ps.setObject(1, playerData.getPlayer().getName());
+				try (PreparedStatement ps = connection.prepareStatement("INSERT INTO data(UserUuid, activeCooldown) VALUES(?,?);")) {
+					ps.setObject(1, playerData.getUuid());
 					ps.setString(2, "null");
 					ps.executeUpdate();
 				} catch (SQLException e) {
-					throw new RuntimeException(e);
+					Util.sendPluginMessage("&cSomething went wrong while creating user account in database!");
+					Util.sendPluginMessage("&cException message: "+e.getMessage());
 				}
 			}
 			StringBuilder stringBuilder = new StringBuilder();
 			for (Map.Entry<Location, AtomicInteger> entry : playerData.getCooldown().entrySet()) {
 				stringBuilder.append(Util.getLocationString(entry.getKey())).append(";").append(entry.getValue().get()).append("_");
 			}
-			try (PreparedStatement ps = connection.prepareStatement("UPDATE data SET activeCooldown = '"+stringBuilder.toString()+"' WHERE user = '"+playerData.getPlayer().getName()+"'")) {
+			try (PreparedStatement ps = connection.prepareStatement("UPDATE data SET activeCooldown = '"+stringBuilder.toString()+"' WHERE UserUuid = '"+playerData.getUuid()+"'")) {
 				ps.executeUpdate();
 			} catch (SQLException e) {
-				throw new RuntimeException(e);
+				Util.sendPluginMessage("&cSomething went wrong while saving/updating data in database!");
+				Util.sendPluginMessage("&cException message: "+e.getMessage());
 			}
 		});
 	}
 
-	private boolean exists(OfflinePlayer player) {
-		try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT user FROM data WHERE user='"+player.getName()+"'")) {
+	private boolean exists(UUID uuid) {
+		try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT UserUuid FROM data WHERE UserUuid='"+uuid+"'")) {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				return true;
@@ -109,13 +109,12 @@ public class DatabaseMySQL implements IDatabase {
 	}
 
 	private void createTable() {
-		try (PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `"
-				+Config.DATABASE_NAME.toString()+"`.`data` (`user` VARCHAR(16) NULL DEFAULT NULL , `activeCooldown` VARCHAR(400) NULL DEFAULT NULL , PRIMARY KEY (`user`))")) {
+		try (PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS data(`UserUuid` VARCHAR(36) NULL DEFAULT NULL , `activeCooldown` VARCHAR(400) NULL DEFAULT NULL , PRIMARY KEY (`UserUuid`))")) {
 			preparedStatement.execute();
 			Util.sendPluginMessage("&aCreated table for users and their active cooldowns!");
 		} catch (SQLException e) {
 			Util.sendPluginMessage("&cCould not created table for users!");
-			e.printStackTrace();
+			Util.sendPluginMessage("&cException message: "+e.getMessage());
 		}
 	}
 

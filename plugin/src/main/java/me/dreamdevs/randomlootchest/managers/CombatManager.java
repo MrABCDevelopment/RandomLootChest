@@ -10,7 +10,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CombatManager {
+public final class CombatManager {
 
     private final @Getter Map<UUID, AtomicInteger> combatTimers;
 

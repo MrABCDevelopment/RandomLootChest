@@ -41,9 +41,7 @@ public class ChestMenu extends BookItemMenu {
 			event.setWillClose(true);
 
 			// Go to new menu
-			Bukkit.getScheduler().runTaskLater(RandomLootChestMain.getInstance(), () -> {
-				new ChestEditMenu(chestGame).open(event.getPlayer());
-			}, 4L);
+			Bukkit.getScheduler().runTaskLater(RandomLootChestMain.getInstance(), () -> new ChestEditMenu(chestGame).open(event.getPlayer()), 4L);
 		}
 	}
 }

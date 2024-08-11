@@ -1,6 +1,7 @@
 package me.dreamdevs.randomlootchest.managers;
 
 import lombok.Getter;
+import me.dreamdevs.randomlootchest.api.Language;
 import me.dreamdevs.randomlootchest.api.event.player.PlayerOpenChestEvent;
 import me.dreamdevs.randomlootchest.api.object.IChestGame;
 import me.dreamdevs.randomlootchest.api.object.IRandomItem;
@@ -29,6 +30,7 @@ import tsp.headdb.implementation.head.Head;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Getter
 public class ChestsManager {
@@ -54,11 +56,14 @@ public class ChestsManager {
         chestsDirectory = new File(plugin.getDataFolder(), "chests");
         if((!chestsDirectory.exists() || !chestsDirectory.isDirectory()) && chestsDirectory.mkdirs()) {
             plugin.saveResource("chests/default.yml", false);
+            plugin.saveResource("chests/mmochest.yml", false);
+            plugin.saveResource("chests/onlyitems.yml", false);
         }
 
         Optional.ofNullable(chestsDirectory.listFiles(((dir, name) -> name.endsWith(".yml")))).ifPresent(files -> Arrays.stream(files).forEach(chestFile -> {
             FileConfiguration config = YamlConfiguration.loadConfiguration(chestFile);
             ChestGame chestGame = new ChestGame(chestFile.getName().substring(0, chestFile.getName().length()-4));
+
             chestGame.setTitle(ColourUtil.colorize((config.getString("Title", "Random Chest"))));
             chestGame.setTime(TimeUtil.convertStringToCooldown(config.getString("Cooldown", "60s")));
             chestGame.setMaxItems(config.getInt("MaxItems"));
@@ -66,63 +71,54 @@ public class ChestsManager {
             chestGame.setParticleUse(config.getBoolean("Particles.Use", false));
             chestGame.setParticleAmount(config.getInt("Particles.Amount", 1));
             chestGame.setParticleType(Particle.valueOf(config.getString("Particles.Type", "HEART")));
-            chestGame.setExp(config.getDouble("Exp", 0));
+            chestGame.setExp(config.getInt("Exp", 0));
 
             Optional.of(config.getStringList(CONTENTS+"-Items"))
                     .ifPresent(strings -> strings.stream().map(String::new)
                             .map(RandomLootChestMain.getInstance().getItemsManager().getItems()::get)
                             .forEach(chestGame.getItemStacks()::add));
 
-            Optional.of(config.getStringList(CONTENTS+"-MMOItems"))
-                    .ifPresent(strings -> strings.stream().map(String::new)
-                            .forEach(s -> {
-                                String[] split = s.split(":");
-                                RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]));
-                                if (split.length == 4 && split[3] != null)
-                                    randomItem.setRandomDropAmount(config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
-                                chestGame.getItemStacks().add(randomItem);
-                            }));
+            if (Bukkit.getServer().getPluginManager().getPlugin("MMOItems") != null) {
+                loadMMOItems(chestGame, config);
+            }
 
-            Optional.of(config.getStringList(CONTENTS+"-MythicMobs"))
-                    .ifPresent(strings -> strings.stream().map(String::new)
-                            .forEach(s -> {
-                                String[] split = s.split(":");
-                                RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]));
-                                if (split.length == 4 && split[3] != null)
-                                    randomItem.setRandomDropAmount(config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
-                                chestGame.getItemStacks().add(randomItem);
-                            }));
+            if (Bukkit.getServer().getPluginManager().getPlugin("MythicMobs") != null) {
+                loadMythicMobsItems(chestGame, config);
+            }
 
-            if (config.getConfigurationSection(CONTENTS) != null) {
-                for (String content : config.getConfigurationSection(CONTENTS).getKeys(false)) {
+            ConfigurationSection contentsSection = config.getConfigurationSection(CONTENTS);
+
+            if (contentsSection != null) {
+                for (String content : contentsSection.getKeys(false)) {
                     try {
                         ItemStack itemStack = null;
-                        String material = Objects.requireNonNull(config.getString(CONTENTS + "." + content + ".Material")).toUpperCase();
-                        String displayName = config.getString(CONTENTS + "." + content + ".DisplayName", null);
-                        int amount = config.getInt(CONTENTS + "." + content + ".Amount", 1);
-                        List<String> lore = new ArrayList<>();
-                        if (config.get(CONTENTS + "." + content + ".DisplayLore") != null)
-                            lore = config.getStringList(CONTENTS + "." + content + ".DisplayLore");
+                        String material = contentsSection.getString(content + ".Material", "STONE").toUpperCase();
+                        String displayName = contentsSection.getString(content + ".DisplayName");
+                        int amount = contentsSection.getInt(content + ".Amount", 1);
+                        List<String> lore = (contentsSection.get(content + ".DisplayLore") != null)
+                                ? contentsSection.getStringList(content + ".DisplayLore") : new ArrayList<>();
 
                         Map<String, Integer> enchantments = new HashMap<>();
-                        if (config.get(CONTENTS + "." + content + ".Enchantments") != null) {
-                            ConfigurationSection enchantmentSection = config.getConfigurationSection(CONTENTS + "." + content + ".Enchantments");
+
+                        ConfigurationSection enchantmentSection = contentsSection.getConfigurationSection(content + ".Enchantments");
+                        if (enchantmentSection != null) {
                             for (String key : enchantmentSection.getKeys(false))
                                 enchantments.put(key.toUpperCase(), enchantmentSection.getInt(key));
                         }
 
-                        boolean unbreakable = config.getBoolean(CONTENTS + "." + content + ".Unbreakable", false);
-                        boolean glowing = config.getBoolean(CONTENTS + "." + content + ".Glowing", false);
+                        boolean unbreakable = contentsSection.getBoolean(content + ".Unbreakable", false);
+                        boolean glowing = contentsSection.getBoolean(content + ".Glowing", false);
                         itemStack = ItemUtil.parsedItem(material, amount, displayName, lore, enchantments, unbreakable, glowing);
 
                         if (material.contains("potion".toUpperCase())) {
                             itemStack = ItemUtil.getPotion(material, amount, displayName, lore, enchantments, unbreakable, glowing,
-                                    config.getString(CONTENTS + "." + content + ".PotionEffect", "AWKWARD"),
-                                    config.getBoolean(CONTENTS + "." + content + ".Extended", false), config.getBoolean(CONTENTS + "." + content + ".Upgraded", false));
+                                    contentsSection.getString(content + ".PotionEffect", "AWKWARD"),
+                                    contentsSection.getBoolean(content + ".Extended", false),
+                                    contentsSection.getBoolean(content + ".Upgraded", false));
                         }
 
                         if (material.contains("PLAYER_HEAD")) {
-                            String headName = config.getString(CONTENTS + "." + content + ".HeadName");
+                            String headName = contentsSection.getString(content + ".HeadName");
 
                             Optional<Head> headOptional = HeadAPI.getHeadByExactName(headName);
                             if (headOptional.isEmpty()) {
@@ -135,7 +131,8 @@ public class ChestsManager {
                             itemStack.setItemMeta(copiedMeta);
                         }
 
-                        RandomItem randomItem = new RandomItem(itemStack, config.getDouble(CONTENTS + "." + content + ".Chance"), config.getBoolean(CONTENTS + "." + content + ".RandomAmount", false));
+                        RandomItem randomItem = new RandomItem(itemStack, contentsSection.getDouble(content + ".Chance"),
+                                contentsSection.getBoolean(content + ".RandomAmount", false));
 
                         chestGame.getItemStacks().add(randomItem);
                     } catch (NullPointerException e) {
@@ -151,6 +148,38 @@ public class ChestsManager {
         }));
 
         Util.sendPluginMessage("&a"+chests.size()+" chests loaded!");
+    }
+
+    /**
+     * Load items from MythicMobs plugin
+     */
+
+    private void loadMythicMobsItems(IChestGame chestGame, FileConfiguration config) {
+        Optional.of(config.getStringList(CONTENTS+"-MythicMobs"))
+                .ifPresent(strings -> strings.stream().map(String::new)
+                        .forEach(s -> {
+                            String[] split = s.split(":");
+                            RandomItem randomItem = new RandomItem(MythicMobsHook.INSTANCE.getItemStack(split[0]), Double.parseDouble(split[1]));
+                            if (split.length == 4 && split[3] != null)
+                                randomItem.setRandomDropAmount(config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
+                            chestGame.getItemStacks().add(randomItem);
+                        }));
+    }
+
+    /**
+     * Load items from MMOItems plugin
+     */
+
+    private void loadMMOItems(IChestGame chestGame, FileConfiguration config) {
+        Optional.of(config.getStringList(CONTENTS+"-MMOItems"))
+                .ifPresent(strings -> strings.stream().map(String::new)
+                        .forEach(s -> {
+                            String[] split = s.split(":");
+                            RandomItem randomItem = new RandomItem(MMOItemsHook.INSTANCE.getItemStack(split[0], split[1]), Double.parseDouble(split[2]));
+                            if (split.length == 4 && split[3] != null)
+                                randomItem.setRandomDropAmount(config.getBoolean(CONTENTS+"."+split[3]+".RandomAmount", false));
+                            chestGame.getItemStacks().add(randomItem);
+                        }));
     }
 
     public IChestGame getChestGameByRarity(@NotNull String id) {
@@ -176,12 +205,26 @@ public class ChestsManager {
                 .orElse(null);
     }
 
+    /**
+     * Get random chest type.
+     */
+
     public IChestGame getRandomChest() {
         return chests.values().stream().findAny().orElse(null);
     }
 
     /**
+     * Return list of random items that are between chances.
+     */
+
+    private List<IRandomItem> getRandomItems(IChestGame chestGame) {
+        return chestGame.getItemStacks().stream().filter(iRandomItem -> Util.chance(iRandomItem.getChance()))
+                .sorted(Comparator.comparingDouble(IRandomItem::getChance)).toList();
+    }
+
+    /**
      * Some changes since v1.8.0 due to new menu system.
+     * After version 1.8.5.0, there is new system of randomizing and dropping items.
      */
 
     public void openChest(final @NotNull Player player, @NotNull String type) {
@@ -189,18 +232,29 @@ public class ChestsManager {
 
         Inventory inventory = Bukkit.createInventory(null, 27, chestGame.getTitle());
 
+        CopyOnWriteArrayList<IRandomItem> list = new CopyOnWriteArrayList<>(getRandomItems(chestGame));
+
+        if (list.isEmpty()) {
+            player.sendMessage(Language.CHEST_NO_ITEMS.toString());
+            return;
+        }
+
         int counter = 0;
 
-        for (IRandomItem randomItem : chestGame.getItemStacks()) {
-            ItemStack itemStack = randomItem.getItemStack();
-
-            if (randomItem.isRandomDropAmount())
-                itemStack.setAmount(Util.randomSlot(randomItem.getItemStack().getMaxStackSize()));
-
-            if (counter == chestGame.getMaxItems())
-                break;
-            if (!Util.chance(randomItem.getChance()))
+        for (int x = 0; x < chestGame.getMaxItems(); x++) {
+            if (list.isEmpty()) {
                 continue;
+            }
+
+            int element = Util.random((list.size() > 2) ? list.size() : 1);
+
+            IRandomItem randomItem = list.get(element);
+
+            ItemStack itemStack = randomItem.getItemStack();
+            if (randomItem.isRandomDropAmount()) {
+                itemStack.setAmount(Util.random(randomItem.getItemStack().getMaxStackSize()));
+            }
+
             int max = chestGame.getMaxItemsInTheSameType();
             if (max > 0) {
                 int i = 0;
@@ -212,20 +266,22 @@ public class ChestsManager {
                     }
                 }
                 if (i < max) {
-                    inventory.setItem(Util.randomSlot(27), itemStack);
+                    inventory.setItem(Util.random(27), itemStack);
                     counter++;
                 }
             } else {
-                inventory.setItem(Util.randomSlot(27), itemStack);
+                inventory.setItem(Util.random(27), itemStack);
                 counter++;
             }
+
+            list.remove(element);
         }
 
         PlayerOpenChestEvent chestOpenEvent = new PlayerOpenChestEvent(player, chestGame, inventory.getContents());
         Bukkit.getPluginManager().callEvent(chestOpenEvent);
 
         player.openInventory(inventory);
-        player.setExp((float) (player.getExp()+chestGame.getExp()));
+        player.setTotalExperience(player.getTotalExperience() + chestGame.getExp());
     }
 
 }

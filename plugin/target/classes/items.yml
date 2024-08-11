@@ -4,3 +4,18 @@ Items:
     Amount: 64
     DisplayName: '&6Example Stone'
     Chance: 0.9
+  magicstone:
+    Material: STONE
+    Amount: 1
+    Enchantments:
+      - DURABILITY:10
+    DisplayName: "&d&l* &a&lMagic Stone &d&l*"
+    Chance: 0.3
+  healpotion:
+    Material: POTION
+    Amount: 1
+    DisplayName: '&cHealing Potion'
+    PotionEffect: HEAL
+    Upgraded: false
+    Extended: false
+    Chance: 0.2

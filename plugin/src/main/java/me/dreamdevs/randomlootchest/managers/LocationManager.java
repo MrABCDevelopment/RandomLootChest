@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
-public class LocationManager {
+public final class LocationManager {
 
     private final Map<String, String> locations;
     private static final String FILENAME = "locations.yml";
@@ -49,6 +49,7 @@ public class LocationManager {
             locationsConfig.load(RandomLootChestMain.getInstance().getLocationsFile());
         } catch (Exception e) {
             Util.sendPluginMessage("&cSomething went wrong while saving and loading locations.yml");
+            Util.sendPluginMessage("&cError message: "+e.getMessage());
         }
     }
 

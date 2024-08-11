@@ -9,6 +9,8 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class PlaceholderAPIHook extends PlaceholderExpansion {
 
 	public PlaceholderAPIHook() {
@@ -47,7 +49,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 					? ChatColor.GREEN+"Yes" : ChatColor.RED+"No";
 		}
 		if (params.equalsIgnoreCase("is_in_combat")) {
-			return (Config.USE_COMBAT_BLOCKER.toBoolean() && RandomLootChestMain.getInstance().getCombatManager().isInCombat(player.getPlayer()))
+			return (Config.USE_COMBAT_BLOCKER.toBoolean() && RandomLootChestMain.getInstance().getCombatManager().isInCombat(Objects.requireNonNull(player.getPlayer())))
 					? ChatColor.GREEN+"Yes" : ChatColor.RED+"No";
 		}
 		if (params.equalsIgnoreCase("total_chests")) {

@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @UtilityClass
-public class ItemUtil {
+public final class ItemUtil {
 
     private final String parseError = "&cCannot parse item with type: %MATERIAL%";
 
@@ -64,6 +64,8 @@ public class ItemUtil {
                     itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 }
 
+                itemStack.setItemMeta(itemMeta);
+
                 if (material.equalsIgnoreCase("ENCHANTED_BOOK")) {
                     EnchantmentStorageMeta storageMeta = (EnchantmentStorageMeta) itemMeta;
                     enchantments.forEach((key, value) -> storageMeta.addStoredEnchant(Enchantment.getByName(key), value, true));
@@ -75,7 +77,8 @@ public class ItemUtil {
                 }
 
             }
-            return itemStack;
+
+            return itemStack.clone();
         } catch (Exception e) {
             Util.sendPluginMessage(parseError.replace("%MATERIAL%", material));
             return null;

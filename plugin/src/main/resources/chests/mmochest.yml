@@ -1,0 +1,24 @@
+# Chest's title - nothing special, since mc 1.16 you can use hex colours!
+Title: '&b&lMMOItems'
+# There is cooldown format, where you can put seconds, minutes, days, etc.
+# Correct way to set cooldown is for example 60s, 1m, 1h, 5h 30m, etc.
+Cooldown: 1h
+# Max items in the chest
+MaxItems: 4
+# Max items in the same type in the chest is useful, when you have several items in the same type (20 gold ingots, 15 gold ingots, etc.)
+MaxItemsInTheSameType: 1
+# Particles above the chests.
+# If you are using versions 1.9+, use this link: https://spigotdocs.okaeri.cloud/1.9.4/org/bukkit/Particle.html or newer docs
+Particles:
+  Use: true
+  Type: HEART
+  Amount: 1
+
+# MMOItems support
+# PATTERN: TYPE:ITEM_ID:CHANCE
+# Example:
+Contents-MMOItems:
+- AXE:SILVER_AXE:0.4
+- SWORD:KATANA:0.3
+- SWORD:FALCON_BLADE:0.2
+- BOW:PRECISION_BOW:0.4

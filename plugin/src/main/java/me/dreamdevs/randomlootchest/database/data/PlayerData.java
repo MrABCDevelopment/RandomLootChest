@@ -1,10 +1,13 @@
 package me.dreamdevs.randomlootchest.database.data;
 
 import lombok.Getter;
+import me.dreamdevs.randomlootchest.RandomLootChestMain;
 import me.dreamdevs.randomlootchest.api.database.IPlayerData;
+import me.dreamdevs.randomlootchest.api.object.IChestGame;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.UUID;
@@ -20,7 +23,7 @@ public class PlayerData implements IPlayerData {
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
-        this.player = Bukkit.getPlayer(uuid);
+        this.player = Bukkit.getOfflinePlayer(uuid);
         this.cooldown = new ConcurrentHashMap<>();
     }
 
@@ -37,6 +40,21 @@ public class PlayerData implements IPlayerData {
     @Override
     public int getLeftCooldownSeconds(Location location) {
         return hasCooldown(location) ? getCooldown().get(location).get() : 0;
+    }
+
+    @Override
+    public void openChest(String type) {
+        Player onlinePlayer = Bukkit.getPlayer(uuid);
+        if (onlinePlayer == null) {
+            return;
+        }
+
+        RandomLootChestMain.getInstance().getChestsManager().openChest(onlinePlayer, type);
+    }
+
+    @Override
+    public void openChest(IChestGame chestGame) {
+        this.openChest(chestGame.getId());
     }
 
 }

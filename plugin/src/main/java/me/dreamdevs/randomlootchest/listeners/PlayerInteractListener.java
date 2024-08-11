@@ -23,7 +23,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PlayerInteractListener implements Listener {
+public final class PlayerInteractListener implements Listener {
 
     private final RandomLootChestMain plugin;
     private static final String TIME_PLACEHOLDER = "%TIME%";
@@ -33,16 +33,19 @@ public class PlayerInteractListener implements Listener {
     }
 
     @EventHandler
-    public void onInteractChest(PlayerInteractEvent event) {
+    public void onInteractChest(final PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
+
         if (event.getClickedBlock() == null || event.getClickedBlock().getType() != Material.CHEST) {
             return;
         }
+
         if (!plugin.getLocationManager().getLocations().containsKey(Util.getLocationString(event.getClickedBlock().getLocation()))) {
             return;
         }
+
         if (event.getPlayer().getInventory().getItemInMainHand().equals(WandItem.WANDITEM)) {
             return;
         }
@@ -90,7 +93,7 @@ public class PlayerInteractListener implements Listener {
             IChestGame chestGame = plugin.getChestsManager().getRandomChest();
             plugin.getChestsManager().openChest(event.getPlayer(), chestGame.getId());
             if (Config.USE_PERSONAL_COOLDOWN.toBoolean()) {
-                plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
+                plugin.getCooldownManager().setCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
             } else {
                 plugin.getCooldownManager().getLocations().put(event.getClickedBlock().getLocation(), new AtomicInteger((int) chestGame.getTime()));
             }
@@ -103,7 +106,7 @@ public class PlayerInteractListener implements Listener {
         plugin.getChestsManager().openChest(event.getPlayer(), type);
 
         if (Config.USE_PERSONAL_COOLDOWN.toBoolean()) {
-            plugin.getCooldownManager().setCooldown(event.getPlayer(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
+            plugin.getCooldownManager().setCooldown(event.getPlayer().getUniqueId(), event.getClickedBlock().getLocation(), (int) chestGame.getTime(), true);
         } else {
             ChestDisappearEvent chestDisappearEvent = new ChestDisappearEvent(chestGame, event.getClickedBlock().getLocation());
             Bukkit.getPluginManager().callEvent(chestDisappearEvent);

@@ -1,6 +1,7 @@
 # Chest's title - nothing special, since mc 1.16 you can use hex colours!
 Title: 'Default Chest'
-# Since 1.5.0 there is new cooldown format, where you can put seconds, minutes, days, etc.
+# There is cooldown format, where you can put seconds, minutes, days, etc.
+# Correct way to set cooldown is for example 60s, 1m, 1h, 5h 30m, etc.
 Cooldown: 30s
 # Max items in the chest
 MaxItems: 4
@@ -14,25 +15,13 @@ Particles:
   Amount: 1
 
 # Here you put items from items.yml
-#Contents-Items:
-#  - example
-
-# MMOItems support
-#Contents-MMOItems:
-# PATTERN: TYPE:ITEM_ID:CHANCE
-# Example:
-# - AXE:SILVER_AXE:0.4
-
-# Same case in MythicMobs items
-#Contents-MythicMobs:
-# PATTERN: ITEM_ID:CHANCE
-# Example:
-# ID:0.5
+Contents-Items:
+  - example
 
 # Put all your items into this section!
 Contents:
   CommonSword:
-    DisplayName: 'Common Sword'
+    DisplayName: '&3Common Sword'
     DisplayLore:
       - '&eExample Lore'
       - '&cWith custom colours!'
@@ -41,3 +30,27 @@ Contents:
       DAMAGE_ALL: 5
       DURABILITY: 3
     Chance: 0.5
+  WeakPotion:
+    DisplayName: '&cWeakness'
+    DisplayLore:
+      -  "&7Drink this potion to weak yourself."
+      - "&7(PROTIP: Don't do that!)"
+    Material: POTION
+    PotionEffect: WEAKNESS
+    Upgraded: false
+    Extended: false
+    Chance: 0.3
+  KnockingStick:
+    DisplayName: "&aKnockout"
+    Material: STICK
+    Enchantments:
+      - KNOCKBACK:5
+    Chance: 0.5
+  Cobblestone:
+    Material: COBBLESTONE
+    RandomAmount: true
+    Chance: 0.6
+  Dirt:
+    Material: DIRT
+    RandomAmount: true
+    Chance: 0.4

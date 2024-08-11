@@ -1,0 +1,5 @@
+# Same case in MythicMobs items
+#Contents-MythicMobs:
+# PATTERN: ITEM_ID:CHANCE
+# Example:
+# ID:0.5

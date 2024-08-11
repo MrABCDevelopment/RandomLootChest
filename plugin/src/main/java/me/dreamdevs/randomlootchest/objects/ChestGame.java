@@ -23,7 +23,7 @@ public class ChestGame implements IChestGame {
     private Particle particleType;
     private int particleAmount;
     private boolean particleUse;
-    private double exp;
+    private int exp;
     private List<IRandomItem> items;
 
     public ChestGame(String id) {
@@ -79,7 +79,7 @@ public class ChestGame implements IChestGame {
     }
 
     @Override
-    public double getExp() {
+    public int getExp() {
         return this.exp;
     }
 

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import me.dreamdevs.randomlootchest.api.Config;
 import me.dreamdevs.randomlootchest.api.Language;
-import me.dreamdevs.randomlootchest.api.RandomLootChestApi;
 import me.dreamdevs.randomlootchest.api.util.Util;
 import me.dreamdevs.randomlootchest.api.util.VersionUtil;
 import me.dreamdevs.randomlootchest.commands.CommandHandler;
@@ -37,6 +36,8 @@ public class RandomLootChestMain extends JavaPlugin {
     private CombatManager combatManager;
     private ExtensionManager extensionManager;
     private CommandHandler commandHandler;
+    private RandomSpawnManager randomSpawnManager;
+    private RandomLootChestApi randomLootChestApi;
     private static @Getter @Setter RandomLootChestMain instance;
 
     // Files
@@ -46,7 +47,7 @@ public class RandomLootChestMain extends JavaPlugin {
     @Override
     public void onEnable() {
         setInstance(this);
-        RandomLootChestApi.registerApi(this);
+        this.randomLootChestApi = new RandomLootChestApi(this);
 
         new VersionUtil();
 
@@ -81,6 +82,10 @@ public class RandomLootChestMain extends JavaPlugin {
         this.commandHandler = new CommandHandler(this);
         this.extensionManager = new ExtensionManager(this);
         this.extensionManager.loadExtensions();
+
+        if (Config.USE_RANDOM_SPAWN_CHESTS.toBoolean()) {
+            this.randomSpawnManager = new RandomSpawnManager(this);
+        }
 
         if (Config.USE_DATABASE.toBoolean()) {
             this.databaseManager = new Database();
@@ -127,9 +132,16 @@ public class RandomLootChestMain extends JavaPlugin {
         getCooldownManager().getLocations().keySet().forEach(location -> location.getBlock().setType(Material.CHEST));
 
         getExtensionManager().disableExtensions();
-        if(Config.USE_DATABASE.toBoolean()) {
+        if (Config.USE_DATABASE.toBoolean()) {
             databaseManager.saveData();
             databaseManager.disconnect();
+        }
+
+        if (Config.USE_RANDOM_CHESTS.toBoolean()) {
+            randomSpawnManager.getTempLocations().forEach(location ->  {
+                location.getBlock().setType(Material.AIR);
+                RandomLootChestMain.getInstance().getLocationManager().removeLocation(location);
+            });
         }
         getLocationManager().save();
     }

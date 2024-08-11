@@ -28,9 +28,4 @@ public class WandSubCommand implements ArgumentCommand {
         return "randomlootchest.admin.wand";
     }
 
-    @Override
-    public boolean hasArguments() {
-        return false;
-    }
-
 }

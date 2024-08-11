@@ -9,7 +9,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ExtensionMenu extends BookItemMenu {
 
@@ -28,7 +27,7 @@ public class ExtensionMenu extends BookItemMenu {
 			}, new ItemStack(extension.getDescription().getExtensionMaterial()));
 			menuItem.setLore(List.of((extension.isEnabled()) ? ChatColor.GREEN + "Enabled" : ChatColor.RED + "Disabled"));
 			return menuItem;
-		}).collect(Collectors.toList());
+		}).toList();
 	}
 
 }

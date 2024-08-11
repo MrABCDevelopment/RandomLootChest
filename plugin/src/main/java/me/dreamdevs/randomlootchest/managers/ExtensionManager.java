@@ -16,7 +16,6 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.zip.ZipFile;
 
 public class ExtensionManager {
@@ -113,7 +112,7 @@ public class ExtensionManager {
     }
 
     public List<Extension> getEnabledExtensions() {
-        return extensions.stream().filter(Extension::isEnabled).collect(Collectors.toList());
+        return extensions.stream().filter(Extension::isEnabled).toList();
     }
 
     public Extension getExtensionByName(String extensionName) {
