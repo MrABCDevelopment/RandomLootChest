@@ -1,5 +1,5 @@
 name: ${project.parent.name}
-version: ${project.version}
+version: ${plugin-version}
 main: me.dreamdevs.randomlootchest.RandomLootChestMain
 author: MrABCDevelopment
 api-version: 1.13
