@@ -22,7 +22,7 @@
     <build>
         <defaultGoal>clean package</defaultGoal>
 
-        <finalName>${project.parent.artifactId}-${project.version}</finalName>
+        <finalName>${project.parent.artifactId}-${plugin-version}</finalName>
 
         <plugins>
             <plugin>
